@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Магнит (MGNT) — Fair Value дашборд</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <div>
+    <h1>Магнит <span class="ticker">MGNT</span></h1>
+    <p class="sub">Динамическая FV-модель · pre-IFRS16 базис · issued 101.9m / outstanding 67.8m</p>
+  </div>
+  <div class="meta"><span id="built">…</span><br><span id="mkt-update">…</span></div>
+</header>
+
+<section class="cards">
+  <div class="card big"><h2>Цена</h2><div class="num" id="price">—</div><div class="cap" id="cap">—</div></div>
+  <div class="card big"><h2>FV posterior (issued)</h2><div class="num" id="fv-mean">—</div><div class="cap" id="fv-band">—</div></div>
+  <div class="card"><h2>P(FV&gt;P)</h2><div class="num" id="pfv">—</div><div class="cap">вероятность недооценки</div></div>
+  <div class="card"><h2>Вердикт гейтов</h2><div class="num small" id="verdict">—</div><div class="cap" id="gates">—</div></div>
+</section>
+
+<section><h2>FV-дистрибутив vs цена</h2><svg id="fvchart" viewBox="0 0 640 170"></svg>
+<p class="note" id="robust">…</p></section>
+
+<section><h2>Q3 2026 nowcast (LFL)</h2><div class="card"><div class="num" id="nc">—</div><div class="cap" id="nc-detail">—</div><div class="cap warn" id="nc-warn">—</div></div></section>
+
+<section><h2>LFL: продажи = чек × трафик</h2><svg id="lflchart" viewBox="0 0 640 240"></svg></section>
+
+<section><h2>Выручка г/г: Магнит vs X5</h2><svg id="revchart" viewBox="0 0 640 220"></svg></section>
+
+<section><h2>Маржи pre16 + долг</h2><svg id="mgnchart" viewBox="0 0 640 200"></svg>
+<p class="note" id="credit">…</p></section>
+
+<section><h2>Skill моста (15 origins)</h2><div id="skill"></div><svg id="errchart" viewBox="0 0 640 180"></svg></section>
+
+<section><h2>Консенсус (T-invest)</h2><div id="consensus"></div></section>
+
+<footer>
+<p>Источники: magnit.com IR (primary), Росстат, ЦБ, x5.ru databook IAS17, MOEX ISS, T-invest. Не рекомендация — MOS/IRR/гейты, не buy/sell.</p>
+<p id="fresh">…</p>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>
