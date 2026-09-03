@@ -1,0 +1,40 @@
+{
+ "basis": "issued 101.9m; ND/EBITDA from press (0.7/1.0x) or levels",
+ "mults": {
+  "2021": {
+   "close": 5444,
+   "cap_issued": 554.8,
+   "nd_pre16": 197.0,
+   "ebitda_pre16": 133.1,
+   "ev_ebitda_pre16": 5.65
+  },
+  "2022": {
+   "close": 4340.5,
+   "cap_issued": 442.3,
+   "nd_pre16": 112.4,
+   "ebitda_pre16": 160.5,
+   "ev_ebitda_pre16": 3.46
+  },
+  "2023": {
+   "close": 7006,
+   "cap_issued": 714.0,
+   "nd_pre16": 166.3,
+   "ebitda_pre16": 166.3,
+   "ev_ebitda_pre16": 5.29
+  },
+  "2024": {
+   "close": 5092,
+   "cap_issued": 518.9,
+   "nd_pre16": 252.8,
+   "ebitda_pre16": 171.9,
+   "ev_ebitda_pre16": 4.49
+  }
+ },
+ "x5_post16_mrq": 5.2,
+ "mgnt_post16_now": 4.1,
+ "mc_band_pre16": [
+  3.5,
+  4.5
+ ],
+ "band_note": "history 3.5-5.7; MC uses low end = leverage haircut (ND/EBITDA 2.9x vs 0.7-1.5x then)"
+}

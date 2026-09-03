@@ -1,0 +1,48 @@
+{
+ "deals": [
+  {
+   "deal": "Dixy",
+   "close": "2021-07-22",
+   "contrib": {
+    "2022H1": 150.0,
+    "2022FY": 300.0
+   },
+   "band": 20.0,
+   "note": "H2 2021 +133.9bn (IFRS); FY2022 ~300 est (band +-20); H1 ~150"
+  },
+  {
+   "deal": "Samberi",
+   "close": "2024-01-11",
+   "contrib": {
+    "2024FY": 100.5,
+    "2024H1": 50.0
+   },
+   "band": 5.0,
+   "note": "2024 +100.5bn IFRS note 7; H1 ~50 (even split)"
+  },
+  {
+   "deal": "Azbuka",
+   "close": "2025-05-20",
+   "contrib": {
+    "2025FY": 66.0,
+    "2025H1": 11.6,
+    "2026H1": 54.0
+   },
+   "band": 3.0,
+   "note": "IFRS note 7 exact (2025, H1-2025); H1-2026 EST ~54 (band +-3)"
+  }
+ ],
+ "method_v1": "organic bridge + ma_pp add-on (TESTED WORSE: 3.2 vs 1.9)",
+ "method_v2": "LFL bridge (Magnit LFL vs X5 LFL, expansion-free) + expansion add-on + M&A add-on",
+ "v2_test": {
+  "2024FY": 1.82,
+  "2025FY": -1.46,
+  "2026H1": -2.56
+ },
+ "expansion_space_growth": {
+  "2024": 5.3,
+  "2025": 5.6,
+  "H1_2026": 0.4
+ },
+ "note": "trailing gap per bridge; M&A no longer in spread"
+}

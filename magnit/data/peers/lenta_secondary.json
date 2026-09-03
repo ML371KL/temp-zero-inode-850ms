@@ -1,0 +1,23 @@
+{
+ "source_status": "secondary (lenta.com 401); SmartLab + T-invest",
+ "series": {
+  "smartlab_error": "<HTTPError 404: 'Not Found'>",
+  "tinvest": {
+   "marketCapitalization": 0.0,
+   "revenueTtm": 1238217494000.0,
+   "ebitdaTtm": 119209513000.0,
+   "netIncomeTtm": 31206057000.0,
+   "evToEbitdaMrq": 2.32,
+   "netDebtToEbitda": 2.32,
+   "priceToSalesTtm": 0.0,
+   "dividendYieldDailyTtm": 0.0
+  },
+  "smartlab": "no coverage (404 on /q/LNTA/f/ and /forum/LNTA as of 2026-09-04)"
+ },
+ "peer_multiple_context_post16_mrq": {
+  "lenta": 2.32,
+  "magnit": 4.1,
+  "x5": 5.2,
+  "note": "T-invest MRQ; Lenta illiquidity/governance discount; Magnit between"
+ }
+}

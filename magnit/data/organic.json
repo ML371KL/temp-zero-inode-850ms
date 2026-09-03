@@ -1,0 +1,44 @@
+[
+ {
+  "series": "revenue_organic",
+  "period": "2024",
+  "as_of": "2024-12-31",
+  "value": 2942.9,
+  "unit": "bn_rub",
+  "source": "press total minus IFRS note-7 M&A contribution (primary+primary)",
+  "url": "https://www.magnit.com/upload/iblock/2db/ecvc2fg3kthovujs5mcalx9ml8jag266/Magnit_Press Release_FY2024_29Apr2025_rus.pdf",
+  "released_at": "2025-04-29",
+  "vintage": "v4-organic",
+  "status": "ok",
+  "note": "DV Nevada/Samberi 11Jan-31Dec2024 (IFRS note 7: 100501597k); base 2023 reported (no Samberi)=2544.7",
+  "organic_yoy_pct": 15.6
+ },
+ {
+  "series": "revenue_organic",
+  "period": "2025",
+  "as_of": "2025-12-31",
+  "value": 3443.2,
+  "unit": "bn_rub",
+  "source": "press total minus IFRS note-7 M&A contribution (primary+primary)",
+  "url": "https://www.magnit.com/upload/iblock/efd/apurwwtmb22m92l9b4rlb9t1bzabqe9u/Magnit_Press Release_FY2025_30Apr2026_rus.pdf",
+  "released_at": "2026-04-30",
+  "vintage": "v4-organic",
+  "status": "ok",
+  "note": "Azbuka 20May-31Dec2025 (IFRS note 7: 65962025k; pro-forma FY +40.4bn); base 2024 reported incl Samberi 11Jan-31Dec (pro-forma full-year diff only +2.2bn, immaterial)=3043.4",
+  "organic_yoy_pct": 13.1
+ },
+ {
+  "series": "revenue_organic",
+  "period": "2026H1",
+  "as_of": "2026-06-30",
+  "value": 1833.2,
+  "unit": "bn_rub",
+  "source": "press total minus IFRS note-7 M&A contribution (primary+primary)",
+  "url": "https://www.magnit.com/upload/iblock/cef/qic4e1bm0cd9pd6uhfuuxjg4x73a15zj/Magnit_Press Release_1H2026_28Aug2026_rus.pdf",
+  "released_at": "2026-08-28",
+  "vintage": "v4-organic",
+  "status": "provisional",
+  "note": "Azbuka H1 2026 EST ~54bn (7.3mo 66.0bn in H2 2025 -> ~9.0bn/mo); band +-3bn; base H1 2025 ex-Azbuka-partial (1673.2-11.6)=1661.6",
+  "organic_yoy_pct": 10.3
+ }
+]

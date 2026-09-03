@@ -1,0 +1,15 @@
+{
+ "as_of": "2026-09-03",
+ "target": "Magnit Q3 2026 LFL yoy",
+ "food_q3_yoy": 5.03,
+ "x5_q3_lfl": 4.2,
+ "x5_src": "carry Q2 (rel 16Jul2026); X5 Q3 trading ~14Oct",
+ "trailing_gap": 2.56,
+ "bridge": "0.4*food+0.6*x5lfl+gap (v2)",
+ "nowcast": 7.09,
+ "warnings": [
+  "Q3-2026 index partial (1/3 months: official m/m through Jul only + weekly shape)",
+  "Sep weekly points: 0"
+ ],
+ "read": "Q3 LFL nowcast 7.09% vs H1 6.4% / Q2-impl ~6.3%: stable"
+}

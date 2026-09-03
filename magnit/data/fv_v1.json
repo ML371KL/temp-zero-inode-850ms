@@ -1,0 +1,13 @@
+{
+ "as_of": "2026-08-28 (1H2026 release)",
+ "price": 1580.0,
+ "basis": "issued shares (101.9m)",
+ "method": "v1.1: EV blend, DCF floored at 0, distress mult-only",
+ "fv_issued": {
+  "stress": 852.0,
+  "base": 300.0,
+  "recovery": 3138.0
+ },
+ "fv_note": "base=mid-WACC view ~12-13% (table: 135@12%, 495@10%); recovery=16% WACC leg (headline 4286@12%)",
+ "implied_recovery_weight": 0.32
+}

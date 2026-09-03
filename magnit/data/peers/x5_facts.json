@@ -1,0 +1,142 @@
+[
+ {
+  "period": "FY2024",
+  "series": "x5_revenue_yoy",
+  "value": 24.2,
+  "unit": "pct",
+  "released_at": "2025-01-28",
+  "source": "x5.ru IR (primary)",
+  "file": "x5_q4_2024_trading.pdf",
+  "note": "net revenue FY2024; Magnit +19.6 -> gap -4.6pp"
+ },
+ {
+  "period": "FY2025",
+  "series": "x5_revenue_yoy",
+  "value": 18.8,
+  "unit": "pct",
+  "released_at": "2026-01-22",
+  "source": "x5.ru IR (primary)",
+  "file": "x5_q4_2025_trading.pdf",
+  "note": "revenue FY2025; Magnit +15.3 -> gap -3.5pp"
+ },
+ {
+  "period": "2025-Q4",
+  "series": "x5_pyaterochka_yoy",
+  "value": 13.2,
+  "unit": "pct",
+  "released_at": "2026-01-22",
+  "source": "x5.ru IR (primary)",
+  "file": "x5_q4_2025_trading.pdf",
+  "note": "net retail revenue"
+ },
+ {
+  "period": "2025-Q4",
+  "series": "x5_pyaterochka_lfl",
+  "value": 7.3,
+  "unit": "pct",
+  "released_at": "2026-01-22",
+  "source": "x5.ru IR (primary)",
+  "file": "x5_q4_2025_trading.pdf",
+  "note": "LFL traffic +0.6pp"
+ },
+ {
+  "period": "2025-Q4",
+  "series": "x5_perekrestok_yoy",
+  "value": 5.8,
+  "unit": "pct",
+  "released_at": "2026-01-22",
+  "source": "x5.ru IR (primary)",
+  "file": "x5_q4_2025_trading.pdf",
+  "note": ""
+ },
+ {
+  "period": "2025-Q4",
+  "series": "x5_perekrestok_lfl",
+  "value": 4.8,
+  "unit": "pct",
+  "released_at": "2026-01-22",
+  "source": "x5.ru IR (primary)",
+  "file": "x5_q4_2025_trading.pdf",
+  "note": "ticket-driven"
+ },
+ {
+  "period": "2026-Q1",
+  "series": "x5_revenue_yoy",
+  "value": 11.3,
+  "unit": "pct",
+  "released_at": "2026-04-16",
+  "source": "x5.ru IR (primary)",
+  "file": "x5_q1_2026_trading.pdf",
+  "note": "Magnit Q1 +13.1 (rel 30Apr) -> Magnit AHEAD +1.8pp"
+ },
+ {
+  "period": "2026-Q1",
+  "series": "x5_pyaterochka_yoy",
+  "value": 9.9,
+  "unit": "pct",
+  "released_at": "2026-04-16",
+  "source": "x5.ru IR (primary)",
+  "file": "x5_q1_2026_trading.pdf",
+  "note": "LFL +6.0 (ticket)"
+ },
+ {
+  "period": "2026-Q1",
+  "series": "x5_perekrestok_yoy",
+  "value": 6.8,
+  "unit": "pct",
+  "released_at": "2026-04-16",
+  "source": "x5.ru IR (primary)",
+  "file": "x5_q1_2026_trading.pdf",
+  "note": "LFL +6.7 (ticket)"
+ },
+ {
+  "period": "2026-Q2",
+  "series": "x5_revenue_yoy",
+  "value": 9.9,
+  "unit": "pct",
+  "released_at": "2026-07-16",
+  "source": "x5.ru IR (primary)",
+  "file": "x5_q2_2026_trading.pdf",
+  "note": "Magnit 1H +12.8 (rel 28Aug) -> Magnit ahead again"
+ },
+ {
+  "period": "2026-Q2",
+  "series": "x5_pyaterochka_yoy",
+  "value": 7.6,
+  "unit": "pct",
+  "released_at": "2026-07-16",
+  "source": "x5.ru IR (primary)",
+  "file": "x5_q2_2026_trading.pdf",
+  "note": "LFL +3.9 (ticket +2.8, traffic +1.1)"
+ },
+ {
+  "period": "2026-Q2",
+  "series": "x5_perekrestok_yoy",
+  "value": 6.5,
+  "unit": "pct",
+  "released_at": "2026-07-16",
+  "source": "x5.ru IR (primary)",
+  "file": "x5_q2_2026_trading.pdf",
+  "note": "LFL +5.2 (ticket +3.6, traffic +1.6)"
+ },
+ {
+  "period": "2026-Q1",
+  "series": "x5_fin_date",
+  "value": null,
+  "unit": "",
+  "released_at": "2026-04-29",
+  "source": "x5.ru IR (primary)",
+  "file": "x5_q1_2026_fin.pdf",
+  "note": "financials 13d after trading; Magnit FY25 next day 30Apr"
+ },
+ {
+  "period": "2026-Q2",
+  "series": "x5_fin_date",
+  "value": null,
+  "unit": "",
+  "released_at": "2026-08-13",
+  "source": "x5.ru IR (primary)",
+  "file": "x5_q2_2026_fin.pdf",
+  "note": "financials 15d before Magnit 1H (28Aug)"
+ }
+]

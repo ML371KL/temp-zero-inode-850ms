@@ -1,0 +1,110 @@
+{
+ "as_of_utc": "2026-09-03T15:21:27.442857+00:00",
+ "ticker": "MGNT",
+ "moex": {
+  "last": 1589,
+  "open": 1548,
+  "high": 1593.5,
+  "low": 1546.5,
+  "vol_today": 440381,
+  "val_today": 691697005,
+  "cap_issued": 161427586320,
+  "updatetime": "18:06:26",
+  "last_history_close": 1548.5,
+  "last_history_date": "2026-09-02"
+ },
+ "tinvest": {
+  "marketCapitalization": 107745212500.0,
+  "revenueTtm": 3509225556000.0,
+  "ebitdaTtm": 306162000000.0,
+  "netIncomeTtm": -31575703000.0,
+  "freeCashFlowTtm": -141369049000.0,
+  "totalEnterpriseValueMrq": 1209060294500.0,
+  "evToEbitdaMrq": 3.95,
+  "netDebtToEbitda": 3.6,
+  "totalDebtMrq": 748588915000.0,
+  "priceToBookTtm": 0.72,
+  "fiveYearsAverageDividendYield": 8.64,
+  "sharesOutstanding": 67871000.0
+ },
+ "consensus": [
+  {
+   "company": "Банк \"ПСБ\"",
+   "rec": "RECOMMENDATION_BUY",
+   "target": {
+    "units": "2450",
+    "nano": 0
+   }
+  },
+  {
+   "company": "Альфа-банк",
+   "rec": "RECOMMENDATION_BUY",
+   "target": {
+    "units": "4000",
+    "nano": 0
+   }
+  },
+  {
+   "company": "Газпромбанк",
+   "rec": "RECOMMENDATION_BUY",
+   "target": {
+    "units": "4400",
+    "nano": 0
+   }
+  },
+  {
+   "company": "АО «Эйлер Аналитические Технологии»",
+   "rec": "RECOMMENDATION_HOLD",
+   "target": {
+    "units": "2800",
+    "nano": 0
+   }
+  },
+  {
+   "company": "Т-Инвестиции",
+   "rec": "RECOMMENDATION_SELL",
+   "target": {
+    "units": "1680",
+    "nano": 0
+   }
+  },
+  {
+   "company": "БКС Мир инвестиций",
+   "rec": "RECOMMENDATION_HOLD",
+   "target": {
+    "units": "2200",
+    "nano": 0
+   }
+  },
+  {
+   "company": "Кит Финанс Брокер",
+   "rec": "RECOMMENDATION_HOLD",
+   "target": {
+    "units": "4000",
+    "nano": 0
+   }
+  },
+  {
+   "company": "SberCIB Investment Research",
+   "rec": "RECOMMENDATION_SELL",
+   "target": {
+    "units": "1500",
+    "nano": 0
+   }
+  },
+  {
+   "company": "Инвестиционный банк Синара",
+   "rec": "RECOMMENDATION_BUY",
+   "target": {
+    "units": "2200",
+    "nano": 0
+   }
+  }
+ ],
+ "cap_dual": {
+  "price": 1589,
+  "issued_101_9m": 161.9,
+  "outstanding_67_8m": 107.8,
+  "unit": "bn_rub"
+ }
+}

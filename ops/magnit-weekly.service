@@ -1,0 +1,14 @@
+[Unit]
+Description=Magnit FV pipeline: weekly digest (macro+market+X5 watcher+nowcast+report)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=dash
+Group=dash
+EnvironmentFile=/usr/local/etc/magnit/env
+ExecStart=/usr/local/sbin/magnit weekly
+ExecStopPost=-/usr/local/sbin/dash-alert magnit-weekly
+StandardOutput=journal
+StandardError=journal

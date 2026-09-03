@@ -1,0 +1,46 @@
+{
+ "rule": "cod = 0.92*key_avg12m; WACC = cod*0.75*0.55 + (key+4.5)*0.45",
+ "calibration": [
+  {
+   "period": "2025Q4",
+   "key12m": 19.18,
+   "pred": 17.65,
+   "reported": 17.1,
+   "err": 0.55
+  },
+  {
+   "period": "2026Q2",
+   "key12m": 16.32,
+   "pred": 15.01,
+   "reported": 16.0,
+   "err": -0.99
+  }
+ ],
+ "band_pp": 1.5,
+ "status": "provisional (2 points)",
+ "scenarios": {
+  "hold_14": {
+   "key_fwd": 14.0,
+   "cod": 12.88,
+   "wacc": 13.64
+  },
+  "cut_11": {
+   "key_fwd": 11.0,
+   "cod": 10.12,
+   "wacc": 11.15
+  },
+  "hike_16": {
+   "key_fwd": 16.0,
+   "cod": 14.72,
+   "wacc": 15.3
+  }
+ },
+ "now": {
+  "key_now": 14.0,
+  "key12m_trailing": 15.24,
+  "cod_now": 14.03,
+  "wacc_now": 14.11
+ },
+ "source_key": "cbr.ru KeyRate",
+ "built_at_utc": "2026-09-03T15:21:27.225967+00:00"
+}

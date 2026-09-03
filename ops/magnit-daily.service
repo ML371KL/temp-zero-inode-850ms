@@ -1,0 +1,14 @@
+[Unit]
+Description=Magnit FV pipeline: daily post-close refresh (market+macro+report)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=dash
+Group=dash
+EnvironmentFile=/usr/local/etc/magnit/env
+ExecStart=/usr/local/sbin/magnit daily
+ExecStopPost=-/usr/local/sbin/dash-alert magnit-daily
+StandardOutput=journal
+StandardError=journal

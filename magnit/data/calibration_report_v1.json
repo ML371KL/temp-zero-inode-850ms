@@ -1,0 +1,26 @@
+{
+ "engine_version": "magnit-v1",
+ "bridge": "rev = 0.4*food_q + 0.6*x5 + trailing_gap",
+ "origins": {
+  "FY2024": {
+   "act": 19.6,
+   "food": 11.06,
+   "x5": 24.2
+  },
+  "FY2025": {
+   "act": 15.3,
+   "food": 5.25,
+   "x5": 18.8
+  },
+  "1H2026": {
+   "act": 12.8,
+   "food": 2.78,
+   "x5": 10.6
+  }
+ },
+ "mae_pp": 1.78,
+ "direction": "pass",
+ "x5_H1_approx": "mean(Q1,Q2); refine with X5 H1 press weights",
+ "food_Q": "official monthly chain-linked; weekly trimmed-mean for intra-quarter shape only",
+ "recalibration_trigger": ">=12 quarterly origins, traffic split, M&A-adjusted like-for-like base"
+}

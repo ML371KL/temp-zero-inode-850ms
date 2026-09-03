@@ -1,0 +1,169 @@
+{
+ "as_of": "2026-09-03",
+ "price": 1580.0,
+ "price_src": "market/latest.json",
+ "n_draws": 50000,
+ "regimes": {
+  "stress": {
+   "rev": 3600.0,
+   "margin": [
+    4.0,
+    4.8,
+    5.2
+   ],
+   "mult": [
+    3.0,
+    3.8
+   ],
+   "wacc": [
+    [
+     15.3,
+     0.55
+    ],
+    [
+     14.11,
+     0.35
+    ],
+    [
+     11.15,
+     0.1
+    ]
+   ],
+   "nd": [
+    500.0,
+    530.0,
+    560.0
+   ],
+   "interest": 85.0,
+   "capex": 150.0
+  },
+  "mid": {
+   "rev": 3800.0,
+   "margin": [
+    5.2,
+    5.4,
+    6.2
+   ],
+   "mult": [
+    3.5,
+    4.5
+   ],
+   "wacc": [
+    [
+     15.3,
+     0.15
+    ],
+    [
+     14.11,
+     0.4
+    ],
+    [
+     11.15,
+     0.45
+    ]
+   ],
+   "nd": [
+    440.0,
+    500.0,
+    510.0
+   ],
+   "interest": 62.0,
+   "capex": 100.0
+  },
+  "healthy": {
+   "rev": 3950.0,
+   "margin": [
+    6.2,
+    6.5,
+    7.0
+   ],
+   "mult": [
+    4.0,
+    5.0
+   ],
+   "wacc": [
+    [
+     15.3,
+     0.05
+    ],
+    [
+     14.11,
+     0.35
+    ],
+    [
+     11.15,
+     0.6
+    ]
+   ],
+   "nd": [
+    400.0,
+    440.0,
+    470.0
+   ],
+   "interest": 50.0,
+   "capex": 100.0
+  }
+ },
+ "storage_basis": "issued 101.911355m",
+ "canonical_basis": "outstanding 67.847m",
+ "canonical_factor": 1.5020760682123013,
+ "results": {
+  "prior_issued": {
+   "probs": {
+    "stress": 0.16666666666666666,
+    "mid": 0.3333333333333333,
+    "healthy": 0.5
+   },
+   "mean": 3922.0,
+   "p05": 113.0,
+   "p25": 1405.0,
+   "p50": 4150.0,
+   "p75": 6510.0,
+   "p95": 7644.0,
+   "p_fv_gt_p": 0.719
+  },
+  "prior_outstanding": {
+   "probs": {
+    "stress": 0.16666666666666666,
+    "mid": 0.3333333333333333,
+    "healthy": 0.5
+   },
+   "mean": 5891.0,
+   "p05": 170.0,
+   "p25": 2111.0,
+   "p50": 6233.0,
+   "p75": 9778.0,
+   "p95": 11482.0,
+   "p_fv_gt_p": 0.812
+  },
+  "posterior_issued": {
+   "probs": {
+    "stress": 0.2,
+    "mid": 0.42,
+    "healthy": 0.38
+   },
+   "mean": 3324.0,
+   "p05": 30.0,
+   "p25": 1144.0,
+   "p50": 2309.0,
+   "p75": 5965.0,
+   "p95": 7525.0,
+   "p_fv_gt_p": 0.655
+  },
+  "posterior_outstanding": {
+   "probs": {
+    "stress": 0.2,
+    "mid": 0.42,
+    "healthy": 0.38
+   },
+   "mean": 4993.0,
+   "p05": 45.0,
+   "p25": 1718.0,
+   "p50": 3468.0,
+   "p75": 8960.0,
+   "p95": 11303.0,
+   "p_fv_gt_p": 0.769
+  }
+ },
+ "note": "prior=FY margin base-rate n=6 (2020 scanned gap); posterior tilted by H1 trough/cod/capex/organic evidence (stated); hold WACC leg 14.11 = current trailing (steady-state hold 13.64); method v1.1: EV floors, distress mult-only"
+}

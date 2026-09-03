@@ -1,0 +1,188 @@
+{
+ "quarters": {
+  "2023Q1": {
+   "revenue_mln": 696364,
+   "ebitda_mln": 39634,
+   "ebitda_margin": 5.69,
+   "revenue_yoy": 15.2
+  },
+  "2024Q1": {
+   "revenue_mln": 886220,
+   "ebitda_mln": 55436,
+   "ebitda_margin": 6.26,
+   "revenue_yoy": 27.3
+  },
+  "2025Q1": {
+   "revenue_mln": 1069786,
+   "ebitda_mln": 49981,
+   "ebitda_margin": 4.67,
+   "revenue_yoy": 20.7,
+   "x5_lfl": 14.6,
+   "x5_lfl_traffic": 4.6,
+   "x5_lfl_ticket": 9.6
+  },
+  "2026Q1": {
+   "revenue_mln": 1190606,
+   "ebitda_mln": 62408,
+   "ebitda_margin": 5.24,
+   "revenue_yoy": 11.3,
+   "x5_lfl": 6.1,
+   "x5_lfl_traffic": -1.7,
+   "x5_lfl_ticket": 7.9
+  },
+  "2023Q2": {
+   "revenue_mln": 772043,
+   "ebitda_mln": 60991,
+   "ebitda_margin": 7.9,
+   "revenue_yoy": 19.2
+  },
+  "2024Q2": {
+   "revenue_mln": 965491,
+   "ebitda_mln": 72159,
+   "ebitda_margin": 7.47,
+   "revenue_yoy": 25.1,
+   "x5_lfl": 14.9,
+   "x5_lfl_traffic": 2.9,
+   "x5_lfl_ticket": 11.7
+  },
+  "2025Q2": {
+   "revenue_mln": 1174206,
+   "ebitda_mln": 72773,
+   "ebitda_margin": 6.2,
+   "revenue_yoy": 21.6,
+   "x5_lfl": 13.9,
+   "x5_lfl_traffic": 1.5,
+   "x5_lfl_ticket": 12.2
+  },
+  "2026Q2": {
+   "revenue_mln": 1289907,
+   "ebitda_mln": 74258,
+   "ebitda_margin": 5.76,
+   "revenue_yoy": 9.9,
+   "x5_lfl": 4.2,
+   "x5_lfl_traffic": 1.2,
+   "x5_lfl_ticket": 3.0
+  },
+  "2023Q3": {
+   "revenue_mln": 796236,
+   "ebitda_mln": 61446,
+   "ebitda_margin": 7.72,
+   "revenue_yoy": 22.9
+  },
+  "2024Q3": {
+   "revenue_mln": 978556,
+   "ebitda_mln": 71278,
+   "ebitda_margin": 7.28,
+   "revenue_yoy": 22.9,
+   "x5_lfl": 13.8,
+   "x5_lfl_traffic": 2.2,
+   "x5_lfl_ticket": 11.4
+  },
+  "2025Q3": {
+   "revenue_mln": 1160077,
+   "ebitda_mln": 71708,
+   "ebitda_margin": 6.18,
+   "revenue_yoy": 18.5,
+   "x5_lfl": 10.6,
+   "x5_lfl_traffic": 0.4,
+   "x5_lfl_ticket": 10.1
+  },
+  "2023Q4": {
+   "revenue_mln": 881216,
+   "ebitda_mln": 53366,
+   "ebitda_margin": 6.06,
+   "revenue_yoy": 25.0
+  },
+  "2024Q4": {
+   "revenue_mln": 1077780,
+   "ebitda_mln": 52934,
+   "ebitda_margin": 4.91,
+   "revenue_yoy": 22.3,
+   "x5_lfl": 14.0,
+   "x5_lfl_traffic": 3.8,
+   "x5_lfl_ticket": 9.9
+  },
+  "2025Q4": {
+   "revenue_mln": 1237965,
+   "ebitda_mln": 78647,
+   "ebitda_margin": 6.35,
+   "revenue_yoy": 14.9,
+   "x5_lfl": 7.3,
+   "x5_lfl_traffic": 0.5,
+   "x5_lfl_ticket": 6.8
+  }
+ },
+ "annual": {
+  "2021": {
+   "revenue_mln": 2204814
+  },
+  "2022": {
+   "revenue_mln": 2605206
+  },
+  "2023": {
+   "revenue_mln": 3145859
+  },
+  "2024": {
+   "revenue_mln": 3908047
+  },
+  "2025": {
+   "revenue_mln": 4642034
+  }
+ },
+ "debt_quarters": {
+  "2021-12-31": {
+   "net_debt_pre16_mln": 268484,
+   "nd_ebitda_pre16": 1.6646454124970549
+  },
+  "2022-12-31": {
+   "net_debt_pre16_mln": 192935,
+   "nd_ebitda_pre16": 1.0271952381712959
+  },
+  "2023-12-31": {
+   "net_debt_pre16_mln": 190803.04315245993,
+   "nd_ebitda_pre16": 0.8856558676200463
+  },
+  "2024-06-30": {
+   "net_debt_pre16_mln": 169854.84532818597,
+   "nd_ebitda_pre16": 0.7007097462425784
+  },
+  "2024-09-30": {
+   "net_debt_pre16_mln": 197142.1281313666,
+   "nd_ebitda_pre16": 0.781568782509313
+  },
+  "2024-12-31": {
+   "net_debt_pre16_mln": 220833.76918894387,
+   "nd_ebitda_pre16": 0.8769961485937399
+  },
+  "2025-03-31": {
+   "net_debt_pre16_mln": 273744.54717318073,
+   "nd_ebitda_pre16": 1.1111927127572772
+  },
+  "2025-06-30": {
+   "net_debt_pre16_mln": 258359.27515210974,
+   "nd_ebitda_pre16": 1.046132970336442
+  },
+  "2025-09-30": {
+   "net_debt_pre16_mln": 256766.61679965735,
+   "nd_ebitda_pre16": 1.0378769939677979
+  },
+  "2025-12-31": {
+   "net_debt_pre16_mln": 228508.15244643862,
+   "nd_ebitda_pre16": 0.8366921355445577
+  },
+  "2026-03-31": {
+   "net_debt_pre16_mln": 335474,
+   "nd_ebitda_pre16": 1.174892132690799
+  },
+  "2026-06-30": {
+   "net_debt_pre16_mln": 310647,
+   "nd_ebitda_pre16": 1.0823145344765714
+  }
+ },
+ "x5_old_perimeter_2022_mln": {
+  "2022Q1": 604230,
+  "2022Q2": 647950,
+  "2022Q3": 647869,
+  "2022Q4": 705183
+ }
+}

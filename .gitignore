@@ -1,0 +1,23 @@
+# Binaries + secrets: never committed. VPS bootstraps data via download scripts.
+magnit/data/pdfs/
+magnit/data/press_text/
+magnit/data/ifrs_text/
+magnit/data/pres_text/
+magnit/data/peers/*.pdf
+magnit/data/peers/*.xlsx
+magnit/data/peers/*.txt
+magnit/data/macro/*.xlsx
+magnit/data/ifrs_text/
+magnit/data/vintages/
+magnit/data/runs/
+magnit/data/ed/
+magnit/data/__pycache__/
+magnit/__pycache__/
+magnit/tests/__pycache__/
+__pycache__/
+.venv/
+node_modules/
+.wrangler/
+# env with tokens (template in ops/env.example)
+ops/env
+usr-local-etc-magnit-env

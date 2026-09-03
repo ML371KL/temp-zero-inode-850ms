@@ -1,0 +1,14 @@
+[Unit]
+Description=Magnit FV pipeline: monthly full refresh (catalog+parse+skill+fv+decision+snapshot)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=dash
+Group=dash
+EnvironmentFile=/usr/local/etc/magnit/env
+ExecStart=/usr/local/sbin/magnit monthly
+ExecStopPost=-/usr/local/sbin/dash-alert magnit-monthly
+StandardOutput=journal
+StandardError=journal

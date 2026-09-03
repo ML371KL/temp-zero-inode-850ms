@@ -1,0 +1,171 @@
+{
+ "checked": 27,
+ "agree": 19,
+ "no_filename_date": 8,
+ "disagree": 0,
+ "edisclosure": "blocked (JS challenge); session method in fetch_edisclosure.py; mirror magnit.com/disclosure is JS-shell",
+ "rows": [
+  {
+   "key": "arc2019#6:press-release",
+   "released_at": "2019-04-30",
+   "filename_date": null,
+   "agree": "no-filename-date"
+  },
+  {
+   "key": "arc2019#4:press-release",
+   "released_at": "2019-08-20",
+   "filename_date": null,
+   "agree": "no-filename-date"
+  },
+  {
+   "key": "arc2019#5:press-release",
+   "released_at": "2019-07-25",
+   "filename_date": null,
+   "agree": "no-filename-date"
+  },
+  {
+   "key": "arc2019#3:press-release",
+   "released_at": "2019-10-29",
+   "filename_date": null,
+   "agree": "no-filename-date"
+  },
+  {
+   "key": "arc2019#0:press-release",
+   "released_at": "2020-03-16",
+   "filename_date": "2020-03-16",
+   "agree": true
+  },
+  {
+   "key": "arc2019#1:press-release",
+   "released_at": "2020-02-06",
+   "filename_date": null,
+   "agree": "no-filename-date"
+  },
+  {
+   "key": "arc2020#6:press-release",
+   "released_at": "2020-04-29",
+   "filename_date": "2020-04-29",
+   "agree": true
+  },
+  {
+   "key": "arc2020#4:press-release",
+   "released_at": "2026-09-03",
+   "filename_date": null,
+   "agree": "no-filename-date"
+  },
+  {
+   "key": "arc2021#0:press-release",
+   "released_at": "2022-03-04",
+   "filename_date": "2022-03-04",
+   "agree": true
+  },
+  {
+   "key": "arc2021#5:press-release",
+   "released_at": "2021-04-29",
+   "filename_date": "2021-04-29",
+   "agree": true
+  },
+  {
+   "key": "arc2021#3:press-release",
+   "released_at": "2021-08-19",
+   "filename_date": "2021-08-19",
+   "agree": true
+  },
+  {
+   "key": "arc2021#4:press-release",
+   "released_at": "2021-07-29",
+   "filename_date": "2021-07-29",
+   "agree": true
+  },
+  {
+   "key": "arc2021#2:press-release",
+   "released_at": "2021-10-28",
+   "filename_date": "2021-10-28",
+   "agree": true
+  },
+  {
+   "key": "arc2021#1:press-release",
+   "released_at": "2022-02-04",
+   "filename_date": "2022-02-04",
+   "agree": true
+  },
+  {
+   "key": "2022#3:press-release",
+   "released_at": "2022-04-29",
+   "filename_date": "2022-04-29",
+   "agree": true
+  },
+  {
+   "key": "2022#1:press-release",
+   "released_at": "2022-08-19",
+   "filename_date": "2022-08-19",
+   "agree": true
+  },
+  {
+   "key": "2022#2:press-release",
+   "released_at": "2022-07-28",
+   "filename_date": "2022-07-28",
+   "agree": true
+  },
+  {
+   "key": "2022#0:press-release",
+   "released_at": "2023-06-16",
+   "filename_date": "2023-06-16",
+   "agree": true
+  },
+  {
+   "key": "2023#3:press-release",
+   "released_at": "2023-06-16",
+   "filename_date": null,
+   "agree": "no-filename-date"
+  },
+  {
+   "key": "2023#2:press-release",
+   "released_at": "2023-08-29",
+   "filename_date": null,
+   "agree": "no-filename-date"
+  },
+  {
+   "key": "2023#1:press-release",
+   "released_at": "2023-11-14",
+   "filename_date": "2023-11-14",
+   "agree": true
+  },
+  {
+   "key": "2023#0:press-release",
+   "released_at": "2024-05-15",
+   "filename_date": "2024-05-15",
+   "agree": true
+  },
+  {
+   "key": "2024#1:press-release",
+   "released_at": "2024-08-30",
+   "filename_date": "2024-08-30",
+   "agree": true
+  },
+  {
+   "key": "2024#0:press-release",
+   "released_at": "2025-04-29",
+   "filename_date": "2025-04-29",
+   "agree": true
+  },
+  {
+   "key": "2025#1:press-release",
+   "released_at": "2025-08-29",
+   "filename_date": "2025-08-29",
+   "agree": true
+  },
+  {
+   "key": "2025#0:press-release",
+   "released_at": "2026-04-30",
+   "filename_date": "2026-04-30",
+   "agree": true
+  },
+  {
+   "key": "2026#0:press-release",
+   "released_at": "2026-08-28",
+   "filename_date": "2026-08-28",
+   "agree": true
+  }
+ ]
+}

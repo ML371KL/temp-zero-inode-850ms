@@ -1,0 +1,10 @@
+[Unit]
+Description=Magnit FV pipeline: monthly full refresh (1st 06:00 UTC = 09:00 MSK)
+
+[Timer]
+OnCalendar=*-*-01 06:00:00
+Persistent=true
+Unit=magnit-monthly.service
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,35 @@
+{
+ "engine_version": "magnit-v0",
+ "n_obs": 3,
+ "priors": {
+  "w_cpi": 0.35,
+  "w_peer": 0.45,
+  "w_traf": 0.2
+ },
+ "priors_mae_pp": 1.9533333333333331,
+ "direction_check": "fail",
+ "grid_overfit_note": "0 vectors with MAE<1pp on n=3: weights NOT re-estimated",
+ "proxy_status": "STUB - Rosstat weekly food CPI + X5 archive vintages required for production",
+ "recalibration_trigger": ">=12 quarterly origins with point-in-time proxies, then purged expanding-window OOS",
+ "regime_weights": {
+  "distress_lev_ge_2.5": {
+   "dcf": 0.25,
+   "mult": 0.75,
+   "ddm": 0.0,
+   "blend_on": "EV"
+  },
+  "mid_lev_1.5_2.5": {
+   "dcf": 0.45,
+   "mult": 0.4,
+   "ddm": 0.15,
+   "blend_on": "EV-renorm"
+  },
+  "healthy_lev_lt_1.5": {
+   "dcf": 0.55,
+   "mult": 0.3,
+   "ddm": 0.15,
+   "blend_on": "EV-renorm"
+  }
+ },
+ "frozen": true
+}

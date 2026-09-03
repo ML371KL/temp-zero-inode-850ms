@@ -1,0 +1,187 @@
+{
+ "origins": [
+  {
+   "period": "2022Q1",
+   "act": 37.7,
+   "food": 9.96,
+   "x5": 19.1,
+   "market": 15.44,
+   "spread": 0.0,
+   "pred": 15.44,
+   "err": -22.26,
+   "naive_x5_err": -18.6
+  },
+  {
+   "period": "2022Q2",
+   "act": 38.7,
+   "food": 2.35,
+   "x5": 18.6,
+   "market": 12.1,
+   "spread": 22.26,
+   "pred": 34.36,
+   "err": -4.34,
+   "naive_x5_err": -20.1
+  },
+  {
+   "period": "2022H1",
+   "act": 38.2,
+   "food": 12.54,
+   "x5": 18.8,
+   "market": 16.3,
+   "spread": 26.6,
+   "pred": 42.9,
+   "err": 4.7,
+   "naive_x5_err": -19.4
+  },
+  {
+   "period": "2022FY",
+   "act": 26.7,
+   "food": 10.3,
+   "x5": 18.2,
+   "market": 15.04,
+   "spread": 21.9,
+   "pred": 36.94,
+   "err": 10.24,
+   "naive_x5_err": -8.5
+  },
+  {
+   "period": "2023Q1",
+   "act": 9.0,
+   "food": 2.25,
+   "x5": 15.2,
+   "market": 10.02,
+   "spread": 11.66,
+   "pred": 21.68,
+   "err": 12.68,
+   "naive_x5_err": 6.2
+  },
+  {
+   "period": "2023Q2",
+   "act": 7.5,
+   "food": -0.03,
+   "x5": 19.2,
+   "market": 11.51,
+   "spread": -1.02,
+   "pred": 10.49,
+   "err": 2.99,
+   "naive_x5_err": 11.7
+  },
+  {
+   "period": "2023H1",
+   "act": 8.2,
+   "food": 2.22,
+   "x5": 17.3,
+   "market": 11.27,
+   "spread": -4.01,
+   "pred": 7.26,
+   "err": -0.94,
+   "naive_x5_err": 9.1
+  },
+  {
+   "period": "2023Q3",
+   "act": 5.7,
+   "food": 1.29,
+   "x5": 22.9,
+   "market": 14.26,
+   "spread": -3.07,
+   "pred": 11.19,
+   "err": 5.49,
+   "naive_x5_err": 17.2
+  },
+  {
+   "period": "2023-9M",
+   "act": 7.4,
+   "food": 3.54,
+   "x5": 19.2,
+   "market": 12.94,
+   "spread": -8.56,
+   "pred": 4.38,
+   "err": -3.02,
+   "naive_x5_err": 11.8
+  },
+  {
+   "period": "2023FY",
+   "act": 8.2,
+   "food": 8.15,
+   "x5": 20.8,
+   "market": 15.74,
+   "spread": -5.54,
+   "pred": 10.2,
+   "err": 2.0,
+   "naive_x5_err": 12.6
+  },
+  {
+   "period": "2024H1",
+   "act": 18.8,
+   "food": 3.78,
+   "x5": 26.1,
+   "market": 17.17,
+   "spread": -7.54,
+   "pred": 9.63,
+   "err": -9.17,
+   "naive_x5_err": 7.3
+  },
+  {
+   "period": "2024FY",
+   "act": 19.6,
+   "food": 11.06,
+   "x5": 24.2,
+   "market": 18.94,
+   "spread": 1.63,
+   "pred": 20.57,
+   "err": 0.97,
+   "naive_x5_err": 4.6
+  },
+  {
+   "period": "2025H1",
+   "act": 14.6,
+   "food": 4.59,
+   "x5": 21.2,
+   "market": 14.56,
+   "spread": 0.66,
+   "pred": 15.21,
+   "err": 0.61,
+   "naive_x5_err": 6.6
+  },
+  {
+   "period": "2025FY",
+   "act": 15.3,
+   "food": 5.25,
+   "x5": 18.8,
+   "market": 13.38,
+   "spread": 0.04,
+   "pred": 13.42,
+   "err": -1.88,
+   "naive_x5_err": 3.5
+  },
+  {
+   "period": "2026H1",
+   "act": 12.8,
+   "food": 2.78,
+   "x5": 10.5,
+   "market": 7.41,
+   "spread": 1.92,
+   "pred": 9.33,
+   "err": -3.47,
+   "naive_x5_err": -2.3
+  }
+ ],
+ "mae_pp": 5.65,
+ "bias_pp": -0.36,
+ "direction": "7/14",
+ "naive_x5_mae_pp": 10.63,
+ "bridge": "rev = 0.4*food + 0.6*x5 + trailing_gap",
+ "caveats": [
+  "X5 assumed released before Magnit (verified 2-6wk lead on 4 recent cases only)",
+  "2022 bridge misses Dixy level shift (spread adapts with 1-period lag)"
+ ],
+ "organic_variant": {
+  "points": {
+   "FY2024": 3.34,
+   "FY2025": -3.06,
+   "H1-2026": -3.17
+  },
+  "mae_pp": 3.2,
+  "verdict": "worse than reported-track (1.9 on same points): X5 proxy itself contains M&A; keep reported primary, M&A as explicit add-on layer (P2)"
+ }
+}

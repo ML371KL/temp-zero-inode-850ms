@@ -1,0 +1,7 @@
+{
+ "probe": "2026-09-03",
+ "orderbook": "subscribers-only HTML (Bearer JWT on ISS does not unlock; Algopack needs product auth flow)",
+ "trades": "JSON ok but empty without session params",
+ "m1_candles": "JSON ok, needs from/to (defaults 2011)",
+ "verdict": "PARKED: microstructure adds nothing to weeks/quarters FV horizon; ISS-free + T-invest cover all model inputs. Revisit only for execution algos."
+}

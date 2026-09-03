@@ -1,0 +1,13 @@
+[Unit]
+Description=Magnit FV pipeline: weekly digest Mon + midweek Wed pickup
+
+[Timer]
+# Mon 00:00 UTC (= 03:00 MSK) — weekly digest
+OnCalendar=Mon *-*-* 00:00:00
+# Wed 20:00 UTC (= 23:00 MSK, after Rosstat weekly ~19:00 MSK) — midweek pickup
+OnCalendar=Wed *-*-* 20:00:00
+Persistent=true
+Unit=magnit-weekly.service
+
+[Install]
+WantedBy=timers.target

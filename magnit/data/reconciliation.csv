@@ -1,0 +1,7 @@
+check,primary,secondary,secondary_src,delta,verdict
+revenue FY2025 primary vs key-figures page,3509.2,3509,magnit.com key-figures (web),0.2,match
+revenue TTM T-Invest vs FY2025 primary,3509.2,3509.226,T-Invest GetAssetFundamentals,0.0,match
+stores FY2025 primary vs key-figures col5,33440,33440,magnit.com key-figures,0,match
+EBITDA basis: press FY2024 171.9 vs key-figures 171.9,171.9,171.9,key-figures,0.0,match; T-Invest 306 = post16 -> DO NOT MIX
+net debt jump FY2024->FY2025,496.3,252.8,FY2024 press,243.5,flag: leverage regime change 1.5x->2.9x
+shares: ISS issued vs T-Invest outstanding,101.911355,67.871,ISS vs T-Invest,-34.04,flag: treasury after 2023 buyback; always dual-basis

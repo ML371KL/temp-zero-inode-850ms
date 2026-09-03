@@ -1,0 +1,10 @@
+[Unit]
+Description=Magnit FV pipeline daily timer (19:15 MSK post-close)
+
+[Timer]
+OnCalendar=*-*-* 16:15:00
+Persistent=true
+Unit=magnit-daily.service
+
+[Install]
+WantedBy=timers.target

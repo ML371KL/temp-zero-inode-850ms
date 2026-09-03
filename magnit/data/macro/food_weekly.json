@@ -1,0 +1,886 @@
+{
+ "weeks": [
+  {
+   "date": "2024-01-09",
+   "food_wow_trimmed_pct": 0.654,
+   "food_wow_median_pct": 0.235,
+   "n_items": 44
+  },
+  {
+   "date": "2024-01-15",
+   "food_wow_trimmed_pct": 0.349,
+   "food_wow_median_pct": 0.255,
+   "n_items": 44
+  },
+  {
+   "date": "2024-01-22",
+   "food_wow_trimmed_pct": 0.25,
+   "food_wow_median_pct": 0.205,
+   "n_items": 44
+  },
+  {
+   "date": "2024-01-29",
+   "food_wow_trimmed_pct": 0.286,
+   "food_wow_median_pct": 0.205,
+   "n_items": 44
+  },
+  {
+   "date": "2024-02-05",
+   "food_wow_trimmed_pct": 0.229,
+   "food_wow_median_pct": 0.185,
+   "n_items": 44
+  },
+  {
+   "date": "2024-02-12",
+   "food_wow_trimmed_pct": 0.194,
+   "food_wow_median_pct": 0.14,
+   "n_items": 44
+  },
+  {
+   "date": "2024-02-19",
+   "food_wow_trimmed_pct": 0.259,
+   "food_wow_median_pct": 0.17,
+   "n_items": 44
+  },
+  {
+   "date": "2024-02-26",
+   "food_wow_trimmed_pct": 0.207,
+   "food_wow_median_pct": 0.175,
+   "n_items": 44
+  },
+  {
+   "date": "2024-03-04",
+   "food_wow_trimmed_pct": 0.228,
+   "food_wow_median_pct": 0.22,
+   "n_items": 44
+  },
+  {
+   "date": "2024-03-11",
+   "food_wow_trimmed_pct": 0.138,
+   "food_wow_median_pct": 0.14,
+   "n_items": 44
+  },
+  {
+   "date": "2024-03-18",
+   "food_wow_trimmed_pct": 0.061,
+   "food_wow_median_pct": 0.085,
+   "n_items": 44
+  },
+  {
+   "date": "2024-03-25",
+   "food_wow_trimmed_pct": 0.165,
+   "food_wow_median_pct": 0.145,
+   "n_items": 44
+  },
+  {
+   "date": "2024-04-01",
+   "food_wow_trimmed_pct": 0.131,
+   "food_wow_median_pct": 0.08,
+   "n_items": 44
+  },
+  {
+   "date": "2024-04-08",
+   "food_wow_trimmed_pct": 0.255,
+   "food_wow_median_pct": 0.245,
+   "n_items": 44
+  },
+  {
+   "date": "2024-04-15",
+   "food_wow_trimmed_pct": 0.158,
+   "food_wow_median_pct": 0.135,
+   "n_items": 44
+  },
+  {
+   "date": "2024-04-22",
+   "food_wow_trimmed_pct": 0.191,
+   "food_wow_median_pct": 0.225,
+   "n_items": 44
+  },
+  {
+   "date": "2024-05-02",
+   "food_wow_trimmed_pct": 0.211,
+   "food_wow_median_pct": 0.16,
+   "n_items": 44
+  },
+  {
+   "date": "2024-05-06",
+   "food_wow_trimmed_pct": 0.129,
+   "food_wow_median_pct": 0.085,
+   "n_items": 44
+  },
+  {
+   "date": "2024-05-13",
+   "food_wow_trimmed_pct": 0.242,
+   "food_wow_median_pct": 0.145,
+   "n_items": 44
+  },
+  {
+   "date": "2024-05-20",
+   "food_wow_trimmed_pct": 0.312,
+   "food_wow_median_pct": 0.215,
+   "n_items": 44
+  },
+  {
+   "date": "2024-05-27",
+   "food_wow_trimmed_pct": 0.218,
+   "food_wow_median_pct": 0.18,
+   "n_items": 44
+  },
+  {
+   "date": "2024-06-03",
+   "food_wow_trimmed_pct": 0.188,
+   "food_wow_median_pct": 0.13,
+   "n_items": 44
+  },
+  {
+   "date": "2024-06-10",
+   "food_wow_trimmed_pct": 0.138,
+   "food_wow_median_pct": 0.155,
+   "n_items": 44
+  },
+  {
+   "date": "2024-06-17",
+   "food_wow_trimmed_pct": 0.096,
+   "food_wow_median_pct": 0.08,
+   "n_items": 44
+  },
+  {
+   "date": "2024-06-24",
+   "food_wow_trimmed_pct": 0.117,
+   "food_wow_median_pct": 0.15,
+   "n_items": 44
+  },
+  {
+   "date": "2024-07-01",
+   "food_wow_trimmed_pct": 0.099,
+   "food_wow_median_pct": 0.115,
+   "n_items": 44
+  },
+  {
+   "date": "2024-07-08",
+   "food_wow_trimmed_pct": 0.093,
+   "food_wow_median_pct": 0.095,
+   "n_items": 44
+  },
+  {
+   "date": "2024-07-15",
+   "food_wow_trimmed_pct": 0.017,
+   "food_wow_median_pct": 0.075,
+   "n_items": 44
+  },
+  {
+   "date": "2024-07-22",
+   "food_wow_trimmed_pct": 0.07,
+   "food_wow_median_pct": 0.16,
+   "n_items": 44
+  },
+  {
+   "date": "2024-07-29",
+   "food_wow_trimmed_pct": -0.016,
+   "food_wow_median_pct": 0.07,
+   "n_items": 44
+  },
+  {
+   "date": "2024-08-05",
+   "food_wow_trimmed_pct": -0.065,
+   "food_wow_median_pct": 0.05,
+   "n_items": 44
+  },
+  {
+   "date": "2024-08-12",
+   "food_wow_trimmed_pct": 0.02,
+   "food_wow_median_pct": 0.13,
+   "n_items": 44
+  },
+  {
+   "date": "2024-08-19",
+   "food_wow_trimmed_pct": -0.029,
+   "food_wow_median_pct": 0.1,
+   "n_items": 44
+  },
+  {
+   "date": "2024-08-26",
+   "food_wow_trimmed_pct": 0.044,
+   "food_wow_median_pct": 0.245,
+   "n_items": 44
+  },
+  {
+   "date": "2024-09-02",
+   "food_wow_trimmed_pct": -0.073,
+   "food_wow_median_pct": 0.055,
+   "n_items": 44
+  },
+  {
+   "date": "2024-09-09",
+   "food_wow_trimmed_pct": -0.048,
+   "food_wow_median_pct": 0.04,
+   "n_items": 44
+  },
+  {
+   "date": "2024-09-16",
+   "food_wow_trimmed_pct": 0.045,
+   "food_wow_median_pct": 0.13,
+   "n_items": 44
+  },
+  {
+   "date": "2024-09-23",
+   "food_wow_trimmed_pct": 0.016,
+   "food_wow_median_pct": 0.185,
+   "n_items": 44
+  },
+  {
+   "date": "2024-09-30",
+   "food_wow_trimmed_pct": -0.006,
+   "food_wow_median_pct": 0.065,
+   "n_items": 44
+  },
+  {
+   "date": "2024-10-07",
+   "food_wow_trimmed_pct": 0.088,
+   "food_wow_median_pct": 0.245,
+   "n_items": 44
+  },
+  {
+   "date": "2024-10-14",
+   "food_wow_trimmed_pct": 0.186,
+   "food_wow_median_pct": 0.16,
+   "n_items": 44
+  },
+  {
+   "date": "2024-10-21",
+   "food_wow_trimmed_pct": 0.312,
+   "food_wow_median_pct": 0.26,
+   "n_items": 44
+  },
+  {
+   "date": "2024-10-28",
+   "food_wow_trimmed_pct": 0.529,
+   "food_wow_median_pct": 0.36,
+   "n_items": 44
+  },
+  {
+   "date": "2024-11-05",
+   "food_wow_trimmed_pct": 0.693,
+   "food_wow_median_pct": 0.39,
+   "n_items": 44
+  },
+  {
+   "date": "2024-11-11",
+   "food_wow_trimmed_pct": 0.557,
+   "food_wow_median_pct": 0.315,
+   "n_items": 44
+  },
+  {
+   "date": "2024-11-18",
+   "food_wow_trimmed_pct": 0.632,
+   "food_wow_median_pct": 0.38,
+   "n_items": 44
+  },
+  {
+   "date": "2024-11-25",
+   "food_wow_trimmed_pct": 0.598,
+   "food_wow_median_pct": 0.415,
+   "n_items": 44
+  },
+  {
+   "date": "2024-12-02",
+   "food_wow_trimmed_pct": 0.507,
+   "food_wow_median_pct": 0.32,
+   "n_items": 44
+  },
+  {
+   "date": "2024-12-09",
+   "food_wow_trimmed_pct": 0.591,
+   "food_wow_median_pct": 0.43,
+   "n_items": 44
+  },
+  {
+   "date": "2024-12-16",
+   "food_wow_trimmed_pct": 0.664,
+   "food_wow_median_pct": 0.505,
+   "n_items": 44
+  },
+  {
+   "date": "2024-12-23",
+   "food_wow_trimmed_pct": 0.635,
+   "food_wow_median_pct": 0.54,
+   "n_items": 44
+  },
+  {
+   "date": "2025-01-09",
+   "food_wow_trimmed_pct": 0.594,
+   "food_wow_median_pct": 0.53,
+   "n_items": 44
+  },
+  {
+   "date": "2025-01-13",
+   "food_wow_trimmed_pct": 0.239,
+   "food_wow_median_pct": 0.22,
+   "n_items": 44
+  },
+  {
+   "date": "2025-01-20",
+   "food_wow_trimmed_pct": 0.251,
+   "food_wow_median_pct": 0.235,
+   "n_items": 44
+  },
+  {
+   "date": "2025-01-27",
+   "food_wow_trimmed_pct": 0.309,
+   "food_wow_median_pct": 0.295,
+   "n_items": 44
+  },
+  {
+   "date": "2025-02-03",
+   "food_wow_trimmed_pct": 0.251,
+   "food_wow_median_pct": 0.235,
+   "n_items": 44
+  },
+  {
+   "date": "2025-02-10",
+   "food_wow_trimmed_pct": 0.343,
+   "food_wow_median_pct": 0.33,
+   "n_items": 44
+  },
+  {
+   "date": "2025-02-17",
+   "food_wow_trimmed_pct": 0.258,
+   "food_wow_median_pct": 0.21,
+   "n_items": 44
+  },
+  {
+   "date": "2025-02-24",
+   "food_wow_trimmed_pct": 0.348,
+   "food_wow_median_pct": 0.325,
+   "n_items": 44
+  },
+  {
+   "date": "2025-03-03",
+   "food_wow_trimmed_pct": 0.263,
+   "food_wow_median_pct": 0.285,
+   "n_items": 44
+  },
+  {
+   "date": "2025-03-10",
+   "food_wow_trimmed_pct": 0.308,
+   "food_wow_median_pct": 0.24,
+   "n_items": 44
+  },
+  {
+   "date": "2025-03-17",
+   "food_wow_trimmed_pct": 0.213,
+   "food_wow_median_pct": 0.215,
+   "n_items": 44
+  },
+  {
+   "date": "2025-03-24",
+   "food_wow_trimmed_pct": 0.232,
+   "food_wow_median_pct": 0.215,
+   "n_items": 44
+  },
+  {
+   "date": "2025-03-31",
+   "food_wow_trimmed_pct": 0.235,
+   "food_wow_median_pct": 0.265,
+   "n_items": 44
+  },
+  {
+   "date": "2025-04-07",
+   "food_wow_trimmed_pct": 0.093,
+   "food_wow_median_pct": 0.145,
+   "n_items": 44
+  },
+  {
+   "date": "2025-04-14",
+   "food_wow_trimmed_pct": 0.214,
+   "food_wow_median_pct": 0.17,
+   "n_items": 44
+  },
+  {
+   "date": "2025-04-21",
+   "food_wow_trimmed_pct": 0.195,
+   "food_wow_median_pct": 0.1,
+   "n_items": 44
+  },
+  {
+   "date": "2025-04-28",
+   "food_wow_trimmed_pct": 0.285,
+   "food_wow_median_pct": 0.225,
+   "n_items": 44
+  },
+  {
+   "date": "2025-05-05",
+   "food_wow_trimmed_pct": 0.186,
+   "food_wow_median_pct": 0.065,
+   "n_items": 44
+  },
+  {
+   "date": "2025-05-12",
+   "food_wow_trimmed_pct": 0.159,
+   "food_wow_median_pct": 0.06,
+   "n_items": 44
+  },
+  {
+   "date": "2025-05-19",
+   "food_wow_trimmed_pct": 0.202,
+   "food_wow_median_pct": 0.155,
+   "n_items": 44
+  },
+  {
+   "date": "2025-05-26",
+   "food_wow_trimmed_pct": 0.068,
+   "food_wow_median_pct": 0.115,
+   "n_items": 44
+  },
+  {
+   "date": "2025-06-02",
+   "food_wow_trimmed_pct": -0.068,
+   "food_wow_median_pct": 0.035,
+   "n_items": 44
+  },
+  {
+   "date": "2025-06-09",
+   "food_wow_trimmed_pct": -0.064,
+   "food_wow_median_pct": -0.015,
+   "n_items": 44
+  },
+  {
+   "date": "2025-06-16",
+   "food_wow_trimmed_pct": 0.021,
+   "food_wow_median_pct": 0.09,
+   "n_items": 44
+  },
+  {
+   "date": "2025-06-23",
+   "food_wow_trimmed_pct": 0.027,
+   "food_wow_median_pct": 0.105,
+   "n_items": 44
+  },
+  {
+   "date": "2025-06-30",
+   "food_wow_trimmed_pct": -0.004,
+   "food_wow_median_pct": 0.05,
+   "n_items": 44
+  },
+  {
+   "date": "2025-07-07",
+   "food_wow_trimmed_pct": -0.16,
+   "food_wow_median_pct": -0.025,
+   "n_items": 44
+  },
+  {
+   "date": "2025-07-14",
+   "food_wow_trimmed_pct": -0.237,
+   "food_wow_median_pct": -0.05,
+   "n_items": 44
+  },
+  {
+   "date": "2025-07-21",
+   "food_wow_trimmed_pct": -0.354,
+   "food_wow_median_pct": -0.035,
+   "n_items": 44
+  },
+  {
+   "date": "2025-07-28",
+   "food_wow_trimmed_pct": -0.392,
+   "food_wow_median_pct": 0.04,
+   "n_items": 44
+  },
+  {
+   "date": "2025-08-04",
+   "food_wow_trimmed_pct": -0.454,
+   "food_wow_median_pct": -0.045,
+   "n_items": 44
+  },
+  {
+   "date": "2025-08-11",
+   "food_wow_trimmed_pct": -0.424,
+   "food_wow_median_pct": 0.03,
+   "n_items": 44
+  },
+  {
+   "date": "2025-08-18",
+   "food_wow_trimmed_pct": -0.412,
+   "food_wow_median_pct": 0.01,
+   "n_items": 44
+  },
+  {
+   "date": "2025-08-25",
+   "food_wow_trimmed_pct": -0.366,
+   "food_wow_median_pct": 0.02,
+   "n_items": 44
+  },
+  {
+   "date": "2025-09-01",
+   "food_wow_trimmed_pct": -0.224,
+   "food_wow_median_pct": 0.055,
+   "n_items": 44
+  },
+  {
+   "date": "2025-09-08",
+   "food_wow_trimmed_pct": -0.059,
+   "food_wow_median_pct": 0.15,
+   "n_items": 44
+  },
+  {
+   "date": "2025-09-15",
+   "food_wow_trimmed_pct": -0.146,
+   "food_wow_median_pct": -0.015,
+   "n_items": 44
+  },
+  {
+   "date": "2025-09-22",
+   "food_wow_trimmed_pct": -0.078,
+   "food_wow_median_pct": -0.005,
+   "n_items": 44
+  },
+  {
+   "date": "2025-09-29",
+   "food_wow_trimmed_pct": 0.092,
+   "food_wow_median_pct": 0.105,
+   "n_items": 44
+  },
+  {
+   "date": "2025-10-06",
+   "food_wow_trimmed_pct": 0.13,
+   "food_wow_median_pct": 0.125,
+   "n_items": 44
+  },
+  {
+   "date": "2025-10-13",
+   "food_wow_trimmed_pct": 0.172,
+   "food_wow_median_pct": 0.135,
+   "n_items": 44
+  },
+  {
+   "date": "2025-10-20",
+   "food_wow_trimmed_pct": 0.265,
+   "food_wow_median_pct": 0.24,
+   "n_items": 44
+  },
+  {
+   "date": "2025-10-27",
+   "food_wow_trimmed_pct": 0.175,
+   "food_wow_median_pct": 0.185,
+   "n_items": 44
+  },
+  {
+   "date": "2025-11-05",
+   "food_wow_trimmed_pct": 0.202,
+   "food_wow_median_pct": 0.16,
+   "n_items": 44
+  },
+  {
+   "date": "2025-11-10",
+   "food_wow_trimmed_pct": 0.147,
+   "food_wow_median_pct": 0.105,
+   "n_items": 44
+  },
+  {
+   "date": "2025-11-17",
+   "food_wow_trimmed_pct": 0.144,
+   "food_wow_median_pct": 0.105,
+   "n_items": 44
+  },
+  {
+   "date": "2025-11-24",
+   "food_wow_trimmed_pct": 0.155,
+   "food_wow_median_pct": 0.13,
+   "n_items": 44
+  },
+  {
+   "date": "2025-12-01",
+   "food_wow_trimmed_pct": 0.02,
+   "food_wow_median_pct": 0.01,
+   "n_items": 44
+  },
+  {
+   "date": "2025-12-08",
+   "food_wow_trimmed_pct": 0.067,
+   "food_wow_median_pct": 0.08,
+   "n_items": 44
+  },
+  {
+   "date": "2025-12-15",
+   "food_wow_trimmed_pct": 0.033,
+   "food_wow_median_pct": 0.04,
+   "n_items": 44
+  },
+  {
+   "date": "2025-12-22",
+   "food_wow_trimmed_pct": 0.199,
+   "food_wow_median_pct": 0.18,
+   "n_items": 44
+  },
+  {
+   "date": "2026-01-12",
+   "food_wow_trimmed_pct": 0.885,
+   "food_wow_median_pct": 0.44,
+   "n_items": 44
+  },
+  {
+   "date": "2026-01-19",
+   "food_wow_trimmed_pct": 0.413,
+   "food_wow_median_pct": 0.2,
+   "n_items": 44
+  },
+  {
+   "date": "2026-01-26",
+   "food_wow_trimmed_pct": 0.363,
+   "food_wow_median_pct": 0.2,
+   "n_items": 44
+  },
+  {
+   "date": "2026-02-02",
+   "food_wow_trimmed_pct": 0.23,
+   "food_wow_median_pct": 0.13,
+   "n_items": 44
+  },
+  {
+   "date": "2026-02-09",
+   "food_wow_trimmed_pct": 0.213,
+   "food_wow_median_pct": 0.14,
+   "n_items": 44
+  },
+  {
+   "date": "2026-02-16",
+   "food_wow_trimmed_pct": 0.094,
+   "food_wow_median_pct": -0.005,
+   "n_items": 44
+  },
+  {
+   "date": "2026-02-24",
+   "food_wow_trimmed_pct": 0.119,
+   "food_wow_median_pct": 0.09,
+   "n_items": 44
+  },
+  {
+   "date": "2026-03-02",
+   "food_wow_trimmed_pct": 0.115,
+   "food_wow_median_pct": -0.03,
+   "n_items": 44
+  },
+  {
+   "date": "2026-03-10",
+   "food_wow_trimmed_pct": 0.236,
+   "food_wow_median_pct": 0.16,
+   "n_items": 44
+  },
+  {
+   "date": "2026-03-16",
+   "food_wow_trimmed_pct": 0.169,
+   "food_wow_median_pct": 0.1,
+   "n_items": 44
+  },
+  {
+   "date": "2026-03-23",
+   "food_wow_trimmed_pct": 0.168,
+   "food_wow_median_pct": 0.115,
+   "n_items": 44
+  },
+  {
+   "date": "2026-03-30",
+   "food_wow_trimmed_pct": 0.203,
+   "food_wow_median_pct": 0.18,
+   "n_items": 44
+  },
+  {
+   "date": "2026-04-06",
+   "food_wow_trimmed_pct": 0.26,
+   "food_wow_median_pct": 0.19,
+   "n_items": 44
+  },
+  {
+   "date": "2026-04-13",
+   "food_wow_trimmed_pct": 0.071,
+   "food_wow_median_pct": 0.11,
+   "n_items": 44
+  },
+  {
+   "date": "2026-04-20",
+   "food_wow_trimmed_pct": 0.045,
+   "food_wow_median_pct": 0.045,
+   "n_items": 44
+  },
+  {
+   "date": "2026-04-27",
+   "food_wow_trimmed_pct": -0.016,
+   "food_wow_median_pct": -0.01,
+   "n_items": 44
+  },
+  {
+   "date": "2026-05-04",
+   "food_wow_trimmed_pct": 0.014,
+   "food_wow_median_pct": 0.01,
+   "n_items": 44
+  },
+  {
+   "date": "2026-05-12",
+   "food_wow_trimmed_pct": 0.072,
+   "food_wow_median_pct": 0.07,
+   "n_items": 44
+  },
+  {
+   "date": "2026-05-18",
+   "food_wow_trimmed_pct": -0.037,
+   "food_wow_median_pct": -0.065,
+   "n_items": 44
+  },
+  {
+   "date": "2026-05-25",
+   "food_wow_trimmed_pct": -0.026,
+   "food_wow_median_pct": -0.05,
+   "n_items": 44
+  },
+  {
+   "date": "2026-06-01",
+   "food_wow_trimmed_pct": 0.114,
+   "food_wow_median_pct": 0.07,
+   "n_items": 44
+  },
+  {
+   "date": "2026-06-08",
+   "food_wow_trimmed_pct": 0.219,
+   "food_wow_median_pct": 0.085,
+   "n_items": 44
+  },
+  {
+   "date": "2026-06-15",
+   "food_wow_trimmed_pct": 0.162,
+   "food_wow_median_pct": 0.04,
+   "n_items": 44
+  },
+  {
+   "date": "2026-06-22",
+   "food_wow_trimmed_pct": 0.143,
+   "food_wow_median_pct": 0.03,
+   "n_items": 44
+  },
+  {
+   "date": "2026-06-29",
+   "food_wow_trimmed_pct": 0.212,
+   "food_wow_median_pct": 0.075,
+   "n_items": 44
+  },
+  {
+   "date": "2026-07-06",
+   "food_wow_trimmed_pct": 0.236,
+   "food_wow_median_pct": 0.075,
+   "n_items": 44
+  },
+  {
+   "date": "2026-07-13",
+   "food_wow_trimmed_pct": 0.076,
+   "food_wow_median_pct": 0.11,
+   "n_items": 44
+  },
+  {
+   "date": "2026-07-20",
+   "food_wow_trimmed_pct": 0.012,
+   "food_wow_median_pct": 0.09,
+   "n_items": 44
+  },
+  {
+   "date": "2026-07-27",
+   "food_wow_trimmed_pct": 0.034,
+   "food_wow_median_pct": 0.09,
+   "n_items": 44
+  },
+  {
+   "date": "2026-08-03",
+   "food_wow_trimmed_pct": 0.012,
+   "food_wow_median_pct": 0.035,
+   "n_items": 44
+  },
+  {
+   "date": "2026-08-10",
+   "food_wow_trimmed_pct": 0.024,
+   "food_wow_median_pct": 0.08,
+   "n_items": 44
+  },
+  {
+   "date": "2026-08-17",
+   "food_wow_trimmed_pct": -0.06,
+   "food_wow_median_pct": 0.1,
+   "n_items": 44
+  },
+  {
+   "date": "2026-08-24",
+   "food_wow_trimmed_pct": -0.165,
+   "food_wow_median_pct": 0.0,
+   "n_items": 44
+  },
+  {
+   "date": "2026-08-31",
+   "food_wow_trimmed_pct": -0.085,
+   "food_wow_median_pct": 0.04,
+   "n_items": 44
+  }
+ ],
+ "quarterly_trimmed_cumul_pct": {
+  "2024-Q1": 3.061,
+  "2024-Q2": 2.412,
+  "2024-Q3": 0.167,
+  "2024-Q4": 6.157,
+  "2025-Q1": 3.912,
+  "2025-Q2": 1.321,
+  "2025-Q3": -3.168,
+  "2025-Q4": 1.722,
+  "2026-Q1": 3.253,
+  "2026-Q2": 1.239,
+  "2026-Q3": 0.084
+ },
+ "quarterly_median_cumul_pct": {
+  "2024-Q1": 2.181,
+  "2024-Q2": 2.003,
+  "2024-Q3": 1.525,
+  "2024-Q4": 4.406,
+  "2025-Q1": 3.66,
+  "2025-Q2": 1.308,
+  "2025-Q3": 0.235,
+  "2025-Q4": 1.505,
+  "2026-Q1": 1.733,
+  "2026-Q2": 0.601,
+  "2026-Q3": 0.622
+ },
+ "official_quarterly_food_cumul_pct": {
+  "2019-Q1": 2.61,
+  "2019-Q2": 0.36,
+  "2019-Q3": -1.64,
+  "2019-Q4": 1.28,
+  "2020-Q1": 2.24,
+  "2020-Q2": 2.06,
+  "2020-Q3": -1.25,
+  "2020-Q4": 3.53,
+  "2021-Q1": 3.08,
+  "2021-Q2": 2.37,
+  "2021-Q3": -0.03,
+  "2021-Q4": 4.87,
+  "2022-Q1": 9.96,
+  "2022-Q2": 2.35,
+  "2022-Q3": -3.24,
+  "2022-Q4": 1.29,
+  "2023-Q1": 2.25,
+  "2023-Q2": -0.03,
+  "2023-Q3": 1.29,
+  "2023-Q4": 4.45,
+  "2024-Q1": 2.21,
+  "2024-Q2": 1.54,
+  "2024-Q3": 0.69,
+  "2024-Q4": 6.28,
+  "2025-Q1": 3.47,
+  "2025-Q2": 1.08,
+  "2025-Q3": -1.51,
+  "2025-Q4": 2.18,
+  "2026-Q1": 3.2,
+  "2026-Q2": -0.41,
+  "2026-Q3": 0.29
+ },
+ "method": "44 food items; trimmed 10-90 mean + median; official monthly CPI for anchors",
+ "source": "https://rosstat.gov.ru/storage/mediabank/nedel_Ipc.xlsx",
+ "n_weeks": 136,
+ "range": [
+  "2024-01-09",
+  "2026-08-31"
+ ]
+}
