@@ -17,7 +17,6 @@ fetch("data/data.json").then(r => r.json()).then(D => {
   const irr2 = Math.sqrt(post.mean / P) - 1;
   const levGate = false, codGate = true; // leverage 2.9x flat (blocks); cod 17.1->16.0
   const gates = [`E[IRR(2y)] ${(irr2 * 100).toFixed(0)}% ${irr2 >= .25 ? "✓" : "✗"}`, `P(FV>P) ${(post.p_fv_gt_p * 100).toFixed(0)}% ${post.p_fv_gt_p >= .5 ? "✓" : "✗"}`, `leverage ✗ (2.9x flat)`, `cod ✓ (↓)`];
-  $("verdict").textContent = (irr2 >= .25 && post.p_fv_gt_p >= .5 && codGate && !levGate) ? "WAIT" : "WAIT";
   $("verdict").textContent = "WAIT";
   $("gates").textContent = gates.join(" · ");
   $("robust").textContent = "Bear-приоры → 1611, mult −0.5 → 1802, долг +60 → 1834, joint bear → 139. Цена внутри жирной середины (p05 30 / p95 7525): неопределенность, не дешевизна.";
