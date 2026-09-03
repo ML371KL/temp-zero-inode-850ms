@@ -1,85 +1,159 @@
-/* Magnit FV dashboard — vanilla JS, no deps. Reads data/data.json */
+/* Magnit FV dashboard v2 — vanilla JS, no deps. Reads data/data.json.
+   Time-axis charts with gridlines, legends, tooltips. Dual share-basis toggle. */
 const $ = id => document.getElementById(id);
 const NS = "http://www.w3.org/2000/svg";
 const el = (t, a) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); return e; };
-const fmt = (v, d = 0) => v == null ? "—" : Number(v).toLocaleString("ru-RU", { maximumFractionDigits: d });
+const fmt = (v, d = 0) => (v == null || !isFinite(v)) ? "—" : Number(v).toLocaleString("ru-RU", { maximumFractionDigits: d });
+const C = { mut: "#8b98ab", grid: "#2a3446", acc: "#4da3ff", up: "#3fce7a", dn: "#ff6b6b", warn: "#ffb84d", txt: "#e8edf3" };
+let BASIS = 1, BASIS_NAME = "issued"; // or 1.5017 / outstanding
+const QL = iso => { const [y, m] = iso.split("-").map(Number); return `Q${Math.floor((m - 1) / 3) + 1}′${String(y).slice(2)}`; };
 
-fetch("data/data.json").then(r => r.json()).then(D => {
+function niceTicks(lo, hi, n = 4) {
+  const span = hi - lo || 1, step0 = span / n, mag = Math.pow(10, Math.floor(Math.log10(step0)));
+  const norm = step0 / mag;
+  const step = (norm < 1.5 ? 1 : norm < 3.5 ? 2 : norm < 7.5 ? 5 : 10) * mag;
+  const ticks = [];
+  for (let v = Math.ceil(lo / step) * step; v <= hi + 1e-9; v += step) ticks.push(+v.toFixed(10));
+  return ticks;
+}
+function legend(id, items) {
+  $(id).innerHTML = items.map(([c, s]) => `<span><i style="background:${c}"></i>${s}</span>`).join("");
+}
+function txt(parent, x, y, s, fill = C.mut, sz = 11, anchor = "start") {
+  const e = el("text", { x, y, fill, "font-size": sz, "text-anchor": anchor }); e.textContent = s; parent.appendChild(e); return e;
+}
+/* Generic time chart. series: [{key,label,color,width,dash?,pts:[{t:ms,v,tag}]}] */
+function timeChart(svg, series, H, fmtY = v => v) {
+  const all = series.flatMap(s => s.pts.map(p => p.v)).filter(v => v != null);
+  if (!all.length) return;
+  let lo = Math.min(...all), hi = Math.max(...all);
+  if (lo > 0) lo = 0; if (hi < 0) hi = 0;
+  const pad = (hi - lo) * 0.08 || 1; lo -= pad; hi += pad;
+  const ts = series.flatMap(s => s.pts.map(p => p.t));
+  const t0 = Math.min(...ts), t1 = Math.max(...ts), tsp = (t1 - t0) || 1;
+  const L = 52, R = 10, T = 10, B = 24, W = 640;
+  const X = t => L + (t - t0) / tsp * (W - L - R);
+  const Y = v => T + (1 - (v - lo) / (hi - lo)) * (H - T - B);
+  niceTicks(lo, hi).forEach(v => {
+    svg.appendChild(el("line", { x1: L, y1: Y(v), x2: W - R, y2: Y(v), stroke: C.grid, "stroke-width": v === 0 ? 1.2 : 0.6 }));
+    txt(svg, L - 5, Y(v) + 4, fmtY(v), C.mut, 10, "end");
+  });
+  series.forEach(s => {
+    let d = "";
+    s.pts.forEach((p, i) => { d += (i ? "L" : "M") + X(p.t).toFixed(1) + " " + Y(p.v).toFixed(1) + " "; });
+    const path = el("path", { d, fill: "none", stroke: s.color, "stroke-width": s.width || 2 });
+    if (s.dash) path.setAttribute("stroke-dasharray", s.dash);
+    const ttl = el("title", {}); ttl.textContent = s.label; path.appendChild(ttl); svg.appendChild(path);
+    if (s.pts.length <= 40) s.pts.forEach(p => {
+      const c = el("circle", { cx: X(p.t), cy: Y(p.v), r: 2.6, fill: s.color });
+      const tt = el("title", {}); tt.textContent = `${p.tag || ""}: ${fmtY(p.v)}`; c.appendChild(tt); svg.appendChild(c);
+    });
+    const last = s.pts[s.pts.length - 1];
+    txt(svg, W - R, Y(last.v) - 5, s.label, s.color, 10, "end");
+  });
+  // x ticks: ~6 evenly
+  const allT = [...new Set(series.flatMap(s => s.pts.map(p => p.t)))].sort((a, b) => a - b);
+  const step = Math.max(1, Math.floor(allT.length / 6));
+  allT.forEach((t, i) => { if (i % step === 0) txt(svg, X(t), H - 7, QL(new Date(t).toISOString().slice(0, 10)), C.mut, 10, "middle"); });
+}
+
+fetch("data/data.json").then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(D => {
+  const F = D.fv.posterior, P = D.market.price;
   $("built").textContent = "built " + (D.meta.built_utc || "").slice(0, 16).replace("T", " ");
-  $("mkt-update").textContent = "MOEX " + ((D.market.update || "?"));
-  const P = D.market.price;
-  $("price").textContent = fmt(P);
-  $("cap").textContent = `cap ${D.market.cap.issued_101_9m} / ${D.market.cap.outstanding_67_8m} млрд`;
-  const post = D.fv.posterior;
-  $("fv-mean").textContent = fmt(post.mean);
-  $("fv-band").textContent = `p05 ${fmt(post.p05)} · p25 ${fmt(post.p25)} · p50 ${fmt(post.p50)} · p75 ${fmt(post.p75)} · p95 ${fmt(post.p95)}`;
-  $("pfv").textContent = (post.p_fv_gt_p * 100).toFixed(1) + "%";
-  const irr2 = Math.sqrt(post.mean / P) - 1;
-  const levGate = false, codGate = true; // leverage 2.9x flat (blocks); cod 17.1->16.0
-  const gates = [`E[IRR(2y)] ${(irr2 * 100).toFixed(0)}% ${irr2 >= .25 ? "✓" : "✗"}`, `P(FV>P) ${(post.p_fv_gt_p * 100).toFixed(0)}% ${post.p_fv_gt_p >= .5 ? "✓" : "✗"}`, `leverage ✗ (2.9x flat)`, `cod ✓ (↓)`];
-  $("verdict").textContent = "WAIT";
-  $("gates").textContent = gates.join(" · ");
+  $("mkt-update").textContent = "MOEX " + (D.market.update || "?");
+  const setBasis = out => {
+    BASIS = out ? D.market.outstanding_factor : 1; BASIS_NAME = out ? "outstanding" : "issued";
+    $("b-iss").classList.toggle("on", !out); $("b-out").classList.toggle("on", out);
+    $("fv-basis").textContent = BASIS_NAME;
+    renderFV(); renderCards();
+  };
+  $("b-iss").onclick = () => setBasis(false); $("b-out").onclick = () => setBasis(true);
+
+  const renderCards = () => {
+    $("price").textContent = fmt(P); // per-share price is basis-invariant; cap below reflects basis
+    const cap = BASIS_NAME === "issued" ? D.market.cap.issued_101_9m : D.market.cap.outstanding_67_8m;
+    $("cap").textContent = `cap ${cap} млрд (${BASIS_NAME})`;
+    const lh = D.market.last_history_close;
+    $("daychg").textContent = lh ? `prev close ${fmt(lh)} (${D.market.last_history_date || ""}) · day ${(P / lh - 1 >= 0 ? "+" : "") + ((P / lh - 1) * 100).toFixed(2)}%` : "—";
+    $("fv-mean").textContent = fmt(F.mean * BASIS);
+    $("fv-band").textContent = `p05 ${fmt(F.p05 * BASIS)} · p25 ${fmt(F.p25 * BASIS)} · p50 ${fmt(F.p50 * BASIS)} · p75 ${fmt(F.p75 * BASIS)} · p95 ${fmt(F.p95 * BASIS)}`;
+    $("pfv").textContent = (F.p_fv_gt_p * 100).toFixed(1) + "%";
+    const g = D.gates || {};
+    const irr2 = g.irr2 != null ? g.irr2 * 100 : NaN;
+    const parts = [
+      `E[IRR(2y)] ${isFinite(irr2) ? irr2.toFixed(0) + "%" : "—"} ${g.irr2_pass ? "✓" : "✗"}`,
+      `P(FV>P) ${((g.p_prob || 0) * 100).toFixed(0)}% ${g.p_pass ? "✓" : "✗"}`,
+      `leverage ${(g.leverage || {}).value || "?"} ${(g.leverage || {}).pass ? "✓" : "✗"}`,
+      `cod ${(g.cod || {}).pass ? "✓" : "✗"}`];
+    $("verdict").textContent = g.verdict || "WAIT";
+    $("gates").textContent = parts.join(" · ");
+  };
+  const renderFV = () => {
+    const svg = $("fvchart"); svg.innerHTML = "";
+    const q = ["p05", "p25", "p50", "p75", "p95"].map(k => F[k] * BASIS);
+    const Pv = P; // per-share price invariant to share-count basis
+    const hi = Math.max(q[4], Pv) * 1.06, X = v => 52 + v / hi * 578;
+    [0, hi / 2, hi].forEach(v => {
+      svg.appendChild(el("line", { x1: X(v), y1: 34, x2: X(v), y2: 140, stroke: C.grid, "stroke-width": 0.6 }));
+      txt(svg, X(v), 158, fmt(v), C.mut, 10, "middle");
+    });
+    const band = (a, b, fill, y = 62, h = 40) => svg.appendChild(el("rect", { x: X(a), y, width: Math.max(2, X(b) - X(a)), height: h, fill, rx: 4 }));
+    band(q[0], q[4], "#22314a"); band(q[1], q[3], "#4da3ff55");
+    svg.appendChild(el("line", { x1: X(q[2]), y1: 54, x2: X(q[2]), y2: 110, stroke: "#fff", "stroke-width": 3 }));
+    const pl = el("line", { x1: X(Pv), y1: 30, x2: X(Pv), y2: 140, stroke: C.warn, "stroke-width": 2, "stroke-dasharray": "6,3" });
+    const pt = el("title", {}); pt.textContent = `Цена ${fmt(Pv)}`; pl.appendChild(pt); svg.appendChild(pl);
+    txt(svg, X(q[0]), 178, `p05 ${fmt(q[0])}`);
+    txt(svg, X(q[4]), 178, `p95 ${fmt(q[4])}`, C.mut, 11, "end");
+    txt(svg, X(q[2]), 46, `p50 ${fmt(q[2])}`, "#fff", 12, "middle");
+    txt(svg, Math.min(X(Pv) + 7, 540), 24, `цена ${fmt(Pv)}`, C.warn, 12);
+    legend("fv-legend", [["#22314a", "p05–p95"], ["#4da3ff55", "p25–p75"], ["#fff", "p50"], [C.warn, "цена"]]);
+  };
+  renderCards(); renderFV();
   $("robust").textContent = "Bear-приоры → 1611, mult −0.5 → 1802, долг +60 → 1834, joint bear → 139. Цена внутри жирной середины (p05 30 / p95 7525): неопределенность, не дешевизна.";
-  // FV chart: quantile band + price
-  const svg = $("fvchart"), lo = 0, hi = Math.max(post.p95, P) * 1.05, X = v => 40 + (v - lo) / (hi - lo) * 570;
-  svg.appendChild(el("rect", { x: X(post.p05), y: 60, width: Math.max(2, X(post.p95) - X(post.p05)), height: 34, fill: "#2a3a55" }));
-  svg.appendChild(el("rect", { x: X(post.p25), y: 60, width: Math.max(2, X(post.p75) - X(post.p25)), height: 34, fill: "#4da3ff88" }));
-  [[post.p50, "#fff", 3]].forEach(([v, c, w]) => svg.appendChild(el("line", { x1: X(v), y1: 52, x2: X(v), y2: 102, stroke: c, "stroke-width": w })));
-  const pl = el("line", { x1: X(P), y1: 30, x2: X(P), y2: 120, stroke: "#ffb84d", "stroke-width": 2, "stroke-dasharray": "5,3" });
-  svg.appendChild(pl);
-  const t = (x, y, s, c = "#8b98ab", sz = 11) => { const e = el("text", { x, y, fill: c, "font-size": sz }); e.textContent = s; svg.appendChild(e); };
-  t(X(post.p05), 130, "p05 " + fmt(post.p05)); t(X(post.p95) - 60, 130, "p95 " + fmt(post.p95));
-  t(X(post.p50) - 20, 44, "p50 " + fmt(post.p50), "#fff"); t(Math.min(X(P) + 6, 560), 24, "цена " + fmt(P), "#ffb84d");
-  // nowcast
+
   const nc = D.nowcast || {};
   $("nc").textContent = nc.nowcast != null ? nc.nowcast + "%" : "—";
-  $("nc-detail").textContent = `${nc.target || ""} · еда ${nc.food_q3_yoy}% + ${nc.x5_src || ""}. ${nc.read || ""}`;
+  $("nc-detail").textContent = `${nc.target || "—"} · еда ${nc.food_q3_yoy != null ? nc.food_q3_yoy + "%" : "—"} + ${nc.x5_src || "—"}. ${nc.read || ""}`;
   $("nc-warn").textContent = (nc.warnings || []).join(" | ");
-  // LFL chart
-  lineChart($("lflchart"), D.series.lfl, [
-    { s: "sales", c: "#4da3ff", w: 2.5 }, { s: "ticket", c: "#3fce7a", w: 1.5 }, { s: "traffic", c: "#ffb84d", w: 1.5 }], v => v);
-  // revenue chart: magnit vs x5
-  const mg = D.series.revenue_yoy.filter(r => /Q|H|FY|9M/.test(r.p));
-  lineChart($("revchart"), mg.map(r => ({ p: r.p, v: r.v })), [{ s: null, c: "#4da3ff", w: 2.5 }], v => v, "Магнит, % г/г");
-  // margins
-  lineChart($("mgnchart"), D.series.margins_pre16.filter(r => /FY/.test(r.p)).flatMap(r => [{ p: r.p + "/" + r.s.slice(0, 4), v: r.v }]), [{ s: null, c: "#3fce7a", w: 2 }], v => v, "маржа pre16, %");
-  $("credit").textContent = `Чистый долг pre16 ${(D.credit.net_debt_pre16 || {}).h1_2026} млрд · кэш/короткий ${(D.credit.liquidity || {}).cash_to_short}x · неиспользованные линии ${(D.credit.liquidity || {}).undrawn_lines} млрд · ковенанты соблюдены · риск = carry, не solvency.`;
-  // skill table
-  const sk = D.skill.origins || [];
+
+  const T = iso => new Date(iso + "T00:00:00Z").getTime();
+  // LFL: three series on time axis
+  const lflS = ["sales", "ticket", "traffic"], lflC = { sales: "#4da3ff", ticket: "#3fce7a", traffic: "#ffb84d" },
+    lflN = { sales: "продажи", ticket: "чек", traffic: "трафик" };
+  timeChart($("lflchart"), lflS.map(s => ({
+    key: s, label: lflN[s], color: lflC[s], width: s === "sales" ? 2.6 : 1.6,
+    pts: D.series.lfl.filter(r => r.s === s).map(r => ({ t: T(r.as_of), v: r.v, tag: `${r.p} ${lflN[s]}` }))
+  })), 250, v => v + "%");
+  legend("lfl-legend", lflS.map(s => [lflC[s], `${lflN[s]} (LFL г/г)`]));
+  // Revenue: Magnit (time axis) + X5 quarterly dashed
+  const mg = D.series.revenue_yoy.map(r => ({ t: T(r.as_of), v: r.v, tag: `${r.p}: ${r.v}%` }));
+  const x5 = (D.series.x5_quarterly || []).filter(q => q.rev_yoy != null).map(q => {
+    const y = +q.q.slice(0, 4), qq = +q.q.slice(5);
+    return { t: Date.UTC(y, qq * 3 - 1, 1), v: q.rev_yoy, tag: `X5 ${q.q}: ${q.rev_yoy}%` };
+  });
+  timeChart($("revchart"), [
+    { key: "mg", label: "Магнит", color: "#4da3ff", width: 2.4, pts: mg },
+    { key: "x5", label: "X5", color: "#b48cff", width: 1.6, dash: "5,3", pts: x5 }], 230, v => v + "%");
+  legend("rev-legend", [["#4da3ff", "Магнит выручка г/г"], ["#b48cff", "X5 выручка г/г (IAS17)"]]);
+  // Margins: two series
+  const mm = s => D.series.margins_pre16.filter(r => r.s === s).map(r => ({ t: T(r.as_of), v: r.v, tag: `${r.p}: ${r.v}%` }));
+  timeChart($("mgnchart"), [
+    { key: "e", label: "EBITDA", color: "#3fce7a", width: 2.2, pts: mm("ebitda_margin") },
+    { key: "g", label: "валовая", color: "#4da3ff", width: 1.6, pts: mm("gross_margin") }], 210, v => v + "%");
+  legend("mgn-legend", [["#3fce7a", "EBITDA pre16"], ["#4da3ff", "валовая pre16"]]);
+  const cr = D.credit || {}, liq = cr.liquidity || {}, nd = cr.net_debt_pre16 || {};
+  $("credit").textContent = `Чистый долг pre16 ${nd.h1_2026} млрд (YE25 ${nd.ye2025}) · кэш/короткий ${liq.cash_to_short}x · линии ${liq.undrawn_lines} млрд · ковенанты соблюдены · риск = carry, не solvency.`;
+  // skill
+  const sk = (D.skill.origins || []);
   let h = `<table><tr><th>origin</th><th>fact</th><th>pred</th><th>err</th><th>X5</th></tr>`;
   sk.slice(-10).forEach(r => { h += `<tr><td>${r.period}</td><td>${r.act}%</td><td>${r.pred}%</td><td class="${r.err >= 0 ? "pos" : "neg"}">${r.err > 0 ? "+" : ""}${r.err}</td><td>${r.x5}%</td></tr>`; });
   h += `</table><p class="note">MAE ${D.skill.mae_pp}pp vs naive-X5 ${D.skill.naive_x5_mae_pp}pp · direction ${D.skill.direction} · bias ${D.skill.bias_pp}pp</p>`;
   $("skill").innerHTML = h;
   // consensus
-  $("consensus").innerHTML = `<div class="cons">${(D.market.consensus || []).map(c => `<div><b>${c.company || "?"}</b> ${c.rec || ""}<br>target ${c.target ? (c.target.units || "") + " " + (c.target.nanos || "") : "—"}</div>`).join("")}</div>`;
+  const REC = { RECOMMENDATION_BUY: "Buy", RECOMMENDATION_HOLD: "Hold", RECOMMENDATION_SELL: "Sell" };
+  const tp = t => t ? fmt(+t.units + (t.nano || 0) / 1e9) : "—";
+  const rc = c => { const r = REC[c.rec] || c.rec || "?"; return r === "Buy" ? "pos" : r === "Sell" ? "neg" : ""; };
+  $("consensus").innerHTML = `<div class="cons">${(D.market.consensus || []).map(c =>
+    `<div><b>${c.company || "?"}</b> <span class="${rc(c)}">${REC[c.rec] || "?"}</span><br><span class="t">${tp(c.target)}</span></div>`).join("")}</div>`;
   $("fresh").textContent = `registry ${D.meta.registry_rows} rows (${Object.entries(D.meta.status_mix).map(([k, v]) => k + ":" + v).join(", ")}) · engine ${D.meta.engine} · ${D.meta.sources}`;
-}).catch(e => { document.body.insertAdjacentHTML("afterbegin", `<p style="color:red">data load failed: ${e}</p>`); });
-
-function lineChart(svg, pts, series, fmtv, title) {
-  // pts: [{p, s?, v}] — group by s (or single)
-  const groups = {};
-  pts.forEach(r => { const k = r.s || "_"; (groups[k] = groups[k] || []).push(r); });
-  const all = pts.map(r => r.v).filter(v => v != null);
-  if (!all.length) return;
-  let lo = Math.min(...all), hi = Math.max(...all);
-  if (lo > 0) lo = 0; if (hi < 0) hi = 0;
-  const pad = (hi - lo) * 0.1 || 1; lo -= pad; hi += pad;
-  const W = 640, H = +svg.getAttribute("viewBox").split(" ")[3];
-  const X = i => 50 + i / Math.max(1, Object.values(groups)[0].length - 1) * 560;
-  const Y = v => 14 + (1 - (v - lo) / (hi - lo)) * (H - 44);
-  const zero = el("line", { x1: 44, y1: Y(0), x2: 624, y2: Y(0), stroke: "#3a4a63" }); svg.appendChild(zero);
-  const order = Object.keys(groups);
-  order.forEach(k => {
-    const g = groups[k];
-    const spec = series.find(s => s.s === k) || series[0];
-    let d = "";
-    g.forEach((r, i) => { d += (i ? "L" : "M") + X(i).toFixed(1) + " " + Y(r.v).toFixed(1) + " "; });
-    svg.appendChild(el("path", { d, fill: "none", stroke: spec.c, "stroke-width": spec.w }));
-    const last = g[g.length - 1];
-    const tx = el("text", { x: 626, y: Y(last.v), fill: spec.c, "font-size": 10, "text-anchor": "end" }); tx.textContent = k === "_" ? (title || "") : k; svg.appendChild(tx);
-  });
-  const n = Object.values(groups)[0].length;
-  for (let i = 0; i < n; i += Math.ceil(n / 8)) {
-    const tx = el("text", { x: X(i), y: H - 6, fill: "#8b98ab", "font-size": 10 }); tx.textContent = Object.values(groups)[0][i].p; svg.appendChild(tx);
-  }
-}
+}).catch(e => { document.body.insertAdjacentHTML("afterbegin", `<p style="color:#ff6b6b;padding:12px">data load failed: ${e}</p>`); });

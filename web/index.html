@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Магнит (MGNT): динамическая fair-value модель — posterior FV, nowcast, skill, кредит. Не рекомендация.">
+<meta name="theme-color" content="#0f1419">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f1419'/%3E%3Ctext x='16' y='22' font-size='17' text-anchor='middle' fill='%234da3ff' font-family='sans-serif' font-weight='bold'%3EM%3C/text%3E%3C/svg%3E">
 <title>Магнит (MGNT) — Fair Value дашборд</title>
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -10,37 +13,47 @@
 <header>
   <div>
     <h1>Магнит <span class="ticker">MGNT</span></h1>
-    <p class="sub">Динамическая FV-модель · pre-IFRS16 базис · issued 101.9m / outstanding 67.8m</p>
+    <p class="sub">Динамическая FV-модель · pre-IFRS16 базис · posterior-дистрибутив, не точка</p>
   </div>
   <div class="meta"><span id="built">…</span><br><span id="mkt-update">…</span></div>
 </header>
 
+<div class="basis-row">
+  <span>Базис акций:</span>
+  <button id="b-iss" class="on">issued 101.9m</button>
+  <button id="b-out">outstanding 67.8m</button>
+</div>
+
 <section class="cards">
-  <div class="card big"><h2>Цена</h2><div class="num" id="price">—</div><div class="cap" id="cap">—</div></div>
-  <div class="card big"><h2>FV posterior (issued)</h2><div class="num" id="fv-mean">—</div><div class="cap" id="fv-band">—</div></div>
-  <div class="card"><h2>P(FV&gt;P)</h2><div class="num" id="pfv">—</div><div class="cap">вероятность недооценки</div></div>
+  <div class="card big"><h2>Цена</h2><div class="num" id="price">—</div><div class="cap" id="cap">—</div><div class="cap" id="daychg">—</div></div>
+  <div class="card big"><h2>FV posterior <span id="fv-basis" class="tag">issued</span></h2><div class="num" id="fv-mean">—</div><div class="cap" id="fv-band">—</div></div>
+  <div class="card"><h2>P(FV&gt;P)</h2><div class="num" id="pfv">—</div><div class="cap">доля дистрибутива выше цены</div></div>
   <div class="card"><h2>Вердикт гейтов</h2><div class="num small" id="verdict">—</div><div class="cap" id="gates">—</div></div>
 </section>
 
-<section><h2>FV-дистрибутив vs цена</h2><svg id="fvchart" viewBox="0 0 640 170"></svg>
+<section><h2>FV-дистрибутив vs цена</h2><div class="legend" id="fv-legend"></div><svg id="fvchart" viewBox="0 0 640 190" role="img" aria-label="FV distribution chart"></svg>
 <p class="note" id="robust">…</p></section>
 
-<section><h2>Q3 2026 nowcast (LFL)</h2><div class="card"><div class="num" id="nc">—</div><div class="cap" id="nc-detail">—</div><div class="cap warn" id="nc-warn">—</div></div></section>
+<section><h2>Q3 2026 nowcast (LFL)</h2><div class="card"><div class="num" id="nc">—</div><div class="cap" id="nc-detail">—</div><div class="cap warn" id="nc-warn">—</div></div>
+<p class="note">Мост v2: 0.4·прод-CPI + 0.6·X5 LFL + trailing gap. X5 выходит раньше на 2–6 недель — FV двигается до отчета Магнита.</p></section>
 
-<section><h2>LFL: продажи = чек × трафик</h2><svg id="lflchart" viewBox="0 0 640 240"></svg></section>
+<section><h2>LFL: продажи = чек × трафик <span class="tag">identity-check</span></h2><div class="legend" id="lfl-legend"></div><svg id="lflchart" viewBox="0 0 640 250" role="img" aria-label="LFL split chart"></svg>
+<p class="note">Трафик схлопнулся к ~0 к 1H2026 — весь рост из чека (прохождение инфляции).</p></section>
 
-<section><h2>Выручка г/г: Магнит vs X5</h2><svg id="revchart" viewBox="0 0 640 220"></svg></section>
+<section><h2>Выручка г/г: Магнит vs X5</h2><div class="legend" id="rev-legend"></div><svg id="revchart" viewBox="0 0 640 230" role="img" aria-label="Revenue growth chart"></svg>
+<p class="note">X5 содержит свои M&A (Красный Яр/Слата); для органики смотри LFL-мост и M&A add-on в модели.</p></section>
 
-<section><h2>Маржи pre16 + долг</h2><svg id="mgnchart" viewBox="0 0 640 200"></svg>
+<section><h2>Маржи pre16</h2><div class="legend" id="mgn-legend"></div><svg id="mgnchart" viewBox="0 0 640 210" role="img" aria-label="Margins chart"></svg>
 <p class="note" id="credit">…</p></section>
 
-<section><h2>Skill моста (15 origins)</h2><div id="skill"></div><svg id="errchart" viewBox="0 0 640 180"></svg></section>
+<section><h2>Skill моста (15 origins)</h2><div class="tbl-wrap"><div id="skill"></div></div></section>
 
-<section><h2>Консенсус (T-invest)</h2><div id="consensus"></div></section>
+<section><h2>Консенсус (T-invest)</h2><div id="consensus"></div>
+<p class="note">Разброс 1500–4400 — сам по себе сигнал неопределенности, не якорь.</p></section>
 
 <footer>
 <p>Источники: magnit.com IR (primary), Росстат, ЦБ, x5.ru databook IAS17, MOEX ISS, T-invest. Не рекомендация — MOS/IRR/гейты, не buy/sell.</p>
-<p id="fresh">…</p>
+<p><a href="https://github.com/ML371KL/temp-zero-inode-850ms">repo</a> · <span id="fresh">…</span></p>
 </footer>
 <script src="app.js"></script>
 </body>

@@ -1,6 +1,6 @@
 {
  "meta": {
-  "built_utc": "2026-09-03T14:27:55.698441+00:00",
+  "built_utc": "2026-09-03T14:44:16.643656+00:00",
   "engine": "magnit-v2",
   "registry_rows": 281,
   "status_mix": {
@@ -18,6 +18,9 @@
    "unit": "bn_rub"
   },
   "update": "16:54:01",
+  "last_history_close": 1548.5,
+  "last_history_date": "2026-09-02",
+  "outstanding_factor": 1.5021,
   "fundamentals": {
    "marketCapitalization": 107507664000.0,
    "revenueTtm": 3509225556000.0,
@@ -1485,5 +1488,22 @@
    "band": 3.0,
    "note": "IFRS note 7 exact (2025, H1-2025); H1-2026 EST ~54 (band +-3)"
   }
- ]
+ ],
+ "gates": {
+  "irr2": 0.4504,
+  "irr2_pass": true,
+  "p_prob": 0.655,
+  "p_pass": true,
+  "leverage": {
+   "value": "2.9x",
+   "trend": "flat H1 (FY25 2.9x -> H1 2.9x)",
+   "pass": false
+  },
+  "cod": {
+   "falling": true,
+   "note": "key 16.0->14.0; cod 17.1->16.0",
+   "pass": true
+  },
+  "verdict": "WAIT"
+ }
 }
