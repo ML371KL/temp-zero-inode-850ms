@@ -1,6 +1,6 @@
 {
  "meta": {
-  "built_utc": "2026-09-03T15:21:45.442307+00:00",
+  "built_utc": "2026-09-03T16:05:23.711350+00:00",
   "engine": "magnit-v2",
   "registry_rows": 281,
   "status_mix": {
@@ -115,7 +115,7 @@
    "p50": 4150.0,
    "p75": 6510.0,
    "p95": 7644.0,
-   "p_fv_gt_p": 0.719
+   "p_fv_gt_p": 0.717
   },
   "prior_outstanding": {
    "probs": {
@@ -129,7 +129,7 @@
    "p50": 6233.0,
    "p75": 9778.0,
    "p95": 11482.0,
-   "p_fv_gt_p": 0.812
+   "p_fv_gt_p": 0.811
   },
   "posterior_issued": {
    "probs": {
@@ -143,7 +143,7 @@
    "p50": 2309.0,
    "p75": 5965.0,
    "p95": 7525.0,
-   "p_fv_gt_p": 0.655
+   "p_fv_gt_p": 0.653
   },
   "posterior_outstanding": {
    "probs": {
@@ -157,7 +157,7 @@
    "p50": 3468.0,
    "p75": 8960.0,
    "p95": 11303.0,
-   "p_fv_gt_p": 0.769
+   "p_fv_gt_p": 0.768
   }
  },
  "nowcast": {
@@ -1520,7 +1520,7 @@
  "gates": {
   "irr2": 0.7726,
   "irr2_pass": true,
-  "p_prob": 0.769,
+  "p_prob": 0.768,
   "p_pass": true,
   "leverage": {
    "value": "2.9x",
