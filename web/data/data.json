@@ -1,6 +1,6 @@
 {
  "meta": {
-  "built_utc": "2026-09-03T15:07:05.902217+00:00",
+  "built_utc": "2026-09-03T15:21:45.442307+00:00",
   "engine": "magnit-v2",
   "registry_rows": 281,
   "status_mix": {
@@ -10,24 +10,24 @@
   "sources": "magnit.com IR (primary), Rosstat, CBR, x5.ru databook, MOEX ISS, T-invest"
  },
  "market": {
-  "price": 1580,
+  "price": 1589,
   "cap": {
-   "price": 1580,
-   "issued_101_9m": 161.0,
-   "outstanding_67_8m": 107.2,
+   "price": 1589,
+   "issued_101_9m": 161.9,
+   "outstanding_67_8m": 107.8,
    "unit": "bn_rub"
   },
-  "update": "16:54:01",
+  "update": "18:06:26",
   "last_history_close": 1548.5,
   "last_history_date": "2026-09-02",
   "outstanding_factor": 1.5021,
   "fundamentals": {
-   "marketCapitalization": 107507664000.0,
+   "marketCapitalization": 107745212500.0,
    "revenueTtm": 3509225556000.0,
    "ebitdaTtm": 306162000000.0,
    "netIncomeTtm": -31575703000.0,
    "freeCashFlowTtm": -141369049000.0,
-   "totalEnterpriseValueMrq": 1208822746000.0,
+   "totalEnterpriseValueMrq": 1209060294500.0,
    "evToEbitdaMrq": 3.95,
    "netDebtToEbitda": 3.6,
    "totalDebtMrq": 748588915000.0,
@@ -36,6 +36,14 @@
    "sharesOutstanding": 67871000.0
   },
   "consensus": [
+   {
+    "company": "Банк \"ПСБ\"",
+    "rec": "RECOMMENDATION_BUY",
+    "target": {
+     "units": "2450",
+     "nano": 0
+    }
+   },
    {
     "company": "Альфа-банк",
     "rec": "RECOMMENDATION_BUY",
@@ -49,6 +57,14 @@
     "rec": "RECOMMENDATION_BUY",
     "target": {
      "units": "4400",
+     "nano": 0
+    }
+   },
+   {
+    "company": "АО «Эйлер Аналитические Технологии»",
+    "rec": "RECOMMENDATION_HOLD",
+    "target": {
+     "units": "2800",
      "nano": 0
     }
    },
@@ -81,22 +97,6 @@
     "rec": "RECOMMENDATION_SELL",
     "target": {
      "units": "1500",
-     "nano": 0
-    }
-   },
-   {
-    "company": "Банк \"ПСБ\"",
-    "rec": "RECOMMENDATION_BUY",
-    "target": {
-     "units": "2450",
-     "nano": 0
-    }
-   },
-   {
-    "company": "Инвестиционный банк Синара",
-    "rec": "RECOMMENDATION_BUY",
-    "target": {
-     "units": "2200",
      "nano": 0
     }
    }
@@ -1518,7 +1518,7 @@
   }
  ],
  "gates": {
-  "irr2": 0.7777,
+  "irr2": 0.7726,
   "irr2_pass": true,
   "p_prob": 0.769,
   "p_pass": true,
