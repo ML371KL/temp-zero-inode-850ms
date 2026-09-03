@@ -14,12 +14,13 @@ function mkEl() {
     getAttribute() { return "0 0 640 200"; },
   };
 }
-global.document = { getElementById: id => (store[id] ||= mkEl()), createElementNS: () => mkEl(), body: mkEl() };
+global.document = { getElementById: id => (store[id] ||= mkEl()), createElementNS: () => mkEl(),
+  body: Object.assign(mkEl(), { insertAdjacentHTML(p, h) { this._err = h; } }) };
 global.fetch = () => Promise.resolve({ ok: true, json: () => JSON.parse(fs.readFileSync(path.join(WEB, "data", "data.json"), "utf8")) });
 let src = fs.readFileSync(path.join(WEB, "app.js"), "utf8");
 eval(src);
 setTimeout(() => {
-  const need = { price: v => v.replace(/[\s\u00a0]/g, "") === "1580", "fv-mean": v => +v.replace(/[\s\u00a0]/g, "") > 3000, pfv: v => v.includes("65"),
+  const need = { price: v => v.replace(/[\s\u00a0]/g, "") === "1580", "fv-mean": v => +v.replace(/[\s\u00a0]/g, "") > 4500, pfv: v => parseFloat(v) > 70,
     verdict: "WAIT", nc: v => v.includes("7.09") };
   let fail = 0;
   for (const [id, exp] of Object.entries(need)) {
@@ -41,9 +42,9 @@ setTimeout(() => {
     if (!ok) fail++;
   }
   // basis toggle simulation
-  store["b-out"]._click();
+  store["b-iss"]._click();
   const out = store["fv-mean"]._text;
-  console.log((+out.replace(/[\s ]/g, "") > 4500 ? "PASS" : "FAIL") + ` toggle outstanding fv-mean=${out}`);
-  if (!(+out.replace(/[\s ]/g, "") > 4500)) fail++;
+  console.log((+out.replace(/[\s ]/g, "") > 3000 && +out.replace(/[\s ]/g, "") < 3600 ? "PASS" : "FAIL") + ` toggle issued fv-mean=${out}`);
+  if (!(+out.replace(/[\s ]/g, "") > 3000 && +out.replace(/[\s ]/g, "") < 3600)) fail++;
   process.exit(fail ? 1 : 0);
 }, 100);

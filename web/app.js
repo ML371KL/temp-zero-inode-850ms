@@ -5,7 +5,7 @@ const NS = "http://www.w3.org/2000/svg";
 const el = (t, a) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); return e; };
 const fmt = (v, d = 0) => (v == null || !isFinite(v)) ? "—" : Number(v).toLocaleString("ru-RU", { maximumFractionDigits: d });
 const C = { mut: "#8b98ab", grid: "#2a3446", acc: "#4da3ff", up: "#3fce7a", dn: "#ff6b6b", warn: "#ffb84d", txt: "#e8edf3" };
-let BASIS = 1, BASIS_NAME = "issued"; // or 1.5017 / outstanding
+let BASIS_NAME = "outstanding"; // canonical; F already in chosen basis (no scaling)
 const QL = iso => { const [y, m] = iso.split("-").map(Number); return `Q${Math.floor((m - 1) / 3) + 1}′${String(y).slice(2)}`; };
 
 function niceTicks(lo, hi, n = 4) {
@@ -58,13 +58,15 @@ function timeChart(svg, series, H, fmtY = v => v) {
 }
 
 fetch("data/data.json").then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(D => {
-  const F = D.fv.posterior, P = D.market.price;
+  const FOUT = D.fv.posterior_outstanding, FISS = D.fv.posterior_issued, P = D.market.price;
+  let F = FOUT, BASIS_NAME = "outstanding";
   $("built").textContent = "built " + (D.meta.built_utc || "").slice(0, 16).replace("T", " ");
   $("mkt-update").textContent = "MOEX " + (D.market.update || "?");
   const setBasis = out => {
-    BASIS = out ? D.market.outstanding_factor : 1; BASIS_NAME = out ? "outstanding" : "issued";
+    F = out ? FOUT : FISS;
+    BASIS_NAME = out ? "outstanding" : "issued";
     $("b-iss").classList.toggle("on", !out); $("b-out").classList.toggle("on", out);
-    $("fv-basis").textContent = BASIS_NAME;
+    $("fv-basis").textContent = BASIS_NAME + (out ? " (canonical)" : " (MOEX cap recon.)");
     renderFV(); renderCards();
   };
   $("b-iss").onclick = () => setBasis(false); $("b-out").onclick = () => setBasis(true);
@@ -75,8 +77,8 @@ fetch("data/data.json").then(r => { if (!r.ok) throw new Error("HTTP " + r.statu
     $("cap").textContent = `cap ${cap} млрд (${BASIS_NAME})`;
     const lh = D.market.last_history_close;
     $("daychg").textContent = lh ? `prev close ${fmt(lh)} (${D.market.last_history_date || ""}) · day ${(P / lh - 1 >= 0 ? "+" : "") + ((P / lh - 1) * 100).toFixed(2)}%` : "—";
-    $("fv-mean").textContent = fmt(F.mean * BASIS);
-    $("fv-band").textContent = `p05 ${fmt(F.p05 * BASIS)} · p25 ${fmt(F.p25 * BASIS)} · p50 ${fmt(F.p50 * BASIS)} · p75 ${fmt(F.p75 * BASIS)} · p95 ${fmt(F.p95 * BASIS)}`;
+    $("fv-mean").textContent = fmt(F.mean);
+    $("fv-band").textContent = `p05 ${fmt(F.p05)} · p25 ${fmt(F.p25)} · p50 ${fmt(F.p50)} · p75 ${fmt(F.p75)} · p95 ${fmt(F.p95)}`;
     $("pfv").textContent = (F.p_fv_gt_p * 100).toFixed(1) + "%";
     const g = D.gates || {};
     const irr2 = g.irr2 != null ? g.irr2 * 100 : NaN;
@@ -90,7 +92,7 @@ fetch("data/data.json").then(r => { if (!r.ok) throw new Error("HTTP " + r.statu
   };
   const renderFV = () => {
     const svg = $("fvchart"); svg.innerHTML = "";
-    const q = ["p05", "p25", "p50", "p75", "p95"].map(k => F[k] * BASIS);
+    const q = ["p05", "p25", "p50", "p75", "p95"].map(k => F[k]);
     const Pv = P; // per-share price invariant to share-count basis
     const hi = Math.max(q[4], Pv) * 1.06, X = v => 52 + v / hi * 578;
     [0, hi / 2, hi].forEach(v => {
@@ -109,7 +111,7 @@ fetch("data/data.json").then(r => { if (!r.ok) throw new Error("HTTP " + r.statu
     legend("fv-legend", [["#22314a", "p05–p95"], ["#4da3ff55", "p25–p75"], ["#fff", "p50"], [C.warn, "цена"]]);
   };
   renderCards(); renderFV();
-  $("robust").textContent = "Bear-приоры → 1611, mult −0.5 → 1802, долг +60 → 1834, joint bear → 139. Цена внутри жирной середины (p05 30 / p95 7525): неопределенность, не дешевизна.";
+  $("robust").textContent = "Single-factor bears hold above (2420–2755); only the joint bear combo breaks below (208). Цена ниже bulk posterior, но левый хвост реален (p05 45): неопределенность, не дешевизна.";
 
   const nc = D.nowcast || {};
   $("nc").textContent = nc.nowcast != null ? nc.nowcast + "%" : "—";
