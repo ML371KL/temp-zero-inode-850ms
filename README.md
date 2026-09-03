@@ -29,3 +29,8 @@ Dashboard `data.json` is re-exported + redeployed after each model refresh
 
 Data: magnit.com IR (primary), Rosstat, CBR, x5.ru databook IAS17, MOEX ISS, T-invest.
 Not investment advice — MOS/IRR/gates, no buy/sell labels.
+
+## Ops (dormant)
+
+`ops/` (systemd units, VPS installer) is parked: scheduling runs on the local
+machine via Task Scheduler instead. Revisit if 24/7 operation is needed.
