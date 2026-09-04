@@ -153,7 +153,28 @@ fetch("data/data.json").then(r => { if (!r.ok) throw new Error("HTTP " + r.statu
     { key: "g", label: "валовая", color: "#4da3ff", width: 1.6, pts: mm("gross_margin") }], 210, v => v + "%");
   legend("mgn-legend", [["#3fce7a", "EBITDA pre16"], ["#4da3ff", "валовая pre16"]]);
   const cr = D.credit || {}, liq = cr.liquidity || {}, nd = cr.net_debt_pre16 || {};
-  $("credit").textContent = `Чистый долг pre16 ${nd.h1_2026} млрд (YE25 ${nd.ye2025}) · кэш/короткий ${liq.cash_to_short}x · линии ${liq.undrawn_lines} млрд · ковенанты соблюдены. Ближайшая ликвидность достаточна; риск — carry и рефинанс, не мгновенная solvency.`;
+  $("credit").textContent = `Чистый долг pre16 ${nd.h1_2026} млрд (YE25 ${nd.ye2025}) · кэш/короткий ${liq.cash_to_short}x · линии ${liq.undrawn_lines} млрд · ковенанты соблюдены. Ближайшая ликвидность достаточна; риск — carry и рефинанс, не мгновенная solvency. Стена: ${Object.entries(D.debt_wall || {}).map(([k, v]) => `${k}: ${v}`).join(" · ")} млрд.`;
+  // OPEX bridge table
+  const ox = (D.opex || []).filter(r => !String(r.period).includes("wedge"));
+  let oh = `<table><tr><th>период</th><th>выручка</th><th>персонал</th><th>аренда cash</th><th>SG&A</th><th>движения, бп</th></tr>`;
+  ox.forEach(r => {
+    const d = r.deltas_bps || {};
+    const mv = Object.entries(d).filter(([k]) => k !== "loyalty_m_cards").map(([k, v]) => `${k} ${Array.isArray(v) ? v.map(x => (x > 0 ? "+" : "") + x).join("/") : v}`).join("; ");
+    oh += `<tr><td>${r.period}</td><td>${r.revenue}</td><td>${r.personnel != null ? r.personnel + ` (${r.personnel_pct}%)` : "—"}</td><td>${r.rent_cash != null ? r.rent_cash + ` (${r.rent_cash_pct}%)` : "—"}</td><td>${(r.sga_pct || []).join(" / ") || "—"}</td><td>${mv || "—"}</td></tr>`;
+  });
+  const w = (D.opex || []).find(r => String(r.period).includes("wedge"));
+  if (w) oh += `</table><p class="note">Клин 1H25→1H26: gross +${w.gross_bp}бп, EBITDA ${w.ebitda_bp}бп — поглощено +${w.absorbed_bp}бп затрат.</p>`;
+  else oh += `</table>`;
+  $("opex").innerHTML = oh;
+  // APV cross-check (fundamentals-only floor, no multiples)
+  const apv = D.apv || {};
+  let ah = `<table><tr><th>кейс</th><th>breakeven ND (Ku low/mid/high)</th><th>equity при спот-долге</th></tr>`;
+  Object.entries(apv.cases || {}).forEach(([k, v]) => {
+    ah += `<tr><td>${k}</td><td>${["low", "mid", "high"].map(q => v[q] ? (v[q].breakeven_net_debt ?? "—") : "—").join(" / ")}</td><td>${["low", "mid", "high"].map(q => v[q] ? (v[q].per_share_outst_spot ?? "—") : "—").join(" / ")}</td></tr>`;
+  });
+  ah += `</table>`;
+  $("apv").innerHTML = ah;
+  $("apv-note").textContent = ((apv.breakeven_read || "") + " " + (apv.method || "")).slice(0, 600);
   // TSR line under verdict
   const dec = D.decision || {}, dm = dec.metrics || {};
   if (dm.median != null) {

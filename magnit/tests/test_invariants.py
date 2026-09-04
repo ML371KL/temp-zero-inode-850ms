@@ -18,12 +18,14 @@ def rows(series=None, period=None, basis=None, status=None):
     return out
 
 def test_registry_schema():
-    req = {"series", "period", "as_of", "value", "unit", "source", "url",
-           "released_at", "vintage", "status", "note"}
+    import sys
+    sys.path.insert(0, str(pathlib.Path(__file__).parent.parent))
+    from contracts import SCHEMA
+    req = set(SCHEMA["required"])
     today = datetime.date.today().isoformat()
     for x in reg:
         assert req <= set(x), x
-        assert x["status"] in ("ok", "provisional", "quarantine"), x
+        assert x["status"] in SCHEMA["status"], x
         assert isinstance(x["value"], (int, float)), x
         datetime.date.fromisoformat(x["as_of"])
         assert x["released_at"] <= today, x
@@ -151,3 +153,88 @@ def test_no_hardcoded_market_price():
     assert not re.search(r"^\s*P\s*=\s*158\d", src, re.M)
     dec = (_pl.Path(__file__).parent.parent / "decision_layer.py").read_text(encoding="utf-8")
     assert "VERDICT: WAIT (" not in dec  # verdict computed, not printed static
+
+
+def test_opex_wedge_identity():
+    import json, pathlib
+    d = json.loads((pathlib.Path(__file__).parent.parent / 'data' / 'opex_bridge.json').read_text(encoding='utf-8'))
+    w = [r for r in d['rows'] if r['period'].endswith('wedge_check')]
+    assert w, 'wedge check missing'
+    for r in w:
+        assert r['gross_bp'] - r['ebitda_bp'] == r['absorbed_bp'], r
+        assert r['absorbed_bp'] > 0, r  # cost creep absorbs gross gains (the documented fact)
+
+
+def test_format_sums_bounded():
+    import json, pathlib
+    d = json.loads((pathlib.Path(__file__).parent.parent / 'data' / 'opex_bridge.json').read_text(encoding='utf-8'))
+    reg = json.loads((pathlib.Path(__file__).parent.parent / 'data' / 'registry.json').read_text(encoding='utf-8'))
+    rev = {x['period']: x['value'] for x in reg if x['series'] == 'revenue' and x['unit'] == 'bn_rub'
+           and x.get('basis') in (None, '', 'n/a') and x['status'] == 'ok'}
+    for r in d['rows']:
+        if not r.get('formats_mln'): continue
+        s = sum(v['cur_mln'] for v in r['formats_mln'].values()) / 1000
+        tot = rev.get(r['period'])
+        assert tot and 0.5 * tot < s < tot, (r['period'], s, tot)
+        for k, v in r['formats_mln'].items():
+            assert abs(v['cur_mln'] / v['prev_mln'] * 100 - 100 - v['yoy']) < 1.0, (r['period'], k, v)
+
+
+def test_apv_breakeven_below_spot():
+    # APV (no multiples) must show ~0 equity at spot debt: the downside anchor.
+    # If APV ever clears spot debt, the WAIT thesis needs rewriting.
+    import json, pathlib
+    a = json.loads((pathlib.Path(__file__).parent.parent / 'data' / 'apv.json').read_text(encoding='utf-8'))
+    for case, legs in a['cases'].items():
+        be = legs['mid']['breakeven_net_debt']
+        assert be < 922.2, (case, be)
+    assert a['cases']['recovery']['mid']['per_share_outst_spot'] == 0.0
+
+
+def test_debt_wall_sums():
+    import json, pathlib
+    s = json.loads((pathlib.Path(__file__).parent.parent / 'data' / 'debt_schedule.json').read_text(encoding='utf-8'))
+    assert abs(sum(s['wall_bn'].values()) - 2.2 - 745.7) < 1.0, s['wall_bn']  # wall skips the -2.2 current-portion adjustment
+    assert abs(s['long_total'] + s['short_total'] - 745.7) < 0.2
+
+
+def test_vintage_fields_present():
+    for x in reg:
+        for f in ('vintage_id', 'first_seen', 'avail_since', 'restatement_id', 'supersedes'):
+            assert f in x, (x.get('series'), x.get('period'), f)
+
+
+def test_no_destructive_overwrite():
+    # superseded rows are retained, never deleted; quarantine rows stay queryable
+    sts = {x['status'] for x in reg}
+    assert sts <= {'ok', 'provisional', 'quarantine', 'superseded'}, sts
+
+
+def test_pit_monotonic():
+    import sys
+    sys.path.insert(0, str(pathlib.Path(__file__).parent.parent))
+    from pit import rows_as_of
+    a = rows_as_of(reg, '2024-05-01')
+    b = rows_as_of(reg, '2025-05-01')
+    c = rows_as_of(reg, '2026-09-04')
+    assert len(a) <= len(b) <= len(c) and len(a) > 100, (len(a), len(b), len(c))
+
+
+def test_opex_identities():
+    import json, pathlib
+    d = json.loads((pathlib.Path(__file__).parent.parent / 'data' / 'opex_bridge.json').read_text(encoding='utf-8'))
+    w = [r for r in d['rows'] if r['period'].endswith('wedge_check')][0]
+    assert w['gross_bp'] - w['ebitda_bp'] == w['absorbed_bp'] and w['absorbed_bp'] > 0
+    for r in d['rows']:
+        if r.get('formats_mln'):
+            s = sum(v['cur_mln'] for v in r['formats_mln'].values()) / 1000
+            assert 1000 < s < 4000, (r['period'], s)
+
+
+def test_apv_below_spot_debt():
+    # APV (no multiples) must NOT clear spot gross debt: downside anchor holds.
+    # If it ever does, the WAIT thesis and this test both need rewriting.
+    import json, pathlib
+    a = json.loads((pathlib.Path(__file__).parent.parent / 'data' / 'apv.json').read_text(encoding='utf-8'))
+    for case, legs in a['cases'].items():
+        assert legs['mid']['breakeven_net_debt'] < 922.2, (case, legs['mid'])

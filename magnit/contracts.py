@@ -4,8 +4,9 @@
 """
 SCHEMA = {
     "required": ["series", "period", "as_of", "value", "unit", "source", "url",
-                 "released_at", "vintage", "status", "note"],
-    "status": ["ok", "provisional", "quarantine"],
+                 "released_at", "vintage", "status", "note",
+                 "vintage_id", "first_seen", "avail_since", "restatement_id", "supersedes"],
+    "status": ["ok", "provisional", "quarantine", "superseded"],
     "value_types": [int, float],
 }
 # invariants (also enforced in tests/test_invariants.py)

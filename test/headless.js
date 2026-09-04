@@ -43,6 +43,12 @@ setTimeout(() => {
     console.log((ok ? "PASS" : "FAIL") + ` #${id} html=${n}chars`);
     if (!ok) fail++;
   }
+  for (const id of ["opex", "apv"]) {
+    const n = (store[id] ? store[id]._html : "").length;
+    const ok = n > 100;
+    console.log((ok ? "PASS" : "FAIL") + " #" + id + " html=" + n + "chars");
+    if (!ok) fail++;
+  }
   // basis toggle simulation
   store["b-iss"]._click();
   const out = store["fv-mean"]._text;

@@ -1,0 +1,204 @@
+{
+ "rows": [
+  {
+   "period": "2024FY",
+   "revenue": 3043.4,
+   "sga_pct": [
+    "-20,7%",
+    "−20,1%"
+   ],
+   "deltas_bps": {
+    "personnel": [
+     32
+    ]
+   },
+   "personnel": 278.0,
+   "personnel_pct": 9.13,
+   "rent_cash": 63.0,
+   "rent_cash_pct": 2.07,
+   "formats_mln": {
+    "conv": {
+     "cur_mln": 2076600,
+     "prev_mln": 1757809,
+     "yoy": 18.1
+    },
+    "dixy": {
+     "cur_mln": 326334,
+     "prev_mln": 283581,
+     "yoy": 15.1
+    },
+    "drogerie": {
+     "cur_mln": 226934,
+     "prev_mln": 200729,
+     "yoy": 13.1
+    }
+   }
+  },
+  {
+   "period": "2025FY",
+   "revenue": 3509.2,
+   "sga_pct": [
+    "-21,8%",
+    "-20,7%"
+   ],
+   "deltas_bps": {
+    "personnel": [
+     23
+    ],
+    "utilities": [
+     5
+    ]
+   },
+   "personnel": 328.5,
+   "personnel_pct": 9.36,
+   "rent_cash": 57.0,
+   "rent_cash_pct": 1.62,
+   "formats_mln": {
+    "conv": {
+     "cur_mln": 2380343,
+     "prev_mln": 2076600,
+     "yoy": 14.6
+    },
+    "dixy": {
+     "cur_mln": 376653,
+     "prev_mln": 326334,
+     "yoy": 15.4
+    },
+    "drogerie": {
+     "cur_mln": 239887,
+     "prev_mln": 226934,
+     "yoy": 5.7
+    },
+    "super": {
+     "cur_mln": 276829,
+     "prev_mln": 266564,
+     "yoy": 3.9
+    }
+   }
+  },
+  {
+   "period": "2024H1",
+   "revenue": 1460.1,
+   "sga_pct": [
+    "-20,5%",
+    "−19,9%"
+   ],
+   "deltas_bps": {
+    "personnel": [
+     67
+    ]
+   },
+   "formats_mln": {
+    "conv": {
+     "cur_mln": 995681,
+     "prev_mln": 842983,
+     "yoy": 18.1
+    },
+    "dixy": {
+     "cur_mln": 158080,
+     "prev_mln": 138185,
+     "yoy": 14.4
+    },
+    "drogerie": {
+     "cur_mln": 108865,
+     "prev_mln": 94623,
+     "yoy": 15.1
+    },
+    "super": {
+     "cur_mln": 127939,
+     "prev_mln": 121639,
+     "yoy": 5.2
+    }
+   }
+  },
+  {
+   "period": "2025H1",
+   "revenue": 1673.2,
+   "sga_pct": [
+    "-20,9%",
+    "-20,6%"
+   ],
+   "deltas_bps": {
+    "utilities": [
+     6
+    ]
+   },
+   "personnel": 152.5,
+   "personnel_pct": 9.11,
+   "rent_cash": 29.4,
+   "rent_cash_pct": 1.76,
+   "formats_mln": {
+    "conv": {
+     "cur_mln": 1148948,
+     "prev_mln": 995681,
+     "yoy": 15.4
+    },
+    "dixy": {
+     "cur_mln": 182882,
+     "prev_mln": 158080,
+     "yoy": 15.7
+    },
+    "drogerie": {
+     "cur_mln": 115574,
+     "prev_mln": 108865,
+     "yoy": 6.2
+    },
+    "super": {
+     "cur_mln": 134586,
+     "prev_mln": 127939,
+     "yoy": 5.2
+    }
+   }
+  },
+  {
+   "period": "2026H1",
+   "revenue": 1887.2,
+   "sga_pct": [
+    "-22,1%",
+    "-20,9%"
+   ],
+   "deltas_bps": {
+    "personnel": [
+     30
+    ],
+    "utilities": [
+     19
+    ]
+   },
+   "personnel": 181.1,
+   "personnel_pct": 9.6,
+   "rent_cash": 30.5,
+   "rent_cash_pct": 1.62,
+   "formats_mln": {
+    "conv": {
+     "cur_mln": 1277117,
+     "prev_mln": 1148948,
+     "yoy": 11.2
+    },
+    "dixy": {
+     "cur_mln": 207989,
+     "prev_mln": 182882,
+     "yoy": 13.7
+    },
+    "drogerie": {
+     "cur_mln": 116527,
+     "prev_mln": 115574,
+     "yoy": 0.8
+    },
+    "super": {
+     "cur_mln": 138652,
+     "prev_mln": 134586,
+     "yoy": 3.0
+    }
+   }
+  },
+  {
+   "period": "2025H1->2026H1 wedge_check",
+   "gross_bp": 97,
+   "ebitda_bp": -3,
+   "absorbed_bp": 100
+  }
+ ],
+ "method": "levels where disclosed; component bps deltas otherwise (levels undisclosed)",
+ " Labor_note": "personnel IFRS FY + H1 notes; rent = lease principal CF; logistics mostly in COGS per press"
+}

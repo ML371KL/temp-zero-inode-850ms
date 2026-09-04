@@ -23,6 +23,9 @@ sens = load("sensitivity.json", {})
 wacc = load("macro/wacc.json", {})
 credit = load("credit.json", {})
 ma = load("ma_layer.json", {})
+opex = load("opex_bridge.json", {})
+apv = load("apv.json", {})
+debt = load("debt_schedule.json", {})
 x5 = load("peers/x5_quarterly.json", {})
 mult = load("peers/mult_history.json", {})
 food = load("macro/food_monthly.json", {})
@@ -71,6 +74,10 @@ bundle = {
                "mult_history_pre16": ((mult.get("mults")) or {}),
                "peer_post16_mrq": mult.get("peer_multiple_context_post16_mrq") or {"lenta": 2.32, "magnit": 4.1, "x5": 5.2}},
     "ma_deals": (ma.get("deals") or []),
+    "opex": opex.get("rows", []),
+    "apv": {"cases": (apv.get("cases") or {}), "breakeven_read": apv.get("breakeven_read", ""),
+            "method": apv.get("method", "")},
+    "debt_wall": (debt.get("wall_bn") or {}),
     "decision": {"metrics": (dec.get("metrics") or {}), "gates": (dec.get("gates") or {}),
                  "verdict": dec.get("verdict", "WAIT"), "rule": dec.get("rule", ""),
                  "leverage_series_pre16": dec.get("leverage_series_pre16", {})},

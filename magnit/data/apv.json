@@ -1,0 +1,83 @@
+{
+ "cases": {
+  "stress": {
+   "low": {
+    "ev_unlevered": -163.0,
+    "pv_shield": 91.0,
+    "breakeven_net_debt": 247.0,
+    "equity_at_spot_debt": 0.0,
+    "per_share_outst_spot": 0.0
+   },
+   "mid": {
+    "ev_unlevered": -133.0,
+    "pv_shield": 91.0,
+    "breakeven_net_debt": 276.0,
+    "equity_at_spot_debt": 0.0,
+    "per_share_outst_spot": 0.0
+   },
+   "high": {
+    "ev_unlevered": -113.0,
+    "pv_shield": 91.0,
+    "breakeven_net_debt": 297.0,
+    "equity_at_spot_debt": 0.0,
+    "per_share_outst_spot": 0.0
+   }
+  },
+  "base": {
+   "low": {
+    "ev_unlevered": 32.0,
+    "pv_shield": 91.0,
+    "breakeven_net_debt": 441.0,
+    "equity_at_spot_debt": 0.0,
+    "per_share_outst_spot": 0.0
+   },
+   "mid": {
+    "ev_unlevered": 26.0,
+    "pv_shield": 91.0,
+    "breakeven_net_debt": 436.0,
+    "equity_at_spot_debt": 0.0,
+    "per_share_outst_spot": 0.0
+   },
+   "high": {
+    "ev_unlevered": 22.0,
+    "pv_shield": 91.0,
+    "breakeven_net_debt": 432.0,
+    "equity_at_spot_debt": 0.0,
+    "per_share_outst_spot": 0.0
+   }
+  },
+  "recovery": {
+   "low": {
+    "ev_unlevered": 316.0,
+    "pv_shield": 91.0,
+    "breakeven_net_debt": 725.0,
+    "equity_at_spot_debt": 0.0,
+    "per_share_outst_spot": 0.0
+   },
+   "mid": {
+    "ev_unlevered": 258.0,
+    "pv_shield": 91.0,
+    "breakeven_net_debt": 668.0,
+    "equity_at_spot_debt": 0.0,
+    "per_share_outst_spot": 0.0
+   },
+   "high": {
+    "ev_unlevered": 218.0,
+    "pv_shield": 91.0,
+    "breakeven_net_debt": 628.0,
+    "equity_at_spot_debt": 0.0,
+    "per_share_outst_spot": 0.0
+   }
+  }
+ },
+ "method": "APV = PV(FCFF@Ku) + PV(shield@Kd) - debt - put/NCI + avail_cash",
+ "note": "Ku scenarios stated (asset beta check: levered beta ~1.0, D/E~3 -> asset beta ~0.3-0.4; Ku = Rf + ba*ERP left to reader with Rf/ERP views); shield capped by construction (straight paydown, no new debt); leases excluded on pre16 basis consistently",
+ "breakeven_read": "Gross-debt breakeven (cash held constant): stress ~250-300, base ~435, recovery ~630-725 vs current 922 -> APV equity ~0 in ALL cases at spot debt. APV is the fundamentals-only floor (no multiples): value exists here ONLY via deleveraging 250bn+ AND/OR the market multiples leg (MC healthy mean is ~80% mult-driven). Both views belong on the dashboard with labels.",
+ "mc_consistency": {
+  "healthy_nd_band": [
+   400,
+   470
+  ],
+  "status": "MC positive equity in healthy states comes from the MULTIPLE leg, not DCF/APV: consistent, and disclosed as such"
+ }
+}
