@@ -1,10 +1,21 @@
-"""Parse Rosstat monthly food CPI (sheet 02) 2024-2026 -> quarterly cumulative food inflation.
+"""Parse Rosstat monthly food CPI (sheet 02, all years in file) -> quarterly cumulative food inflation.
 Official anchor to validate the weekly proxy against.
 """
 import openpyxl, json, pathlib
 
 SRC = pathlib.Path(__file__).parent / "data" / "macro" / "rosstat_monthly_ipc.xlsx"
 OUT = pathlib.Path(__file__).parent / "data" / "macro"
+
+
+def monthly_src():
+    try:
+        man = json.loads((OUT / "manifest.json").read_text(encoding="utf-8"))
+        for m in man:
+            if "monthly" in m.get("key", ""):
+                return "rosstat " + m["url"].split("/")[-1] + " sheet 02 (food m/m)"
+    except Exception:
+        pass
+    return "rosstat ipc_mes sheet 02 (food m/m), local file " + SRC.name
 MON = ["январь", "февраль", "март", "апрель", "май", "июнь",
        "июль", "август", "сентябрь", "октябрь", "ноябрь", "декабрь"]
 
@@ -33,7 +44,8 @@ for k, vs in sorted(q.items()):
 (OUT / "food_monthly.json").write_text(json.dumps(
     {"monthly_food_mom_pct": {k: round(v, 2) for k, v in sorted(monthly.items())},
      "quarterly_food_cumul_pct": qcumul,
-     "source": "rosstat ipc_mes_07-2026.xlsx sheet 02 (food m/m)", "method": "chain-linked m/m"},
+     "source": monthly_src(),
+     "method": "chain-linked m/m"},
     ensure_ascii=False, indent=1), encoding="utf-8")
 for k in ("2024-Q1", "2024-Q4", "2025-Q1", "2025-Q4", "2026-Q1", "2026-Q2", "2026-Q3"):
     print(f"  {k}: {qcumul.get(k)}%  n_months={len(q.get(k, []))}")

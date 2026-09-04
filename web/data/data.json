@@ -1,33 +1,33 @@
 {
  "meta": {
-  "built_utc": "2026-09-03T16:05:23.711350+00:00",
+  "built_utc": "2026-09-04T11:03:53.075419+00:00",
   "engine": "magnit-v2",
-  "registry_rows": 281,
+  "registry_rows": 282,
   "status_mix": {
-   "ok": 280,
+   "ok": 281,
    "provisional": 1
   },
   "sources": "magnit.com IR (primary), Rosstat, CBR, x5.ru databook, MOEX ISS, T-invest"
  },
  "market": {
-  "price": 1589,
+  "price": 1581,
   "cap": {
-   "price": 1589,
-   "issued_101_9m": 161.9,
-   "outstanding_67_8m": 107.8,
+   "price": 1581,
+   "issued_101_9m": 161.1,
+   "outstanding_67_8m": 107.3,
    "unit": "bn_rub"
   },
-  "update": "18:06:26",
+  "update": "18:49:52",
   "last_history_close": 1548.5,
   "last_history_date": "2026-09-02",
   "outstanding_factor": 1.5021,
   "fundamentals": {
-   "marketCapitalization": 107745212500.0,
+   "marketCapitalization": 107507664000.0,
    "revenueTtm": 3509225556000.0,
    "ebitdaTtm": 306162000000.0,
    "netIncomeTtm": -31575703000.0,
    "freeCashFlowTtm": -141369049000.0,
-   "totalEnterpriseValueMrq": 1209060294500.0,
+   "totalEnterpriseValueMrq": 1208822746000.0,
    "evToEbitdaMrq": 3.95,
    "netDebtToEbitda": 3.6,
    "totalDebtMrq": 748588915000.0,
@@ -109,13 +109,44 @@
     "mid": 0.3333333333333333,
     "healthy": 0.5
    },
-   "mean": 3922.0,
-   "p05": 113.0,
-   "p25": 1405.0,
-   "p50": 4150.0,
-   "p75": 6510.0,
-   "p95": 7644.0,
-   "p_fv_gt_p": 0.717
+   "mean": 1975.0,
+   "p05": 0.0,
+   "p25": 414.0,
+   "p50": 1929.0,
+   "p75": 3414.0,
+   "p95": 4396.0,
+   "p_fv_gt_p": 0.52,
+   "by_regime": {
+    "stress": {
+     "share": 0.165,
+     "mean": 463.0,
+     "p_fv_gt_p": 0.004,
+     "contrib_to_mean": 0.039
+    },
+    "mid": {
+     "share": 0.334,
+     "mean": 551.0,
+     "p_fv_gt_p": 0.058,
+     "contrib_to_mean": 0.093
+    },
+    "healthy": {
+     "share": 0.501,
+     "mean": 3421.0,
+     "p_fv_gt_p": 0.997,
+     "contrib_to_mean": 0.868
+    }
+   },
+   "terminal_share_mean": 0.528,
+   "tsr_2y": {
+    "median": 0.2201,
+    "mean": 0.2491,
+    "p_hurdle_25pa": 0.45,
+    "p_any_gain": 0.52,
+    "p_loss_30": 0.426,
+    "p_loss_50": 0.357,
+    "cvar_5": -1.0,
+    "mos_p25": -0.7379
+   }
   },
   "prior_outstanding": {
    "probs": {
@@ -123,228 +154,335 @@
     "mid": 0.3333333333333333,
     "healthy": 0.5
    },
-   "mean": 5891.0,
-   "p05": 170.0,
-   "p25": 2111.0,
-   "p50": 6233.0,
-   "p75": 9778.0,
-   "p95": 11482.0,
-   "p_fv_gt_p": 0.811
+   "mean": 2966.0,
+   "p05": 0.0,
+   "p25": 622.0,
+   "p50": 2898.0,
+   "p75": 5129.0,
+   "p95": 6603.0,
+   "p_fv_gt_p": 0.583,
+   "by_regime": {
+    "stress": {
+     "share": 0.165,
+     "mean": 696.0,
+     "p_fv_gt_p": 0.109,
+     "contrib_to_mean": 0.039
+    },
+    "mid": {
+     "share": 0.334,
+     "mean": 828.0,
+     "p_fv_gt_p": 0.193,
+     "contrib_to_mean": 0.093
+    },
+    "healthy": {
+     "share": 0.501,
+     "mean": 5139.0,
+     "p_fv_gt_p": 1.0,
+     "contrib_to_mean": 0.868
+    }
+   },
+   "terminal_share_mean": 0.528,
+   "tsr_2y": {
+    "median": 0.8327,
+    "mean": 0.8762,
+    "p_hurdle_25pa": 0.515,
+    "p_any_gain": 0.583,
+    "p_loss_30": 0.344,
+    "p_loss_50": 0.284,
+    "cvar_5": -1.0,
+    "mos_p25": -0.6063
+   }
   },
-  "posterior_issued": {
+  "judgment_issued": {
    "probs": {
     "stress": 0.2,
     "mid": 0.42,
     "healthy": 0.38
    },
-   "mean": 3324.0,
-   "p05": 30.0,
-   "p25": 1144.0,
-   "p50": 2309.0,
-   "p75": 5965.0,
-   "p95": 7525.0,
-   "p_fv_gt_p": 0.653
+   "mean": 1624.0,
+   "p05": 0.0,
+   "p25": 247.0,
+   "p50": 984.0,
+   "p75": 3099.0,
+   "p95": 4274.0,
+   "p_fv_gt_p": 0.404,
+   "by_regime": {
+    "stress": {
+     "share": 0.203,
+     "mean": 461.0,
+     "p_fv_gt_p": 0.005,
+     "contrib_to_mean": 0.058
+    },
+    "mid": {
+     "share": 0.417,
+     "mean": 551.0,
+     "p_fv_gt_p": 0.059,
+     "contrib_to_mean": 0.142
+    },
+    "healthy": {
+     "share": 0.379,
+     "mean": 3427.0,
+     "p_fv_gt_p": 0.998,
+     "contrib_to_mean": 0.801
+    }
+   },
+   "terminal_share_mean": 0.499,
+   "tsr_2y": {
+    "median": -0.3778,
+    "mean": 0.0272,
+    "p_hurdle_25pa": 0.342,
+    "p_any_gain": 0.404,
+    "p_loss_30": 0.53,
+    "p_loss_50": 0.446,
+    "cvar_5": -1.0,
+    "mos_p25": -0.8438
+   }
   },
-  "posterior_outstanding": {
+  "judgment_outstanding": {
    "probs": {
     "stress": 0.2,
     "mid": 0.42,
     "healthy": 0.38
    },
-   "mean": 4993.0,
-   "p05": 45.0,
-   "p25": 1718.0,
-   "p50": 3468.0,
-   "p75": 8960.0,
-   "p95": 11303.0,
-   "p_fv_gt_p": 0.768
+   "mean": 2439.0,
+   "p05": 0.0,
+   "p25": 371.0,
+   "p50": 1478.0,
+   "p75": 4656.0,
+   "p95": 6419.0,
+   "p_fv_gt_p": 0.482,
+   "by_regime": {
+    "stress": {
+     "share": 0.203,
+     "mean": 693.0,
+     "p_fv_gt_p": 0.11,
+     "contrib_to_mean": 0.058
+    },
+    "mid": {
+     "share": 0.417,
+     "mean": 828.0,
+     "p_fv_gt_p": 0.193,
+     "contrib_to_mean": 0.142
+    },
+    "healthy": {
+     "share": 0.379,
+     "mean": 5147.0,
+     "p_fv_gt_p": 1.0,
+     "contrib_to_mean": 0.801
+    }
+   },
+   "terminal_share_mean": 0.499,
+   "tsr_2y": {
+    "median": -0.0655,
+    "mean": 0.543,
+    "p_hurdle_25pa": 0.4,
+    "p_any_gain": 0.482,
+    "p_loss_30": 0.428,
+    "p_loss_50": 0.354,
+    "cvar_5": -1.0,
+    "mos_p25": -0.7653
+   }
   }
  },
  "nowcast": {
-  "as_of": "2026-09-03",
+  "as_of": "2026-09-04",
   "target": "Magnit Q3 2026 LFL yoy",
-  "food_q3_yoy": 5.03,
+  "food_q3_yoy": 4.4,
+  "food_basis": "symmetric on 1/3 months (2026-07 vs 2025)",
   "x5_q3_lfl": 4.2,
-  "x5_src": "carry Q2 (rel 16Jul2026); X5 Q3 trading ~14Oct",
-  "trailing_gap": 2.56,
+  "x5_src": "carry Q2 (rel 16Jul2026); X5 Q3 trading ~14Oct; carry widens interval",
+  "trailing_gap": -6.137688000000001,
+  "gap_src": "mean of last-3 quarterly gaps ['-6.81', '-11.16', '-8.78'] + H1-2026 +2.20",
   "bridge": "0.4*food+0.6*x5lfl+gap (v2)",
-  "nowcast": 7.09,
+  "nowcast": -2,
+  "interval_pp": 4.02,
+  "confidence": "low",
   "warnings": [
-   "Q3-2026 index partial (1/3 months: official m/m through Jul only + weekly shape)",
-   "Sep weekly points: 0"
+   "food index partial (1/3 months of Q3; symmetric month-vs-month only)",
+   "no September weekly points yet (file through Aug-31)"
   ],
-  "read": "Q3 LFL nowcast 7.09% vs H1 6.4% / Q2-impl ~6.3%: stable"
+  "read": "preliminary Q3 LFL bridge: about -2%, low confidence (±4.02pp backtest interval)"
  },
  "skill": {
-  "mae_pp": 5.65,
-  "bias_pp": -0.36,
-  "direction": "7/14",
-  "naive_x5_mae_pp": 10.63,
+  "mae_pp": 4.02,
+  "direction": "7/15",
+  "interval_coverage": 0.562,
   "origins": [
    {
+    "period": "2019Q1",
+    "act": 0.6,
+    "food": 2.61,
+    "x5": 15.5,
+    "x5_kind": "total-flagged",
+    "market": 10.34,
+    "gap_used": 0.0,
+    "pred": 10.34,
+    "err": 9.74
+   },
+   {
+    "period": "2019Q2",
+    "act": 1.7,
+    "food": 0.36,
+    "x5": 14.3,
+    "x5_kind": "total-flagged",
+    "market": 8.72,
+    "gap_used": -9.74,
+    "pred": -1.02,
+    "err": -2.72
+   },
+   {
+    "period": "2019Q3",
+    "act": -0.7,
+    "food": -1.64,
+    "x5": 12.4,
+    "x5_kind": "total-flagged",
+    "market": 6.78,
+    "gap_used": -8.38,
+    "pred": -1.6,
+    "err": -0.9
+   },
+   {
+    "period": "2019Q4",
+    "act": 0.1,
+    "food": 1.28,
+    "x5": 10.9,
+    "x5_kind": "total-flagged",
+    "market": 7.05,
+    "gap_used": -8.08,
+    "pred": -1.03,
+    "err": -1.13
+   },
+   {
+    "period": "2020Q1",
+    "act": 7.8,
+    "food": 2.24,
+    "x5": 15.6,
+    "x5_kind": "total-flagged",
+    "market": 10.26,
+    "gap_used": -7.8,
+    "pred": 2.46,
+    "err": -5.34
+   },
+   {
+    "period": "2021Q1",
+    "act": 4.1,
+    "food": 3.08,
+    "x5": 8.1,
+    "x5_kind": "total-flagged",
+    "market": 6.09,
+    "gap_used": -6.73,
+    "pred": -0.64,
+    "err": -4.74
+   },
+   {
+    "period": "2021Q2",
+    "act": 5.2,
+    "food": 2.37,
+    "x5": 10.7,
+    "x5_kind": "total-flagged",
+    "market": 7.37,
+    "gap_used": -5.94,
+    "pred": 1.43,
+    "err": -3.77
+   },
+   {
+    "period": "2021Q3",
+    "act": 8.6,
+    "food": -0.03,
+    "x5": 11.7,
+    "x5_kind": "total-flagged",
+    "market": 7.01,
+    "gap_used": -5.4,
+    "pred": 1.61,
+    "err": -6.99
+   },
+   {
+    "period": "2021Q4",
+    "act": 9.9,
+    "food": 4.87,
+    "x5": 14.9,
+    "x5_kind": "total-flagged",
+    "market": 10.89,
+    "gap_used": -4.53,
+    "pred": 6.36,
+    "err": -3.54
+   },
+   {
     "period": "2022Q1",
-    "act": 37.7,
+    "act": 12.0,
     "food": 9.96,
     "x5": 19.1,
+    "x5_kind": "total-flagged",
     "market": 15.44,
-    "spread": 0.0,
-    "pred": 15.44,
-    "err": -22.26,
-    "naive_x5_err": -18.6
+    "gap_used": -4.14,
+    "pred": 11.31,
+    "err": -0.69
    },
    {
     "period": "2022Q2",
-    "act": 38.7,
+    "act": 13.1,
     "food": 2.35,
     "x5": 18.6,
+    "x5_kind": "total-flagged",
     "market": 12.1,
-    "spread": 22.26,
-    "pred": 34.36,
-    "err": -4.34,
-    "naive_x5_err": -20.1
+    "gap_used": -4.07,
+    "pred": 8.03,
+    "err": -5.07
    },
    {
-    "period": "2022H1",
-    "act": 38.2,
-    "food": 12.54,
-    "x5": 18.8,
-    "market": 16.3,
-    "spread": 26.6,
-    "pred": 42.9,
-    "err": 4.7,
-    "naive_x5_err": -19.4
-   },
-   {
-    "period": "2022FY",
-    "act": 26.7,
-    "food": 10.3,
-    "x5": 18.2,
-    "market": 15.04,
-    "spread": 21.9,
-    "pred": 36.94,
-    "err": 10.24,
-    "naive_x5_err": -8.5
+    "period": "2022Q4",
+    "act": 10.0,
+    "food": 1.29,
+    "x5": 16.1,
+    "x5_kind": "total-flagged",
+    "market": 10.18,
+    "gap_used": -3.61,
+    "pred": 6.57,
+    "err": -3.43
    },
    {
     "period": "2023Q1",
-    "act": 9.0,
+    "act": 6.1,
     "food": 2.25,
     "x5": 15.2,
+    "x5_kind": "total-flagged",
     "market": 10.02,
-    "spread": 11.66,
-    "pred": 21.68,
-    "err": 12.68,
-    "naive_x5_err": 6.2
+    "gap_used": -3.32,
+    "pred": 6.7,
+    "err": 0.6
    },
    {
     "period": "2023Q2",
-    "act": 7.5,
+    "act": 4.7,
     "food": -0.03,
     "x5": 19.2,
+    "x5_kind": "total-flagged",
     "market": 11.51,
-    "spread": -1.02,
-    "pred": 10.49,
-    "err": 2.99,
-    "naive_x5_err": 11.7
-   },
-   {
-    "period": "2023H1",
-    "act": 8.2,
-    "food": 2.22,
-    "x5": 17.3,
-    "market": 11.27,
-    "spread": -4.01,
-    "pred": 7.26,
-    "err": -0.94,
-    "naive_x5_err": 9.1
+    "gap_used": -3.37,
+    "pred": 8.14,
+    "err": 3.44
    },
    {
     "period": "2023Q3",
-    "act": 5.7,
+    "act": 3.1,
     "food": 1.29,
     "x5": 22.9,
+    "x5_kind": "total-flagged",
     "market": 14.26,
-    "spread": -3.07,
-    "pred": 11.19,
-    "err": 5.49,
-    "naive_x5_err": 17.2
+    "gap_used": -3.61,
+    "pred": 10.64,
+    "err": 7.54
    },
    {
-    "period": "2023-9M",
-    "act": 7.4,
-    "food": 3.54,
-    "x5": 19.2,
-    "market": 12.94,
-    "spread": -8.56,
-    "pred": 4.38,
-    "err": -3.02,
-    "naive_x5_err": 11.8
-   },
-   {
-    "period": "2023FY",
-    "act": 8.2,
-    "food": 8.15,
-    "x5": 20.8,
-    "market": 15.74,
-    "spread": -5.54,
-    "pred": 10.2,
-    "err": 2.0,
-    "naive_x5_err": 12.6
-   },
-   {
-    "period": "2024H1",
-    "act": 18.8,
-    "food": 3.78,
-    "x5": 26.1,
-    "market": 17.17,
-    "spread": -7.54,
-    "pred": 9.63,
-    "err": -9.17,
-    "naive_x5_err": 7.3
-   },
-   {
-    "period": "2024FY",
-    "act": 19.6,
-    "food": 11.06,
-    "x5": 24.2,
-    "market": 18.94,
-    "spread": 1.63,
-    "pred": 20.57,
-    "err": 0.97,
-    "naive_x5_err": 4.6
-   },
-   {
-    "period": "2025H1",
-    "act": 14.6,
-    "food": 4.59,
-    "x5": 21.2,
-    "market": 14.56,
-    "spread": 0.66,
-    "pred": 15.21,
-    "err": 0.61,
-    "naive_x5_err": 6.6
-   },
-   {
-    "period": "2025FY",
-    "act": 15.3,
-    "food": 5.25,
-    "x5": 18.8,
-    "market": 13.38,
-    "spread": 0.04,
-    "pred": 13.42,
-    "err": -1.88,
-    "naive_x5_err": 3.5
-   },
-   {
-    "period": "2026H1",
-    "act": 12.8,
-    "food": 2.78,
-    "x5": 10.5,
-    "market": 7.41,
-    "spread": 1.92,
-    "pred": 9.33,
-    "err": -3.47,
-    "naive_x5_err": -2.3
+    "period": "2023Q4",
+    "act": 8.0,
+    "food": 4.45,
+    "x5": 25.0,
+    "x5_kind": "total-flagged",
+    "market": 16.78,
+    "gap_used": -4.11,
+    "pred": 12.67,
+    "err": 4.67
    }
   ]
  },
@@ -1234,13 +1372,13 @@
     "p": "2023H1",
     "as_of": "2023-06-30",
     "s": "ebitda_margin",
-    "v": 7.4
+    "v": 6.7
    },
    {
     "p": "2023H1",
     "as_of": "2023-06-30",
     "s": "gross_margin",
-    "v": 23.1
+    "v": 22.7
    },
    {
     "p": "2023FY",
@@ -1517,14 +1655,113 @@
    "note": "IFRS note 7 exact (2025, H1-2025); H1-2026 EST ~54 (band +-3)"
   }
  ],
+ "decision": {
+  "metrics": {
+   "median": -0.0655,
+   "mean": 0.543,
+   "p_hurdle_25pa": 0.4,
+   "p_any_gain": 0.482,
+   "p_loss_30": 0.428,
+   "p_loss_50": 0.354,
+   "cvar_5": -1.0,
+   "mos_p25": -0.7653,
+   "basis": "outstanding 67.847m (canonical)",
+   "price": 1581.0,
+   "p25": 371.0
+  },
+  "gates": {
+   "p_hurdle_ge_50": false,
+   "leverage_below_2_5x": false,
+   "cod_falling": true
+  },
+  "verdict": "WAIT",
+  "rule": "ACT iff P(TSR2y>=56.25%)>=0.5 AND leverage falling AND cod falling",
+  "leverage_series_pre16": {
+   "2020FY": 1.24,
+   "2021H1": 1.18,
+   "2021FY": 1.48,
+   "2022H1": 1.18,
+   "2022FY": 0.7,
+   "2023H1": 0.72,
+   "2023FY": 1.0,
+   "2024H1": 1.37,
+   "2024FY": 1.47,
+   "2025H1": 2.39,
+   "2025FY": 2.93,
+   "2026H1": 2.88
+  }
+ },
+ "sensitivity": {
+  "base": {
+   "median": 1511.0,
+   "p_fv_gt_p": 0.489
+  },
+  "bear_probs": {
+   "median": 1034.0,
+   "p_fv_gt_p": 0.368
+  },
+  "bull_probs": {
+   "median": 2975.0,
+   "p_fv_gt_p": 0.593
+  },
+  "wacc_up_2pp": {
+   "median": 1426.0,
+   "p_fv_gt_p": 0.474
+  },
+  "wacc_down_2pp": {
+   "median": 1656.0,
+   "p_fv_gt_p": 0.512
+  },
+  "mult_down_0_5x": {
+   "median": 468.0,
+   "p_fv_gt_p": 0.404
+  },
+  "mult_up_0_5x": {
+   "median": 2593.0,
+   "p_fv_gt_p": 0.71
+  },
+  "debt_up_60bn": {
+   "median": 627.0,
+   "p_fv_gt_p": 0.407
+  },
+  "debt_down_60bn": {
+   "median": 2396.0,
+   "p_fv_gt_p": 0.671
+  },
+  "bear_combo": {
+   "median": 0.0,
+   "p_fv_gt_p": 0.224
+  },
+  "bull_combo": {
+   "median": 5232.0,
+   "p_fv_gt_p": 0.914
+  }
+ },
  "gates": {
-  "irr2": 0.7726,
-  "irr2_pass": true,
-  "p_prob": 0.768,
-  "p_pass": true,
+  "tsr_median_2y": -0.0655,
+  "tsr_mean_2y": 0.543,
+  "p_hurdle_25pa": 0.4,
+  "p_pass": false,
+  "p_loss_30": 0.428,
+  "p_loss_50": 0.354,
+  "cvar_5": -1.0,
+  "mos_p25": -0.7653,
   "leverage": {
-   "value": "2.9x",
-   "trend": "flat H1 (FY25 2.9x -> H1 2.9x)",
+   "series": {
+    "2020FY": 1.24,
+    "2021H1": 1.18,
+    "2021FY": 1.48,
+    "2022H1": 1.18,
+    "2022FY": 0.7,
+    "2023H1": 0.72,
+    "2023FY": 1.0,
+    "2024H1": 1.37,
+    "2024FY": 1.47,
+    "2025H1": 2.39,
+    "2025FY": 2.93,
+    "2026H1": 2.88
+   },
+   "last": 2.88,
    "pass": false
   },
   "cod": {
@@ -1533,5 +1770,36 @@
    "pass": true
   },
   "verdict": "WAIT"
+ },
+ "dilution": {
+  "equity_total_bn": 165.5,
+  "note": "placement adds shares AND cash; at-market ~= neutral by construction",
+  "cases": [
+   {
+    "case": "as-is (treasury held)",
+    "shares_m": 67.847,
+    "per_share": 2439.0
+   },
+   {
+    "case": "repo 3.8m return (no cash)",
+    "shares_m": 71.664,
+    "per_share": 2309.0
+   },
+   {
+    "case": "place 10m at market",
+    "shares_m": 77.847,
+    "per_share": 2329.0
+   },
+   {
+    "case": "place all 34.1m at market",
+    "shares_m": 101.911,
+    "per_share": 2152.0
+   },
+   {
+    "case": "place 10m at -20% discount",
+    "shares_m": 77.847,
+    "per_share": 2288.0
+   }
+  ]
  }
 }

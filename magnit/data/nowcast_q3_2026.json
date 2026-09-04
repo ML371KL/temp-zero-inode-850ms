@@ -1,15 +1,19 @@
 {
- "as_of": "2026-09-03",
+ "as_of": "2026-09-04",
  "target": "Magnit Q3 2026 LFL yoy",
- "food_q3_yoy": 5.03,
+ "food_q3_yoy": 4.4,
+ "food_basis": "symmetric on 1/3 months (2026-07 vs 2025)",
  "x5_q3_lfl": 4.2,
- "x5_src": "carry Q2 (rel 16Jul2026); X5 Q3 trading ~14Oct",
- "trailing_gap": 2.56,
+ "x5_src": "carry Q2 (rel 16Jul2026); X5 Q3 trading ~14Oct; carry widens interval",
+ "trailing_gap": -6.137688000000001,
+ "gap_src": "mean of last-3 quarterly gaps ['-6.81', '-11.16', '-8.78'] + H1-2026 +2.20",
  "bridge": "0.4*food+0.6*x5lfl+gap (v2)",
- "nowcast": 7.09,
+ "nowcast": -2,
+ "interval_pp": 4.02,
+ "confidence": "low",
  "warnings": [
-  "Q3-2026 index partial (1/3 months: official m/m through Jul only + weekly shape)",
-  "Sep weekly points: 0"
+  "food index partial (1/3 months of Q3; symmetric month-vs-month only)",
+  "no September weekly points yet (file through Aug-31)"
  ],
- "read": "Q3 LFL nowcast 7.09% vs H1 6.4% / Q2-impl ~6.3%: stable"
+ "read": "preliminary Q3 LFL bridge: about -2%, low confidence (±4.02pp backtest interval)"
 }

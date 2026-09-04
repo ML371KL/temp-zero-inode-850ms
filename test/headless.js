@@ -20,8 +20,10 @@ global.fetch = () => Promise.resolve({ ok: true, json: () => JSON.parse(fs.readF
 let src = fs.readFileSync(path.join(WEB, "app.js"), "utf8");
 eval(src);
 setTimeout(() => {
-  const need = { price: v => v.replace(/[\s\u00a0]/g, "") === "1580", "fv-mean": v => +v.replace(/[\s\u00a0]/g, "") > 4500, pfv: v => parseFloat(v) > 70,
-    verdict: "WAIT", nc: v => v.includes("7.09") };
+  const need = { price: v => { const n = +v.replace(/[^0-9]/g, ""); return n > 1500 && n < 1700; },
+    "fv-mean": v => { const n = +v.replace(/[^0-9]/g, ""); return n > 1400 && n < 1600; },
+    pfv: v => { const n = parseFloat(v); return n > 45 && n < 52; },
+    verdict: "WAIT", nc: v => /^~-?\d+%$/.test(v.trim()) };
   let fail = 0;
   for (const [id, exp] of Object.entries(need)) {
     const got = store[id] ? store[id]._text : "<missing>";
@@ -44,7 +46,9 @@ setTimeout(() => {
   // basis toggle simulation
   store["b-iss"]._click();
   const out = store["fv-mean"]._text;
-  console.log((+out.replace(/[\s ]/g, "") > 3000 && +out.replace(/[\s ]/g, "") < 3600 ? "PASS" : "FAIL") + ` toggle issued fv-mean=${out}`);
-  if (!(+out.replace(/[\s ]/g, "") > 3000 && +out.replace(/[\s ]/g, "") < 3600)) fail++;
+  console.log((+out.replace(/[^0-9]/g, "") > 900 && +out.replace(/[^0-9]/g, "") < 1100 ? "PASS" : "FAIL") + ` toggle issued fv-mean=${out}`);
+  if (!(+out.replace(/[^0-9]/g, "") > 900 && +out.replace(/[^0-9]/g, "") < 1100)) fail++;
   process.exit(fail ? 1 : 0);
 }, 100);
+
+// patched

@@ -13,12 +13,14 @@ def load(p, default=None):
 
 fv = load("fv_dist.json", {})
 mkt = load("market/latest.json", {})
-skill = load("skill_v1.json", {})
+skill = load("skill_lfl.json", {}) or load("skill_v1.json", {})
 credit = load("credit.json", {})
 wacc = load("macro/wacc.json", {})
 nc = load("nowcast_q3_2026.json", {})
+dec = load("decision.json", {})
+sens = load("sensitivity.json", {})
 P = (mkt.get("cap_dual") or {}).get("price") or fv.get("price", 1580)
-post = (fv.get("results") or {}).get("posterior_outstanding", {})
+post = (fv.get("results") or {}).get("judgment_outstanding", {})
 basis_note = "outstanding 67.8m (canonical)"
 
 alerts = []
@@ -48,30 +50,50 @@ L.append(f"Market: **{P}** (issued cap {(mkt.get('cap_dual') or {}).get('issued_
          f"MOEX update: {(mkt.get('moex') or {}).get('updatetime', '?')}")
 L.append("")
 if post:
-    L.append(f"FV posterior ({basis_note}): mean **{post['mean']:.0f}** | p05 {post['p05']:.0f} p25 {post['p25']:.0f} "
+    L.append(f"FV mix ({basis_note}): mean **{post['mean']:.0f}** | p05 {post['p05']:.0f} p25 {post['p25']:.0f} "
              f"p50 {post['p50']:.0f} p75 {post['p75']:.0f} p95 {post['p95']:.0f} | P(FV>P)={post['p_fv_gt_p']:.1%}")
     L.append("")
-L.append(f"Gates: E[IRR(2y)]>=25% + P>=0.5 + leverage falling 2Q + cod falling. "
-         f"Leverage gate: ND/EBITDA pre16 H1 = 2.9x (flat) -> BLOCKS. "
-         f"cod {(wacc.get('now') or {}).get('cod_now', '?')}% WACC {(wacc.get('now') or {}).get('wacc_now', '?')}% (key {(wacc.get('now') or {}).get('key_now', '?')}%).")
+gm = (dec.get("metrics") or {})
+if gm:
+    L.append(f"TSR_2y (full draws): median {gm.get('median', 0):.1%} mean {gm.get('mean', 0):.1%} | "
+             f"P(hurdle 25pa)={gm.get('p_hurdle_25pa', 0):.1%} P(loss30)={gm.get('p_loss_30', 0):.1%} "
+             f"P(loss50)={gm.get('p_loss_50', 0):.1%} CVaR5={gm.get('cvar_5', 0):.1%} | "
+             f"p25 MOS={gm.get('mos_p25', 0):.1%}.")
+    L.append("")
+gg = dec.get("gates", {})
+if gg:
+    L.append("Gates: " + " · ".join(f"{k} {'PASS' if v else 'BLOCKS'}" for k, v in gg.items())
+             + f" -> **{dec.get('verdict', '?')}** "
+               f"(leverage {dec.get('leverage_series_pre16', {})} | cod {dec.get('cod_points', [])}).")
+    L.append("")
+L.append(f"cod {(wacc.get('now') or {}).get('cod_now', '?')}% WACC {(wacc.get('now') or {}).get('wacc_now', '?')}% "
+         f"(key {(wacc.get('now') or {}).get('key_now', '?')}%).")
 L.append("")
-L.append(f"Bridge skill: MAE {skill.get('mae_pp')}pp (naive-X5 {skill.get('naive_x5_mae_pp')}pp), "
-         f"direction {skill.get('direction')}, bias {skill.get('bias_pp')}pp. "
-         f"LFL-bridge v2 (ma_layer) preferred structurally.")
+sk = load("skill_lfl.json", {}) or load("skill_v1.json", {})
+L.append(f"Bridge skill (LFL quarterly-only, expanding window): MAE {sk.get('mae_pp')}pp, "
+         f"direction {sk.get('direction')} (coin flip: levels only, no turning-point skill), "
+         f"interval coverage {sk.get('interval_coverage')}. "
+         f"Naive-X5 MAE {sk.get('naive_x5_mae_pp', '?')}pp where available.")
 L.append("")
 L.append(f"Credit: net {nd_check}bn pre16; cash/short {(credit.get('liquidity') or {}).get('cash_to_short')}x; "
-         f"undrawn {(credit.get('liquidity') or {}).get('undrawn_lines')}bn; covenants complied; "
-         f"risk = carry, not solvency.")
+         f"undrawn {(credit.get('liquidity') or {}).get('undrawn_lines')}bn; covenants complied. "
+         f"Near-term liquidity looks sufficient; mid-term refinancing + interest carry "
+         f"remain the material equity risk (maturity-bucket table unparsed: see credit.open_item).")
 L.append("")
 L.append("Alerts:")
 L.append("" if alerts else "- none")
 for a in alerts: L.append(f"- {a}")
 L.append("")
-L.append("Robustness (sensitivity audit, canonical basis): single-factor bears hold above "
-         "(bear-probs 2420, mult -0.5x 2707, debt +60bn 2755); only the joint bear combo "
-         "(stress-heavy + WACC +2pp + mult -0.5x + debt +60bn) breaks below at 208. "
-         "Price 1580 sits below the posterior bulk but the left tail is real (p05 45): "
-         "WAIT is the robust middle — action only when leverage/cod gates resolve the uncertainty.")
+sc = (sens.get("cases") or {})
+if sc:
+    def zone(r):
+        if r.get("p_fv_gt_p") is None: return "n/a"
+        return ("above" if (r["median"] > P * 1.25 and r["p_fv_gt_p"] > 0.5)
+                else ("overlap" if r["p_fv_gt_p"] > 0.35 else "below"))
+    L.append("Robustness (sensitivity.json, canonical basis): " +
+             "; ".join(f"{k}: median {v['median']:.0f} ({zone(v)})" for k, v in sc.items()) + ". "
+             f"Price {P} vs mix p05 {post.get('p05')} / p95 {post.get('p95')}: "
+             "value is uncertain, not cheap; WAIT is the robust middle until gates resolve.")
 L.append("")
 L.append("")
 L.append("Next catalysts: X5 Q3 trading (~14 Oct, lead 2-6 wks) -> Magnit Q3/LFL; CBR meetings -> WACC; Q3 ND/EBITDA.")

@@ -3,7 +3,7 @@ Sheets: P&L (revenue/EBITDA levels), EBITDA (margins), Debt (net debt pre16 + ND
 Operating Results (yoy growth + LFL split). Quarterly Q1 2023-Q2 2026 + annual 2021-2025.
 Saves magnit/data/peers/x5_quarterly.json
 """
-import openpyxl, json, pathlib
+import openpyxl, json, pathlib, re
 
 SRC = pathlib.Path(__file__).parent / "data" / "peers" / "financial_and_operating_results_q2_2026.xlsx"
 OLD = pathlib.Path(__file__).parent / "data" / "peers" / "financial_and_operating_results_q1_2024.xlsx"
@@ -14,7 +14,7 @@ def rev_old_2022():
     c2022 = {}
     for c in range(1, ws0.max_column + 1):
         h = ws0.cell(5, c).value
-        if isinstance(h, str) and h.strip() in ("Q1 2022", "Q2 2022", "Q3 2022", "Q4 2022"):
+        if isinstance(h, str) and re.fullmatch(r"Q[1-4] 20(1[89]|2[0-3])", h.strip()):
             c2022[h.strip()] = c
     r0 = next(r for r in range(1, ws0.max_row + 1) if str(ws0.cell(r, 2).value).strip() == "Revenue")
     return {f"20{h[-2:]}Q{h[1]}": ws0.cell(r0, c).value for h, c in c2022.items()}
@@ -100,7 +100,8 @@ for hdr, c in oq.items():
         "x5_lfl": round(op.cell(lab["Продажи"], c).value * 100, 1),
         "x5_lfl_traffic": round(op.cell(lab["Трафик"], c).value * 100, 1),
         "x5_lfl_ticket": round(op.cell(lab["Средний чек"], c).value * 100, 1)})
-out["x5_old_perimeter_2022_mln"] = rev_old_2022()
+out["x5_old_perimeter_mln"] = rev_old_2022()
+out["x5_old_perimeter_2022_mln"] = {k: v for k, v in out["x5_old_perimeter_mln"].items() if k.startswith("2022")}
 pathlib.Path("magnit/data/peers/x5_quarterly.json").write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
 for q in qs: print(f"  {q}: rev={out['quarters'][q]['revenue_mln']} yoy={out['quarters'][q].get('revenue_yoy')} ebitda_m={out['quarters'][q]['ebitda_margin']}")
 print("annual:", {k: v["revenue_mln"] for k, v in out["annual"].items()})

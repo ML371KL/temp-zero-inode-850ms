@@ -26,13 +26,15 @@
 
 <section class="cards">
   <div class="card big"><h2>Цена</h2><div class="num" id="price">—</div><div class="cap" id="cap">—</div><div class="cap" id="daychg">—</div></div>
-  <div class="card big"><h2>FV posterior <span id="fv-basis" class="tag">issued</span></h2><div class="num" id="fv-mean">—</div><div class="cap" id="fv-band">—</div></div>
+  <div class="card big"><h2>FV mix, медиана <span id="fv-basis" class="tag">outstanding</span></h2><div class="num" id="fv-mean">—</div><div class="cap" id="fv-band">—</div></div>
   <div class="card"><h2>P(FV&gt;P)</h2><div class="num" id="pfv">—</div><div class="cap">доля дистрибутива выше цены</div></div>
   <div class="card"><h2>Вердикт гейтов</h2><div class="num small" id="verdict">—</div><div class="cap" id="gates">—</div></div>
 </section>
 
 <section><h2>FV-дистрибутив vs цена</h2><div class="legend" id="fv-legend"></div><svg id="fvchart" viewBox="0 0 640 190" role="img" aria-label="FV distribution chart"></svg>
-<p class="note" id="robust">…</p></section>
+<div class="tbl-wrap"><div id="regimes"></div></div>
+<p class="note" id="robust">…</p>
+<p class="note" id="tsr">…</p></section>
 
 <section><h2>Q3 2026 nowcast (LFL)</h2><div class="card"><div class="num" id="nc">—</div><div class="cap" id="nc-detail">—</div><div class="cap warn" id="nc-warn">—</div></div>
 <p class="note">Мост v2: 0.4·прод-CPI + 0.6·X5 LFL + trailing gap. X5 выходит раньше на 2–6 недель — FV двигается до отчета Магнита.</p></section>
@@ -46,7 +48,10 @@
 <section><h2>Маржи pre16</h2><div class="legend" id="mgn-legend"></div><svg id="mgnchart" viewBox="0 0 640 210" role="img" aria-label="Margins chart"></svg>
 <p class="note" id="credit">…</p></section>
 
-<section><h2>Skill моста (15 origins)</h2><div class="tbl-wrap"><div id="skill"></div></div></section>
+<section><h2>Skill моста (LFL, quarterly-only)</h2><div class="tbl-wrap"><div id="skill"></div></div></section>
+
+<section><h2>Казначейство: сценарии размещения</h2><div class="tbl-wrap"><div id="dilution"></div></div>
+<p class="note">Размещение двигает и акции, и cash: при рыночной цене нейтрально по построению; дисконт — dilution. Issued-базис выше — только для сверки MOEX-капа.</p></section>
 
 <section><h2>Консенсус (T-invest)</h2><div id="consensus"></div>
 <p class="note">Разброс 1500–4400 — сам по себе сигнал неопределенности, не якорь.</p></section>

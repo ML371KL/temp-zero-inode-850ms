@@ -1,0 +1,190 @@
+{
+ "origins": [
+  {
+   "period": "2019Q1",
+   "act": 0.6,
+   "food": 2.61,
+   "x5": 15.5,
+   "x5_kind": "total-flagged",
+   "market": 10.34,
+   "gap_used": 0.0,
+   "pred": 10.34,
+   "err": 9.74
+  },
+  {
+   "period": "2019Q2",
+   "act": 1.7,
+   "food": 0.36,
+   "x5": 14.3,
+   "x5_kind": "total-flagged",
+   "market": 8.72,
+   "gap_used": -9.74,
+   "pred": -1.02,
+   "err": -2.72
+  },
+  {
+   "period": "2019Q3",
+   "act": -0.7,
+   "food": -1.64,
+   "x5": 12.4,
+   "x5_kind": "total-flagged",
+   "market": 6.78,
+   "gap_used": -8.38,
+   "pred": -1.6,
+   "err": -0.9
+  },
+  {
+   "period": "2019Q4",
+   "act": 0.1,
+   "food": 1.28,
+   "x5": 10.9,
+   "x5_kind": "total-flagged",
+   "market": 7.05,
+   "gap_used": -8.08,
+   "pred": -1.03,
+   "err": -1.13
+  },
+  {
+   "period": "2020Q1",
+   "act": 7.8,
+   "food": 2.24,
+   "x5": 15.6,
+   "x5_kind": "total-flagged",
+   "market": 10.26,
+   "gap_used": -7.8,
+   "pred": 2.46,
+   "err": -5.34
+  },
+  {
+   "period": "2021Q1",
+   "act": 4.1,
+   "food": 3.08,
+   "x5": 8.1,
+   "x5_kind": "total-flagged",
+   "market": 6.09,
+   "gap_used": -6.73,
+   "pred": -0.64,
+   "err": -4.74
+  },
+  {
+   "period": "2021Q2",
+   "act": 5.2,
+   "food": 2.37,
+   "x5": 10.7,
+   "x5_kind": "total-flagged",
+   "market": 7.37,
+   "gap_used": -5.94,
+   "pred": 1.43,
+   "err": -3.77
+  },
+  {
+   "period": "2021Q3",
+   "act": 8.6,
+   "food": -0.03,
+   "x5": 11.7,
+   "x5_kind": "total-flagged",
+   "market": 7.01,
+   "gap_used": -5.4,
+   "pred": 1.61,
+   "err": -6.99
+  },
+  {
+   "period": "2021Q4",
+   "act": 9.9,
+   "food": 4.87,
+   "x5": 14.9,
+   "x5_kind": "total-flagged",
+   "market": 10.89,
+   "gap_used": -4.53,
+   "pred": 6.36,
+   "err": -3.54
+  },
+  {
+   "period": "2022Q1",
+   "act": 12.0,
+   "food": 9.96,
+   "x5": 19.1,
+   "x5_kind": "total-flagged",
+   "market": 15.44,
+   "gap_used": -4.14,
+   "pred": 11.31,
+   "err": -0.69
+  },
+  {
+   "period": "2022Q2",
+   "act": 13.1,
+   "food": 2.35,
+   "x5": 18.6,
+   "x5_kind": "total-flagged",
+   "market": 12.1,
+   "gap_used": -4.07,
+   "pred": 8.03,
+   "err": -5.07
+  },
+  {
+   "period": "2022Q4",
+   "act": 10.0,
+   "food": 1.29,
+   "x5": 16.1,
+   "x5_kind": "total-flagged",
+   "market": 10.18,
+   "gap_used": -3.61,
+   "pred": 6.57,
+   "err": -3.43
+  },
+  {
+   "period": "2023Q1",
+   "act": 6.1,
+   "food": 2.25,
+   "x5": 15.2,
+   "x5_kind": "total-flagged",
+   "market": 10.02,
+   "gap_used": -3.32,
+   "pred": 6.7,
+   "err": 0.6
+  },
+  {
+   "period": "2023Q2",
+   "act": 4.7,
+   "food": -0.03,
+   "x5": 19.2,
+   "x5_kind": "total-flagged",
+   "market": 11.51,
+   "gap_used": -3.37,
+   "pred": 8.14,
+   "err": 3.44
+  },
+  {
+   "period": "2023Q3",
+   "act": 3.1,
+   "food": 1.29,
+   "x5": 22.9,
+   "x5_kind": "total-flagged",
+   "market": 14.26,
+   "gap_used": -3.61,
+   "pred": 10.64,
+   "err": 7.54
+  },
+  {
+   "period": "2023Q4",
+   "act": 8.0,
+   "food": 4.45,
+   "x5": 25.0,
+   "x5_kind": "total-flagged",
+   "market": 16.78,
+   "gap_used": -4.11,
+   "pred": 12.67,
+   "err": 4.67
+  }
+ ],
+ "mae_pp": 4.02,
+ "direction": "7/15",
+ "final_gap": -8.78,
+ "interval_coverage": 0.562,
+ "bridge": "LFL = 0.4*food_q + 0.6*x5 + expanding-mean gap",
+ "design": "quarterly-only, no overlaps, point-in-time proxies (X5 total pre-2024Q2 flagged)",
+ "caveats": [
+  "direction ~ coin flip: level skill only, no turning-point skill",
+  "pre-2024Q2 X5 proxy is total revenue (own expansion inside)"
+ ]
+}

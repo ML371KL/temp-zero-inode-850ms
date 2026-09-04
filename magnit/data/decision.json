@@ -1,0 +1,40 @@
+{
+ "metrics": {
+  "median": -0.0655,
+  "mean": 0.543,
+  "p_hurdle_25pa": 0.4,
+  "p_any_gain": 0.482,
+  "p_loss_30": 0.428,
+  "p_loss_50": 0.354,
+  "cvar_5": -1.0,
+  "mos_p25": -0.7653,
+  "basis": "outstanding 67.847m (canonical)",
+  "price": 1581.0,
+  "p25": 371.0
+ },
+ "leverage_series_pre16": {
+  "2020FY": 1.24,
+  "2021H1": 1.18,
+  "2021FY": 1.48,
+  "2022H1": 1.18,
+  "2022FY": 0.7,
+  "2023H1": 0.72,
+  "2023FY": 1.0,
+  "2024H1": 1.37,
+  "2024FY": 1.47,
+  "2025H1": 2.39,
+  "2025FY": 2.93,
+  "2026H1": 2.88
+ },
+ "cod_points": [
+  17.1,
+  16.0
+ ],
+ "gates": {
+  "p_hurdle_ge_50": false,
+  "leverage_below_2_5x": false,
+  "cod_falling": true
+ },
+ "verdict": "WAIT",
+ "rule": "ACT iff P(TSR2y>=56.25%)>=0.5 AND leverage falling AND cod falling"
+}

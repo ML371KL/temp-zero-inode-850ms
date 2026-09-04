@@ -58,7 +58,7 @@ function timeChart(svg, series, H, fmtY = v => v) {
 }
 
 fetch("data/data.json").then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(D => {
-  const FOUT = D.fv.posterior_outstanding, FISS = D.fv.posterior_issued, P = D.market.price;
+  const FOUT = D.fv.judgment_outstanding, FISS = D.fv.judgment_issued, P = D.market.price;
   let F = FOUT, BASIS_NAME = "outstanding";
   $("built").textContent = "built " + (D.meta.built_utc || "").slice(0, 16).replace("T", " ");
   $("mkt-update").textContent = "MOEX " + (D.market.update || "?");
@@ -77,17 +77,16 @@ fetch("data/data.json").then(r => { if (!r.ok) throw new Error("HTTP " + r.statu
     $("cap").textContent = `cap ${cap} млрд (${BASIS_NAME})`;
     const lh = D.market.last_history_close;
     $("daychg").textContent = lh ? `prev close ${fmt(lh)} (${D.market.last_history_date || ""}) · day ${(P / lh - 1 >= 0 ? "+" : "") + ((P / lh - 1) * 100).toFixed(2)}%` : "—";
-    $("fv-mean").textContent = fmt(F.mean);
-    $("fv-band").textContent = `p05 ${fmt(F.p05)} · p25 ${fmt(F.p25)} · p50 ${fmt(F.p50)} · p75 ${fmt(F.p75)} · p95 ${fmt(F.p95)}`;
+    // median-led: median is the central message, mean is tail-dragged (healthy owns ~80%)
+    $("fv-mean").textContent = fmt(F.p50);
+    $("fv-band").textContent = `median ${fmt(F.p50)} · mean ${fmt(F.mean)} · p05 ${fmt(F.p05)} · p25 ${fmt(F.p25)} · p75 ${fmt(F.p75)} · p95 ${fmt(F.p95)}`;
     $("pfv").textContent = (F.p_fv_gt_p * 100).toFixed(1) + "%";
-    const g = D.gates || {};
-    const irr2 = g.irr2 != null ? g.irr2 * 100 : NaN;
+    const dec = D.decision || {}, gm = dec.metrics || {}, gg = dec.gates || {};
     const parts = [
-      `E[IRR(2y)] ${isFinite(irr2) ? irr2.toFixed(0) + "%" : "—"} ${g.irr2_pass ? "✓" : "✗"}`,
-      `P(FV>P) ${((g.p_prob || 0) * 100).toFixed(0)}% ${g.p_pass ? "✓" : "✗"}`,
-      `leverage ${(g.leverage || {}).value || "?"} ${(g.leverage || {}).pass ? "✓" : "✗"}`,
-      `cod ${(g.cod || {}).pass ? "✓" : "✗"}`];
-    $("verdict").textContent = g.verdict || "WAIT";
+      `P(hurdle 25% p.a.) ${((gm.p_hurdle_25pa || 0) * 100).toFixed(0)}% ${(gm.p_hurdle_25pa || 0) >= .5 ? "✓" : "✗"}`,
+      `leverage ${Object.values(dec.leverage_series_pre16 || {}).slice(-1)[0] || "?"}x ${gg.leverage_below_2_5x ? "✓" : "✗"}`,
+      `cod ${gg.cod_falling ? "✓" : "✗"}`];
+    $("verdict").textContent = dec.verdict || "WAIT";
     $("gates").textContent = parts.join(" · ");
   };
   const renderFV = () => {
@@ -111,11 +110,21 @@ fetch("data/data.json").then(r => { if (!r.ok) throw new Error("HTTP " + r.statu
     legend("fv-legend", [["#22314a", "p05–p95"], ["#4da3ff55", "p25–p75"], ["#fff", "p50"], [C.warn, "цена"]]);
   };
   renderCards(); renderFV();
-  $("robust").textContent = "Single-factor bears hold above (2420–2755); only the joint bear combo breaks below (208). Цена ниже bulk posterior, но левый хвост реален (p05 45): неопределенность, не дешевизна.";
+  // regime decomposition: mean is tail-dragged, show who owns it
+  const rg = F.by_regime || {};
+  let rh = `<table><tr><th>режим</th><th>вес</th><th>среднее</th><th>P(FV&gt;P)</th><th>вклад в mean</th></tr>`;
+  Object.entries(rg).forEach(([k, v]) => { rh += `<tr><td>${k}</td><td>${(v.share * 100).toFixed(0)}%</td><td>${fmt(v.mean)}</td><td>${(v.p_fv_gt_p * 100).toFixed(0)}%</td><td>${(v.contrib_to_mean * 100).toFixed(0)}%</td></tr>`; });
+  rh += `</table><p class="note">Взвешенная смесь суждений (не Bayes-posterior): веса режимов заданы вручную и заявлены. Terminal share DCF в среднем ${(F.terminal_share_mean * 100).toFixed(0)}%.</p>`;
+  $("regimes").innerHTML = rh;
+  const sens = D.sensitivity || {};
+  const sc = [["base", "база"], ["bear_combo", "joint bear"], ["bull_combo", "joint bull"]];
+  let sh = `<p class="note">Чувствительность (общий движок, single вес): `;
+  sh += sc.filter(([k]) => sens[k]).map(([k, n]) => `${n}: медиана ${fmt(sens[k].median)}`).join(" · ") + ".</p>";
+  $("robust").innerHTML = sh;
 
   const nc = D.nowcast || {};
-  $("nc").textContent = nc.nowcast != null ? nc.nowcast + "%" : "—";
-  $("nc-detail").textContent = `${nc.target || "—"} · еда ${nc.food_q3_yoy != null ? nc.food_q3_yoy + "%" : "—"} + ${nc.x5_src || "—"}. ${nc.read || ""}`;
+  $("nc").textContent = nc.nowcast != null ? `~${nc.nowcast}%` : "—";
+  $("nc-detail").textContent = `${nc.target || "—"} · еда ${nc.food_q3_yoy != null ? nc.food_q3_yoy + "%" : "—"} (${nc.food_basis || "?"}) + ${nc.x5_src || "—"}. ${nc.read || ""} [gap: ${nc.gap_src || "?"}]`;
   $("nc-warn").textContent = (nc.warnings || []).join(" | ");
 
   const T = iso => new Date(iso + "T00:00:00Z").getTime();
@@ -144,12 +153,26 @@ fetch("data/data.json").then(r => { if (!r.ok) throw new Error("HTTP " + r.statu
     { key: "g", label: "валовая", color: "#4da3ff", width: 1.6, pts: mm("gross_margin") }], 210, v => v + "%");
   legend("mgn-legend", [["#3fce7a", "EBITDA pre16"], ["#4da3ff", "валовая pre16"]]);
   const cr = D.credit || {}, liq = cr.liquidity || {}, nd = cr.net_debt_pre16 || {};
-  $("credit").textContent = `Чистый долг pre16 ${nd.h1_2026} млрд (YE25 ${nd.ye2025}) · кэш/короткий ${liq.cash_to_short}x · линии ${liq.undrawn_lines} млрд · ковенанты соблюдены · риск = carry, не solvency.`;
-  // skill
+  $("credit").textContent = `Чистый долг pre16 ${nd.h1_2026} млрд (YE25 ${nd.ye2025}) · кэш/короткий ${liq.cash_to_short}x · линии ${liq.undrawn_lines} млрд · ковенанты соблюдены. Ближайшая ликвидность достаточна; риск — carry и рефинанс, не мгновенная solvency.`;
+  // TSR line under verdict
+  const dec = D.decision || {}, dm = dec.metrics || {};
+  if (dm.median != null) {
+    const tsr = el("div", {});
+    $("gates").textContent += ` · TSR_2y median ${(dm.median * 100).toFixed(0)}% / mean ${(dm.mean * 100).toFixed(0)}% · P(hurdle 25% p.a.) ${((dm.p_hurdle_25pa || 0) * 100).toFixed(0)}% · P(loss>30%) ${((dm.p_loss_30 || 0) * 100).toFixed(0)}% · CVaR5 ${(dm.cvar_5 * 100).toFixed(0)}%`;
+  }
+  // dilution scenarios
+  const dil = D.dilution || {};
+  if ((dil.cases || []).length) {
+    let dh = `<table><tr><th>сценарий</th><th>акций, млн</th><th>FV/акция</th></tr>`;
+    dil.cases.forEach(c => { dh += `<tr><td>${c.case}</td><td>${c.shares_m}</td><td>${fmt(c.per_share)}</td></tr>`; });
+    dh += `</table><p class="note">Equity total ${dil.equity_total_bn} млрд. ${dil.note || ""}</p>`;
+    $("dilution").innerHTML = dh;
+  }
+  // skill (quarterly-only LFL backtest)
   const sk = (D.skill.origins || []);
-  let h = `<table><tr><th>origin</th><th>fact</th><th>pred</th><th>err</th><th>X5</th></tr>`;
-  sk.slice(-10).forEach(r => { h += `<tr><td>${r.period}</td><td>${r.act}%</td><td>${r.pred}%</td><td class="${r.err >= 0 ? "pos" : "neg"}">${r.err > 0 ? "+" : ""}${r.err}</td><td>${r.x5}%</td></tr>`; });
-  h += `</table><p class="note">MAE ${D.skill.mae_pp}pp vs naive-X5 ${D.skill.naive_x5_mae_pp}pp · direction ${D.skill.direction} · bias ${D.skill.bias_pp}pp</p>`;
+  let h = `<table><tr><th>origin</th><th>fact</th><th>pred</th><th>err</th><th>proxy</th></tr>`;
+  sk.slice(-10).forEach(r => { h += `<tr><td>${r.period}</td><td>${r.act}%</td><td>${r.pred}%</td><td class="${r.err >= 0 ? "pos" : "neg"}">${r.err > 0 ? "+" : ""}${r.err}</td><td>${r.x5}%${r.x5_kind === "lfl" ? "" : "*"}</td></tr>`; });
+  h += `</table><p class="note">MAE ${D.skill.mae_pp}pp · direction ${D.skill.direction} (монета: развороты не ловит) · покрытие интервалом ${((D.skill.interval_coverage || 0) * 100).toFixed(0)}% · * = X5 total proxy (own expansion inside), LFL-бэктест quarterly-only, expanding window.</p>`;
   $("skill").innerHTML = h;
   // consensus
   const REC = { RECOMMENDATION_BUY: "Buy", RECOMMENDATION_HOLD: "Hold", RECOMMENDATION_SELL: "Sell" };

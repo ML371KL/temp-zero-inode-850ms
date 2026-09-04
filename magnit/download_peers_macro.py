@@ -17,10 +17,29 @@ X5 = {
     "x5_q4_2024_trading": "https://www.x5.ru/wp-content/uploads/2025/01/q4_2024_trading_update_rus.pdf",
     "x5_q4_2024_fin": "https://www.x5.ru/wp-content/uploads/2025/03/x5_q4_2024_financial_results_rus.pdf",
 }
+def rosstat_monthly_url():
+    """Discover latest ipc_mes_MM-YYYY.xlsx by probing current month backoff 4 months.
+    The month-pinned URL rots monthly; never hardcode a single vintage."""
+    import datetime as _dt
+    y, m = 2026, 9  # bump: derive from today below
+    today = _dt.date.today()
+    y, m = today.year, today.month
+    for _ in range(5):
+        u = f"https://rosstat.gov.ru/storage/mediabank/ipc_mes_{m:02d}-{y}.xlsx"
+        try:
+            req = urllib.request.Request(u, headers={**H, "Range": "bytes=0-0"})
+            urllib.request.urlopen(req, timeout=20)
+            return u
+        except Exception:
+            m -= 1
+            if m == 0: m, y = 12, y - 1
+    return "https://rosstat.gov.ru/storage/mediabank/ipc_mes_07-2026.xlsx"  # last-known fallback
+
+
 MACRO = {
     "rosstat_weekly_ipc": "https://rosstat.gov.ru/storage/mediabank/nedel_Ipc.xlsx",
     "rosstat_weekly_prices": "https://rosstat.gov.ru/storage/mediabank/nedel_sred_cen.xlsx",
-    "rosstat_monthly_ipc": "https://rosstat.gov.ru/storage/mediabank/ipc_mes_07-2026.xlsx",
+    "rosstat_monthly_ipc": rosstat_monthly_url(),
 }
 
 def dl(url, dest):

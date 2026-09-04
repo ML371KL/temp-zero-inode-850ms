@@ -1,21 +1,16 @@
-"""Frozen calibration (magnit-v1). Eyeball refit forbidden; change only via recalibration trigger.
-v0 (2026-09-03): stub proxies, direction FAIL -> priors frozen, spread term required.
-v1 (2026-09-04): REAL proxies (Rosstat official food CPI + X5 revenue), bridge
-  rev_yoy = 0.4*food_q + 0.6*x5 + trailing_gap; direction PASS (2/2), MAE 1.78pp on n=3.
-  Weekly trimmed-mean food wow validated vs official within ~0.5pp (except summer veg season).
+"""Frozen calibration (magnit-v2). Eyeball refit forbidden; change only via recalibration trigger.
+v2 (2026-09-04): LFL bridge (Magnit LFL vs X5 LFL, expansion-free) + M&A/expansion add-ons;
+  quarterly-only expanding-window backtest (see skill_lfl.json); corrected FCFF engine (valuation.py).
+No DDM: no predictable dividend policy and no sufficient FCF -> DDM weights REMOVED
+(audit: weights without implementation). Revisit only with declared payout policy + coverage.
 """
-ENGINE_VERSION = "magnit-v1"
-# nowcast bridge v1 (revenue yoy, quarterly)
+ENGINE_VERSION = "magnit-v2"
+# LFL nowcast bridge v2 (quarterly revenue-LFL yoy)
 A_FOOD, B_PEER = 0.4, 0.6
-SPREAD_RULE = "trailing Magnit-minus-market gap (point-in-time, 1-period lag)"
-V1_MAE_PP = 1.78
-V1_DIRECTION = "pass"
-W_CPI, W_PEER, W_TRAF = 0.35, 0.45, 0.20  # v0 LFL-bridge priors, superseded by v1 revenue bridge
-REGIME_WEIGHTS = {
-    "distress": {"dcf": 0.25, "mult": 0.75, "ddm": 0.0, "blend_on": "EV"},
-    "mid": {"dcf": 0.45, "mult": 0.40, "ddm": 0.15, "blend_on": "EV-renorm"},
-    "healthy": {"dcf": 0.55, "mult": 0.30, "ddm": 0.15, "blend_on": "EV-renorm"},
-}
+SPREAD_RULE = "expanding-mean gap over prior quarterly origins (point-in-time, never current)"
+# skill lives in data/skill_lfl.json (MAE/direction/coverage); constants must not duplicate it.
+REGIME_PRIORS = {"stress": 1 / 6, "mid": 2 / 6, "healthy": 3 / 6}  # FY margin base-rate 2019-2025 (n=6)
+REGIME_TILT = {"stress": 0.20, "mid": 0.42, "healthy": 0.38}  # judgment tilt (stated, NOT Bayes)
 SHARES_ISSUED_M = 101.911355
 SHARES_TREASURY_M = 34.064  # IFRS FY2025 note: own shares bought back
 SHARES_OUTSTANDING_M = 67.847  # IFRS FY2025 circulation; T-Invest 67.871 stale -> use 67.847
@@ -24,6 +19,9 @@ SHARES_OUTSTANDING_M = 67.847  # IFRS FY2025 circulation; T-Invest 67.871 stale 
 # Issued basis is shown only to reconcile MOEX-published cap (which overstates economic cap).
 SHARES_CANONICAL_M = SHARES_OUTSTANDING_M
 OUTSTANDING_FACTOR = SHARES_ISSUED_M / SHARES_OUTSTANDING_M  # 1.5021: issued-basis FV -> canonical
+# treasury overhang scenarios (repo 3.817m pledged already): placement modeling must move
+# BOTH shares and cash/net-debt. See dilution block in export_dashboard (computed, not static).
+TREASURY_REPO_M = 3.817
 # verified FY2025 anchors (bn rub unless noted)
 FY2025 = {"revenue": 3509.2, "ebitda_pre16": 169.3, "ebitda_post16": 306.2,
           "net_debt_pre16": 496.3, "net_debt_post16": 1096.3, "leases": 600.1,
@@ -32,4 +30,4 @@ FY2025 = {"revenue": 3509.2, "ebitda_pre16": 169.3, "ebitda_post16": 306.2,
 H1_2026 = {"revenue": 1887.2, "ebitda_pre16": 96.0, "ebitda_post16": 171.8,
            "ebitda_margin_pre16": 0.051, "net_debt_pre16": 518.1, "net_debt_post16": 1138.6,
            "capex_exMA": 36.8, "cost_of_debt_pct": 16.0, "net_loss": -1.9}
-RECALIBRATION_TRIGGER = ">=12 quarterly origins, traffic split, M&A-adjusted LFL base"
+RECALIBRATION_TRIGGER = ">=12 quarterly LFL origins (have ~16 and growing), traffic-split bridge, M&A-quarter splits"

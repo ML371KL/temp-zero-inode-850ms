@@ -5,7 +5,7 @@
   "file": "rosstat_weekly_ipc.xlsx",
   "bytes": 170257,
   "sha256": "fe742f8dd1cb2bd6b5f3bb0771c36ceabf4eaaec436f934c5380db002d002502",
-  "fetched_at_utc": "2026-09-03T15:21:18.594264+00:00"
+  "fetched_at_utc": "2026-09-03T16:04:48.843549+00:00"
  },
  {
   "key": "rosstat_weekly_prices",
@@ -13,7 +13,7 @@
   "file": "rosstat_weekly_prices.xlsx",
   "bytes": 204084,
   "sha256": "bd16dd792e92260a760597958ca627a2b62c55fbe2d96d334adc9195997afd19",
-  "fetched_at_utc": "2026-09-03T15:21:20.838911+00:00"
+  "fetched_at_utc": "2026-09-03T16:04:50.479244+00:00"
  },
  {
   "key": "rosstat_monthly_ipc",
@@ -21,6 +21,6 @@
   "file": "rosstat_monthly_ipc.xlsx",
   "bytes": 37871,
   "sha256": "ace8990fe8358173f743987a256eaef71501b06b5c4e5fe865b28046776ea412",
-  "fetched_at_utc": "2026-09-03T15:21:22.992683+00:00"
+  "fetched_at_utc": "2026-09-03T16:04:52.010334+00:00"
  }
 ]

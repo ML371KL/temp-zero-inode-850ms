@@ -1,19 +1,24 @@
-"""Sensitivity audit: how P(FV>P) and median move under prior perturbations.
-Varies regime probs, WACC cut-prob, mult band, ND level. Verdict is ROBUST only if
-WAIT/HOLD conclusion survives plausible perturbations.
+"""Sensitivity audit on the SHARED valuation engine (imports valuation.py + REG spec).
+Single weight wd with complement (1-wd) — weights always sum to 100%.
+Saves magnit/data/sensitivity.json (machine-readable; report renders from it, never hardcoded).
+Price from market snapshot (no hardcoded fallback: metrics vs price skipped if missing).
 """
-import json, pathlib, itertools
+import json, pathlib, copy
 import numpy as np
 
-DATA = pathlib.Path("magnit/data/fv_dist.json")
-spec = json.loads(pathlib.Path("magnit/data/fv_dist.json").read_text(encoding="utf-8"))
-P = 1580.0
+DATA = pathlib.Path(__file__).parent / "data"
+OUT_SHARES = 67.847  # canonical basis
 
 import sys
-sys.path.insert(0, "magnit")
-from fv_distribution import dcf_ev, REG, SH
-OUT_SHARES = 67.847  # canonical basis
-import copy
+sys.path.insert(0, str(pathlib.Path(__file__).parent))
+from valuation import build_fcf, dcf_ev, blend_ev
+from fv_distribution import REG
+
+try:
+    P = float(json.loads((DATA / "market" / "latest.json").read_text(encoding="utf-8"))["cap_dual"]["price"])
+except Exception:
+    P = None
+
 
 def run_once(probs, wacc_shift=0.0, mult_shift=0.0, nd_shift=0.0, seed=7, n=20000):
     rng = np.random.default_rng(seed)
@@ -32,35 +37,41 @@ def run_once(probs, wacc_shift=0.0, mult_shift=0.0, nd_shift=0.0, seed=7, n=2000
         ebitda = g["rev"] * margin / 100
         wv = rng.choice([w for w, _ in g["wacc"]], p=[p for _, p in g["wacc"]])
         mult = rng.uniform(*g["mult"])
-        da = 0.04 * g["rev"]
-        tax = max(0.0, ebitda - da - g["interest"]) * 0.25
-        fcf = ebitda - g["interest"] - tax - g["capex"] - 10.0
-        ev_dcf = max(0.0, dcf_ev(fcf, wv / 100))
+        comp = build_fcf(ebitda, g["rev"])
+        d = dcf_ev(comp["fcf"], wv / 100)
         ev_mult = ebitda * mult
         if rg == "stress":
             ev = ev_mult
         else:
-            a, b = (0.35, 0.50) if rg == "mid" else (0.45, 0.60)
-            ev = rng.uniform(a, b) * ev_dcf + (1 - rng.uniform(a, b)) * ev_mult
+            a, b = g["w_dcf"]
+            wd = rng.uniform(a, b) if b > a else a
+            ev = blend_ev(d["ev"], ev_mult, wd)
         out[i] = max(0.0, ev - rng.triangular(*g["nd"])) * 1000 / OUT_SHARES
-    return float(np.median(out)), float((out > P).mean())
+    med = float(np.median(out))
+    return {"median": round(med, 0),
+            "p_fv_gt_p": round(float((out > P).mean()), 3) if P else None}
+
 
 base_probs = {"stress": 0.20, "mid": 0.42, "healthy": 0.38}
 cases = {
     "base": (base_probs, 0, 0, 0),
-    "bear probs (s.35/m.40/h.25)": ({"stress": 0.35, "mid": 0.40, "healthy": 0.25}, 0, 0, 0),
-    "bull probs (s.10/m.40/h.50)": ({"stress": 0.10, "mid": 0.40, "healthy": 0.50}, 0, 0, 0),
-    "wacc +2pp": (base_probs, 2.0, 0, 0),
-    "wacc -2pp": (base_probs, -2.0, 0, 0),
-    "mult -0.5x": (base_probs, 0, -0.5, 0),
-    "mult +0.5x": (base_probs, 0, 0.5, 0),
-    "debt +60bn": (base_probs, 0, 0, 60),
-    "debt -60bn": (base_probs, 0, 0, -60),
-    "bear combo (s35, w+2, m-0.5, d+60)": ({"stress": 0.35, "mid": 0.40, "healthy": 0.25}, 2.0, -0.5, 60),
-    "bull combo (s10, w-2, m+0.5, d-60)": ({"stress": 0.10, "mid": 0.40, "healthy": 0.50}, -2.0, 0.5, -60),
+    "bear_probs": ({"stress": 0.35, "mid": 0.40, "healthy": 0.25}, 0, 0, 0),
+    "bull_probs": ({"stress": 0.10, "mid": 0.40, "healthy": 0.50}, 0, 0, 0),
+    "wacc_up_2pp": (base_probs, 2.0, 0, 0),
+    "wacc_down_2pp": (base_probs, -2.0, 0, 0),
+    "mult_down_0_5x": (base_probs, 0, -0.5, 0),
+    "mult_up_0_5x": (base_probs, 0, 0.5, 0),
+    "debt_up_60bn": (base_probs, 0, 0, 60),
+    "debt_down_60bn": (base_probs, 0, 0, -60),
+    "bear_combo": ({"stress": 0.35, "mid": 0.40, "healthy": 0.25}, 2.0, -0.5, 60),
+    "bull_combo": ({"stress": 0.10, "mid": 0.40, "healthy": 0.50}, -2.0, 0.5, -60),
 }
-print(f"{'case':38s} {'median':>7} {'P(FV>P)':>8}  price-vs-dist")
+res = {"price": P, "cases": {}}
 for name, (pr, ws, ms, ns) in cases.items():
-    med, prob = run_once(pr, ws, ms, ns)
-    zone = "above" if (med > P * 1.25 and prob > 0.5) else ("overlap" if prob > 0.35 else "below")
-    print(f"{name:38s} {med:>7.0f} {prob:>7.1%}  {zone}")
+    r = run_once(pr, ws, ms, ns)
+    res["cases"][name] = r
+    zone = "n/a" if r["p_fv_gt_p"] is None else ("above" if (r["median"] > P * 1.25 and r["p_fv_gt_p"] > 0.5)
+                                                else ("overlap" if r["p_fv_gt_p"] > 0.35 else "below"))
+    print(f"{name:22s} median {r['median']:>7.0f} P(FV>P)={r['p_fv_gt_p']} {zone}")
+(DATA / "sensitivity.json").write_text(json.dumps(res, ensure_ascii=False, indent=1), encoding="utf-8")
+print("saved sensitivity.json (single-wd, shared engine)")

@@ -1,25 +1,25 @@
 {
- "as_of_utc": "2026-09-03T15:21:27.442857+00:00",
+ "as_of_utc": "2026-09-03T16:04:53.969378+00:00",
  "ticker": "MGNT",
  "moex": {
-  "last": 1589,
+  "last": 1581,
   "open": 1548,
   "high": 1593.5,
   "low": 1546.5,
-  "vol_today": 440381,
-  "val_today": 691697005,
-  "cap_issued": 161427586320,
-  "updatetime": "18:06:26",
+  "vol_today": 454446,
+  "val_today": 713976407,
+  "cap_issued": 160918029545,
+  "updatetime": "18:49:52",
   "last_history_close": 1548.5,
   "last_history_date": "2026-09-02"
  },
  "tinvest": {
-  "marketCapitalization": 107745212500.0,
+  "marketCapitalization": 107507664000.0,
   "revenueTtm": 3509225556000.0,
   "ebitdaTtm": 306162000000.0,
   "netIncomeTtm": -31575703000.0,
   "freeCashFlowTtm": -141369049000.0,
-  "totalEnterpriseValueMrq": 1209060294500.0,
+  "totalEnterpriseValueMrq": 1208822746000.0,
   "evToEbitdaMrq": 3.95,
   "netDebtToEbitda": 3.6,
   "totalDebtMrq": 748588915000.0,
@@ -102,9 +102,9 @@
   }
  ],
  "cap_dual": {
-  "price": 1589,
-  "issued_101_9m": 161.9,
-  "outstanding_67_8m": 107.8,
+  "price": 1581,
+  "issued_101_9m": 161.1,
+  "outstanding_67_8m": 107.3,
   "unit": "bn_rub"
  }
 }

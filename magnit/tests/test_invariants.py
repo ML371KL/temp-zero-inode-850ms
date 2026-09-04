@@ -62,12 +62,18 @@ def test_lfl_identity():
             assert abs(chk * 100 - d["lfl"]) < 0.4, (p, d)
 
 def test_margin_identities():
-    rev = {(x["period"], x.get("basis", "")): x["value"] for x in rows("revenue", status="ok") if x["unit"] == "bn_rub"}
+    rev = {}
+    for x in rows("revenue", status="ok"):
+        if x["unit"] == "bn_rub":
+            rev.setdefault((x["period"], x.get("basis", "")), x["value"])
+    def rev_for(period, basis):
+        return rev.get((period, basis), rev.get((period, ""), rev.get((period, "n/a"))))
     for series, mseries in (("gross_profit", "gross_margin"), ("ebitda", "ebitda_margin")):
         for x in rows(series, status="ok"):
             b = x.get("basis", "")
-            if (x["period"], b) not in rev: continue
-            calc = x["value"] / rev[(x["period"], b)] * 100
+            R = rev_for(x["period"], b)
+            if R is None: continue
+            calc = x["value"] / R * 100
             m = next((m_["value"] for m_ in rows(mseries, x["period"], b if b != "n/a" else None, "ok")), None)
             if m is not None:
                 assert abs(calc - m) < 0.35, (x["period"], series, calc, m)
@@ -80,9 +86,10 @@ def test_fv_distribution_sanity():
 
 def test_dual_basis():
     # canonical = outstanding ex-treasury; issued kept for MOEX-cap reconciliation
-    assert "posterior_outstanding" in fv["results"] and "posterior_issued" in fv["results"]
+    assert "judgment_outstanding" in fv["results"] and "judgment_issued" in fv["results"]
     assert abs(fv.get("canonical_factor", 0) - 101.911355 / 67.847) < 1e-9
-    mo, mi = fv["results"]["posterior_outstanding"]["mean"], fv["results"]["posterior_issued"]["mean"]
+    mo = fv["results"]["judgment_outstanding"]["mean"]
+    mi = fv["results"]["judgment_issued"]["mean"]
     assert abs(mo / mi - 101.911355 / 67.847) < 0.02, (mo, mi)
 
 def test_wacc_calibration_band():
@@ -94,3 +101,53 @@ def test_point_in_time():
     for x in reg:
         if x["status"] != "ok": continue
         assert x["released_at"] >= x["as_of"] or x["released_at"] == "", x
+
+def test_fcff_excludes_interest():
+    # audit: interest must not enter FCFF; tax must be levied on EBIT (unlevered)
+    import sys
+    sys.path.insert(0, str(pathlib.Path(__file__).parent.parent))
+    from valuation import build_fcf
+    c = build_fcf(ebitda=200.0, rev=3500.0)
+    da = 0.028 * 3500.0
+    assert abs(c["da"] - da) < 1e-9
+    assert abs(c["tax"] - max(0.0, 200.0 - da) * 0.25) < 1e-9
+    assert abs(c["fcf"] - (200.0 - c["tax"] - c["capex_maint"] - c["capex_growth"] - c["dwc"])) < 1e-9
+    # growth capex scales with growth, maintenance with revenue
+    assert c["capex_growth"] > 0 and c["capex_maint"] > 0 and c["dwc"] > 0
+
+
+def test_blend_weights_sum_to_one():
+    import sys, random
+    sys.path.insert(0, str(pathlib.Path(__file__).parent.parent))
+    from valuation import blend_ev
+    rnd = random.Random(0)
+    for _ in range(200):
+        a, b = 100.0, 200.0
+        w = rnd.random()
+        assert abs(blend_ev(a, b, w) - (w * a + (1 - w) * b)) < 1e-9
+    try:
+        blend_ev(1.0, 2.0, 1.5)
+        raise SystemExit("blend accepted w>1")
+    except AssertionError:
+        pass
+
+
+def test_seed_stability():
+    import sys
+    sys.path.insert(0, str(pathlib.Path(__file__).parent.parent))
+    from fv_distribution import run, POST
+    v1, _, _, _, _ = run(POST, 77, 67.847)[:5]
+    v2, _, _, _, _ = run(POST, 77, 67.847)[:5]
+    import numpy as np
+    assert (v1 == v2).all()
+    q1 = np.quantile(v1, [0.05, 0.25, 0.5, 0.75, 0.95])
+    assert abs(q1[2] - 1478) / 1478 < 0.05, q1  # median anchor (recalibrate bound if engine changes)
+
+
+def test_no_hardcoded_market_price():
+    import pathlib as _pl, re
+    src = (_pl.Path(__file__).parent.parent / "fv_distribution.py").read_text(encoding="utf-8")
+    # no price ASSIGNMENT literal (mentions in strings/comments are fine)
+    assert not re.search(r"^\s*P\s*=\s*158\d", src, re.M)
+    dec = (_pl.Path(__file__).parent.parent / "decision_layer.py").read_text(encoding="utf-8")
+    assert "VERDICT: WAIT (" not in dec  # verdict computed, not printed static

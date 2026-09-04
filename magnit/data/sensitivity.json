@@ -1,0 +1,49 @@
+{
+ "price": 1581.0,
+ "cases": {
+  "base": {
+   "median": 1511.0,
+   "p_fv_gt_p": 0.489
+  },
+  "bear_probs": {
+   "median": 1034.0,
+   "p_fv_gt_p": 0.368
+  },
+  "bull_probs": {
+   "median": 2975.0,
+   "p_fv_gt_p": 0.593
+  },
+  "wacc_up_2pp": {
+   "median": 1426.0,
+   "p_fv_gt_p": 0.474
+  },
+  "wacc_down_2pp": {
+   "median": 1656.0,
+   "p_fv_gt_p": 0.512
+  },
+  "mult_down_0_5x": {
+   "median": 468.0,
+   "p_fv_gt_p": 0.404
+  },
+  "mult_up_0_5x": {
+   "median": 2593.0,
+   "p_fv_gt_p": 0.71
+  },
+  "debt_up_60bn": {
+   "median": 627.0,
+   "p_fv_gt_p": 0.407
+  },
+  "debt_down_60bn": {
+   "median": 2396.0,
+   "p_fv_gt_p": 0.671
+  },
+  "bear_combo": {
+   "median": 0.0,
+   "p_fv_gt_p": 0.224
+  },
+  "bull_combo": {
+   "median": 5232.0,
+   "p_fv_gt_p": 0.914
+  }
+ }
+}
